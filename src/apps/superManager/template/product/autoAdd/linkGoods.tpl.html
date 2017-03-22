@@ -1,0 +1,166 @@
+<div class="container">
+    <div class="container-innner">
+        <div class="autoAddGoods">
+            <div style="border: 1px solid #e0e0e0; background-color: #f4f4f4; padding-top: 20px;padding-left: 20px;">
+                <form class="sui-form">
+                    <table>
+                        <tr>
+                            <td>
+                                <label class="control-label" style="float:left;">出售状态：</label>
+                                <span class="sui-dropdown dropdown-bordered select" style="background:#fff;margin-left:3px;">
+                                    <span class="dropdown-inner">
+                                        <a id="drop4" role="button" data-toggle="dropdown" href="#" class="dropdown-toggle"><input value="{{code}}" name="city" type="hidden"><i class="caret"></i><span ng-bind="name"></span></a>
+                                        <ul role="menu" aria-labelledby="drop1" class="sui-dropdown-menu">
+                                          <li role="presentation"  ng-repeat="item in goodsStatus">
+                                              <a role="menuitem" tabindex="-1" href="javascript:void(0);" ng-click="chooseStatusClick(item.code)">{{item.name}}</a>
+                                          </li>
+                                        </ul>
+                                    </span>
+                                </span>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                宝贝名称：
+                                <input ng-model="goodsName" type="text" class="input-fat" />
+                            </td>
+                            <td>
+                                <a href="javascript: void(0);" ng-click="listLoad(1)" class="sui-btn btn-primary">查找关联宝贝</a>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div style="padding-top:20px;">
+                <table class="sui-table table-bordered">
+                    <thead>
+                    <tr>
+                        <th class="center">本店宝贝信息</th>
+                        <th class="center">下单地址</th>
+                        <th class="center">关联属性</th>
+                        <th class="center">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbodyId">
+                    <tr ng-repeat="item in list.items">
+                        <td class="goodsInfo" style="width:200px;text-align: center!important;">
+                            <div style="width: 100%;">
+                                <img class="goodsImg" ng-src="{{item.picUrl}}_50x50.jpg_.webp">
+                            </div>
+                            <div class="title"><a href="https://item.taobao.com/item.htm?id={{item.numIid}}" target="_blank">{{item.title}}</a></div>
+                        </td>
+                        <td class="addLink" ng-switch on="item.isAdd" style="width:150px;text-align: center!important;">
+                            <div ng-class="{'hidden':item.isShow}" ng-if="item.linkNumiid != undefined && item.linkNumiid != ''">
+                                <div style="width: 100%;">
+                                    <img class="goodsImg" ng-src="{{item.linkPicUrl}}_50x50.jpg_.webp">
+                                </div>
+                                <div class="title"><a href="https://item.taobao.com/item.htm?id={{item.linkNumiid}}" target="_blank">{{item.linkGoodsName}}</a></div>
+                                <div><a href="javascript:void(0);" class="sui-btn btn-primary" ng-click="delLinkGoods(item)">删除关联商品</a></div>
+                            </div>
+                            <span ng-if="(item.linkNumiid == undefined || item.linkNumiid == '') && !item.isShow">未添加关联商品</span>
+
+                            <div ng-if="item.isShow"><span>输入关联宝贝链接：</span>
+                                <input ng-model="item.linkUrl" ng-blur="changeUrl(item)" value="{{item.linkUrl}}" ng-if="(item.linkNumiid != undefined && item.linkNumiid != '') && item.modify == false" name="linkUrl" type="text" style="width: 150px;" disabled>
+                                <input ng-model="item.linkUrl" ng-blur="changeUrl(item)" value="{{item.linkUrl}}" ng-if="(item.linkNumiid != undefined && item.linkNumiid != '') && item.modify == true" name="linkUrl" type="text" style="width: 150px;">
+                                <input ng-model="item.linkUrl" ng-blur="changeUrl(item)" type="text" style="width: 150px;" ng-if="item.linkNumiid == undefined || item.linkNumiid == ''">
+                            </div>
+                        </td>
+                        <td>
+                            <div style="text-align: center!important;width: 100%;display: block;padding-top:10px;padding-bottom: 10px;">
+                                <button ng-if="item.isShow == false" class="sui-btn btn-primary" style="width: 260px;" ng-click="linkInfoShowOrHidden(item)">展开关联信息</button>
+                                <button ng-if="item.isShow == true" class="sui-btn btn-primary" style="width: 260px;" ng-click="linkInfoShowOrHidden(item)">收起关联信息</button>
+                            </div>
+                            <div ng-class="{'hidden':!item.isShow}" ng-repeat="property in skuInfo.properties">
+                                <div ng-if="skuInfo.properties[0].skuId == null" style="padding-bottom: 10px;text-align: center!important;">
+                                    <center style="color:red;">商品无Sku信息，单一关联</center>
+                                    <div><img class="goodsImg" ng-src="{{skuInfo.linkGoods.picUrl}}_50x50.jpg_.webp"></div>
+                                    <div>
+                                        {{skuInfo.linkGoods.title}}
+                                    </div>
+                                </div>
+
+                                <span class="sui-dropdown dropdown-bordered select disabled" ng-repeat="(k1, v1) in property.skus">
+                                        <span class="dropdown-inner">
+                                            <a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">
+                                                <span>{{v1}}</span>
+                                            </a>
+                                            <ul role="menu" aria-labelledby="drop4" class="sui-dropdown-menu"></ul>
+                                        </span>
+                                    </span>
+                                <span class="sui-dropdown dropdown-bordered select" ng-class="{'disabled' : item.modify == false}" ng-if="(property.skusLength == 0)" ng-repeat="(k1, v1) in property.skus">
+                                        <span class="dropdown-inner">
+                                            <a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">
+                                                <input value="" name="properties" type="hidden">
+                                                <i class="caret"></i><span>请选择...</span>
+                                            </a>
+                                            <ul role="menu" aria-labelledby="drop4" class="sui-dropdown-menu" ng-repeat="(skusKey,skusValue) in skuInfo.selectSkus">
+                                                <li role="presentation" ng-repeat="(skuKey, skuValue) in skusValue">
+                                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);" ng-click="chooseSku(property, skuKey, skuValue)" ng-if="k1.indexOf(skusKey) != -1">{{skuValue}}</a>
+                                                </li>
+                                            </ul>
+                                        </span>
+                                    </span>
+                                <span class="sui-dropdown dropdown-bordered select" ng-class="{'disabled' : item.modify == false}" ng-repeat="(k1,v1) in property.linkSkus">
+                                        <span class="dropdown-inner">
+                                            <a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">
+                                                <i class="caret"></i><span ng-bind="v1"></span>
+                                            </a>
+                                            <ul role="menu" aria-labelledby="drop4" class="sui-dropdown-menu" ng-repeat="(skusKey,skusValue) in skuInfo.selectSkus">
+                                                <li role="presentation" ng-repeat="(skuKey, skuValue) in skusValue">
+                                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);" ng-click="chooseSku(property, skuKey, skuValue)" ng-if="k1.indexOf(skusKey) != -1">{{skuValue}}</a>
+                                                </li>
+                                            </ul>
+                                        </span>
+                                    </span>
+                            </div>
+                        </td>
+                        <td style="width:90px;text-align: center" ng-if="item.linkNumiid == null || item.modify">
+                            <button class="sui-btn btn-primary" ng-class="{'disabled':!item.isShow}" data="items[i].numIid" ng-click="saveSkus(item, skuInfo)">保存</button>
+                        </td>
+                        <td style="width:90px;text-align: center" ng-if="item.linkNumiid != null && !item.modify">
+                            <button class="sui-btn btn-primary" ng-class="{'disabled':!item.isShow}" data="items[i].numIid" ng-click="modify(item)">修改</button>
+                        </td>
+                    </tr>
+                    <tr ng-if="list.isLoading()">
+                        <td colspan="4">
+                            数据正在加载中,请稍后...
+                        </td>
+                    </tr>
+                    <tr ng-if="list.isLoadFailure()">
+                        <td colspan="4">
+                            数据加载失败，请稍后重试。
+                            <a href="javascript:void(0);" ng-click="listLoad(1)" class="sui-btn btn-primary">重新加载数据</a>
+                        </td>
+                    </tr>
+                    <tr ng-if="!list.isLoadFailure() && list.isEmpty()">
+                        <td  colspan="4">
+                            商品数据列表为空。
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div style="display: flex;justify-content: space-between;align-items: center;">
+                    <div class="sui-pagination goodsPage flexalign">
+                        <div class="pageTotal" style="margin:0 auto">
+                            <ul>
+                                <li class="prev disabled"><a href="#">«上一页</a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li class="next disabled"><a href="#">下一页»</a></li>
+                            </ul>
+                            <div>
+                                <span>共1页&nbsp;</span>
+                                <span>
+                                        到<input type="text" class="page-num"><button class="page-confirm" onclick="alert(1)">确定</button>页
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+<!--                     <div>
+                        <a id="saveGoodsList" href="javascript:void(0);" ng-click="batchAddStockGoods()" class="sui-btn btn-primary">批量添加</a>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+<ui-page layout="admin">
+	<page-header page-title="手机联盟推广"></page-header>
+	<uib-alert type="info">
+		<i class="fa fa-info-circle"></i>
+		<span>将您的活动商品投放到与我们合作的手机APP吸引更多淘外流量。由于资源有限，标准版每个帐号只赠送1个推广位，如需更多推广位请订购更高版本！推广后可通过<a href="https://beta.sycm.taobao.com/index.htm?spm=686.1000925.a1zvx.d58.dv3Mip" target="_blank"><i class="fa fa-angle-double-right"></i> 淘宝生意参谋</a>查看推广效果。</span>
+	</uib-alert>
+	<div class="row" ng-if="bootStatus">
+		<uib-alert type="warning"><i class="fa fa-spin fa-spinner"></i>&nbsp;正在加载......</uib-alert>
+	</div>
+	<h4 ng-show="tmpAds.length > 0">您目前有{{tmpAds.length}}个临时广告位</h4>
+	<!-- 固定广告位 -->
+	<div class="row" ng-if="!bootStatus">
+		<div class="col-md-4 col-sm-4 col-xs-12" ng-if="promotionItems.length > 0" ng-repeat="item in promotionItems | filter: {'id': '', 'typeCode': 'permanent'}">
+			<div class="panel panel-default" style="height: 110px;">
+				<div class="panel-body text-center">
+					<div class="media">
+						<div class="media-left">
+							<div class="media-object"><img ng-src="{{item.picUrl}}" style="height: 58px;"></div>
+						</div>
+						<div class="media-body">
+							<a ng-href="https://item.taobao.com/item.htm?id={{item.numiid}}" target="_blank">{{item.title}}</a>
+						</div>
+					</div>
+					<div style="margin: 10px -12px 0px -12px;">
+						<span style="float: left;">状态：{{item.status===1? '良好':'亚健康'}}&nbsp;<i class="iconfont icon-help" uib-tooltip-html="promoteStatusHtml"></i></span>
+						<a href="/promotion/mobileLeague/add-item/{{item.id}}" style="float: right;">更改宝贝</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-4 col-xs-12" ng-repeat="item in promotionItems | filter: {'id' : null, 'typeCode' : 'permanent'}">
+			<div class="panel panel-default">
+				<div class="panel-body text-center" style="height: 110px;">
+					<a href="/promotion/mobileLeague/add-item" style="line-height: 70px;">设置推广宝贝</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- 临时广告位 -->
+		<div class="col-md-4 col-sm-4 col-xs-12" ng-if="promotionItems.length > 0" ng-repeat="item in promotionItems | filter: {'title' :'', 'typeCode' : 'tmp'}">
+			<div class="panel panel-default" style="height: 110px;">
+				<div class="panel-body text-center">
+					<div class="media">
+						<div class="media-left">
+							<div class="media-object"><img ng-src="{{item.picUrl}}" style="height: 58px;"></div>
+						</div>
+						<div class="media-body">
+							<a ng-href="https://item.taobao.com/item.htm?id={{item.numiid}}" target="_blank">{{item.title}}</a>
+						</div>
+					</div>
+					<div style="margin: 10px -12px 0px -12px;">
+						<span style="float: left;">截止日期：{{item.deadline*1000 | date : 'yyyy-MM-dd'}}</span>
+						<span style="line-height: 19px;">状态：{{item.status===1? '良好':'亚健康'}}&nbsp;<i class="iconfont icon-help" uib-tooltip-html="promoteStatusHtml"></i></span>
+						<a href="/promotion/mobileLeague/add-item/{{item.id}}" style="float: right;">更改宝贝</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-4 col-xs-12" ng-repeat="item in promotionItems | filter: {'title' : null, 'typeCode' : 'tmp'}">
+			<div class="panel panel-default">
+				<div class="panel-body text-center" style="height: 110px;">
+					<div class="col-md-12 col-xs-12 col-sm-12">
+						<a href="/promotion/mobileLeague/add-item/{{item.id}}" style="line-height: 40px;display: block;">设置推广宝贝</a>
+						<p>截止日期：{{item.deadline*1000 | date : 'yyyy-MM-dd'}}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-4 col-xs-12">
+			<div class="panel panel-default" style="height: 110px;background-color: #eee;" ng-style="{'background-color': backgroundColor}">
+				<div class="panel-body text-center" ng-mouseenter="backgroundColor='rgba(255, 142, 27, 0.8)';" ng-mouseleave="backgroundColor='#eee';">
+					<div class="col-xs-12 col-sm-12 col-md-12">
+						<div class="col-xs-3 col-sm-3 col-md-3" style="margin-top: -15px;"><i class="iconfont icon-plus" style="color: #2fa4e7;font-size: 5em;margin-left: -15px;"></i></div>
+						<div style="width: 1px; border-left: 1px dashed #fff;"></div>
+						<div class="col-xs-9 col-sm-9 col-md-9" style="margin-top: 5px;">
+							<p><a type="button" class="btn btn-primary btn-sm btn-block" href="/purchase/base">购买更多推广位</a></p>
+							<p><a type="button" class="btn btn-primary btn-sm btn-block" href="/purchase/invite">获取免费推广位</a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</ui-page>

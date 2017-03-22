@@ -1,0 +1,8 @@
+<div class="media" ng-controller="ProductCopyTaskDescCtrl">
+	<div class="media-left"><img class="media-object" ng-src="{{product.logo}}" style="max-height:50px;"></div>
+	<div class="media-body">
+		<div class="media-heading"><a ng-href="{{product.url}}" target="_blank">{{product.title}}</a></div>
+		<small>复制到 <i class="fa fa-angle-right"></i></small>
+		<label class="label label-info">{{task.desc.targetShop.displayName}}</label>
+	</div>
+</div>

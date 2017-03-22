@@ -1,0 +1,19 @@
+<step-bar steps="steps"></step-bar>
+<form class="sui-form form-horizontal" sui-validate ng-submit="upsertActivity()" ng-if="data">
+	<div ng-include="'/template/promotion/promotionmisc/taobaoitem/form.tpl.html'"></div>
+	<div align="center">
+		<label class="control-label"></label>
+		<div class="controls">
+			<div ng-show="globalData.restart">
+				<button type="button" class="sui-btn btn-success btn-xlarge" ng-show="globalData.restart" ng-click="restartNow()" ng-disabled="restarting"><div class="sui-loading loading-xxsmall loading-inline" ng-show="restarting"><i class="sui-icon icon-pc-loading"></i></div> 现在重启</button>
+				<button type="submit" class="sui-btn btn-primary btn-xlarge" ng-show="!isWholeShop()"><i class="sui-icon icon-arrow-right"></i>修改商品</button>
+			</div>
+			<div ng-show="!globalData.restart">
+				<button type="submit" class="sui-btn btn-primary btn-xlarge" ng-hide="editPage" ng-disabled="upserting">
+					<i class="sui-icon icon-arrow-right" ng-show="!creating"></i>
+					<i class="sui-loading loading-inline loading-xxsmal" ng-show="creating" style="color: #fff;"></i> 创建</button>
+				<button type="button" class="sui-btn btn-primary btn-xlarge" ng-show="editPage" ng-click="submitEdit()" ng-disabled="editing"><i class="sui-loading loading-inline loading-xxsmal" ng-show="creating" style="color: #fff;"></i> 确认修改</button>
+			</div>
+		</div>
+	</div>
+</form>

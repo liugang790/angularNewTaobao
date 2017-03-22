@@ -1,0 +1,13 @@
+<step-bar steps="steps"></step-bar>
+<div class="sui-row-fluid">
+	<div ng-if="activity"><mjs-detail-set activity="activity" actions="tabActions"></mjs-detail-set></div>
+</div>
+<div class="sui-msg msg-error msg-large msg-block" style="text-align: center;" ng-show="errorMessage">
+	<div class="msg-con">{{errorMessage}}</div>
+	<s class="msg-icon"></s>
+</div>
+<div class="sui-row-fluid" style="text-align: center;">
+	<button type="button" class="sui-btn btn-xlarge" ng-click="stepTwo()"><i class="sui-icon icon-arrow-left"></i>上一步</button>
+	<button type="button" class="sui-btn btn-primary btn-xlarge" ng-click="create()" ng-disabled="creating">
+		<i class="sui-loading loading-xxsmall loading-inline" ng-show="creating"></i>完成并提交活动
+</div>

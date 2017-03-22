@@ -1,0 +1,26 @@
+<!-- <ul ng-class="menuListClass">
+    <li ng-repeat="menu in filter.menus | filter: {level: 1}"
+        ng-class="{active:isActive(menu)}">
+        <a href ui-sref="{{menu.pagePath}}">{{menu.label}}
+            <i class="iconfont icon-zinew ng-scope" ng-if="menu.status" style="line-height: 8px;position: relative;top: -5px;color: #ff4400;background-color: #fff;font-size: 12px;"></i>
+        </a>
+    </li>
+</ul> -->
+<ul ng-class="menuListClass">
+    <li ng-repeat="menu in filter.menus | filter: {level: 1}"
+        ng-class="{active:isActive(menu)}"
+        class="sui-dropdown">
+        <a href="javascript:;"
+            data-toggle="dropdown" 
+            data-trigger="hover" 
+            class="dropdown-toggle" ng-if="menu.status == true">{{menu.label}}<i class="sui-icon icon-pc-chevron-bottom"></i><i class="iconfont icon-zinew ng-scope" ng-if="menu.status" style="line-height: 8px;position: relative;top: -5px;color: #ff4400;background-color: #fff;font-size: 12px;"></i></a>
+        <ul role="menu" class="sui-dropdown-menu" ng-if="menu.status == true">
+        {{filter.menus}}
+          <li role="presentation" ng-repeat="subMenu in filter.menus | filter: {parentName: menu.name}"
+            ui-sref-active="active">
+            <a role="menuitem" tabindex="-1" href ui-sref="{{subMenu.pagePath}}">{{subMenu.label}}</a>
+          </li>
+        </ul>
+        <a href ui-sref="{{menu.pagePath}}" ng-if="menu.status == false">{{menu.label}}</a>
+    </li>
+</ul>

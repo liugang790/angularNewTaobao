@@ -1,0 +1,47 @@
+<div class="panel panel-default" id="{{product.uniqueId}}_of_panel" style="width: 100%;">
+	<button type="button" class="sui-btn btn-text" data-target="#{{product.uniqueId}}_of_panel" data-dismiss="alert" ng-click="removeProduct(product)" style="float: right;">
+		<span aria-hidden="true" style="font-size: 1.5em;">&times;</span>
+	</button>
+	<div class="panel-body">
+		<div style="width: 30%;display: inline-block;float: left;">
+			<div class="media">
+				<div class="media-left">
+					<img class="media-object" ng-src="{{product.logo}}" style="max-height: 70px;">
+				</div>
+				<div class="media-body">
+					<span class="media-heading"><a ng-href="https://item.taobao.com/item.htm?id={{product.itemId}}" target="_blank">{{product.title}}</a></span>
+				</div>
+			</div>
+		</div>
+		<div style="width: 12%; display: inline-block;float: left; margin-left: 5px;">
+			<div style="padding-left: 0; width: 100%;">原价：</div>
+			<div style="width: 100%;"><span class="sui-text-info" style="font-size:14px;text-align: center;">{{product.price}}</span>元</div>
+		</div>
+		<form class="sui-form form-inline">
+			<div style="width: 16.6%; display: inline-block;">
+				<div style="padding-left: 0;width: 100%;">打折：</div>
+				<div class="input-append" ng-class="{'focusDiscount' : product.focusDiscount}">
+					<input ng-model="product.discountIndex" class="span2 input-fat" ng-class="{'input-info': product.focusDiscount}" type="number" step="0.01" min="0" max="10" ng-focus="product.focusDiscount=true" ng-change="discount()" style="width: 80%;" />
+					<span class="add-on">折</span>
+				</div>
+			</div>
+			<div style="width: 16.6%; display: inline-block;float: left;">
+				<div style="padding-left: 0;width: 100%;">减价：</div>
+				<div class="input-append" ng-class="{'focusDiscount' : !product.focusDiscount}">
+					<input class="span2 input-fat" ng-model="product.cutIndex" ng-class="{'input-info': !product.focusDiscount}" type="number" step="0.01" min="0" max="{{product.price}}" ng-focus="product.focusDiscount=false" ng-change="cutDown()" style="width: 80%;" />
+					<span class="add-on">元</span>
+				</div>
+			</div>
+			<div style="width: 16.6%; display: inline-block;float: right;">
+				<div style="padding-left: 0;width: 100%;">{{product.focusDiscount ? '打折后：' : '减价后：'}}</div>
+				<div class="input-append">
+					<input ng-model="product.newPrice" type="number" step="0.01" min="0" class="span2 input-fat" style="width: 80%;" />
+					<span class="add-on">元</span>
+				</div>
+			</div>
+		</form>
+		
+		<a href="javascript:;" sui-tooltip sui-tooltip-title="errorMessage"  data-replacement="top" ng-show="errorStatus"><i class="sui-icon icon-tb-roundclose" style="color: red; font-weight: bold;"></i></a>
+	</div>
+	<ng-transclude></ng-transclude>
+</div>

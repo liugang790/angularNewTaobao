@@ -1,0 +1,9 @@
+<div ng-controller="jdFilterCtrl">
+	<select class="form-control" ng-model="listFilterData.status" ng-options="status.code as status.name for status in filterStatus">
+		<option value="">选择商品状态</option>
+	</select>	
+	<select class="form-control" ng-model="listFilterData.orderBy" ng-options="field.code as field.name for field in orderField">
+	</select>
+	<select class="form-control" ng-model="listFilterData.orderType" ng-options="field.code as field.name for field in orderType">
+	</select>
+</div>

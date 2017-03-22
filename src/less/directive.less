@@ -1,0 +1,264 @@
+.transition(@r, @g, @b, @a, @time) {
+	-webkit-transition:all cubic-bezier(@r, @g, @b, @a) @time;
+	-moz-transition:all cubic-bezier(@r, @g, @b, @a) @time;
+	-o-transition:all cubic-bezier(@r, @g, @b, @a) @time;
+	transition:all cubic-bezier(@r, @g, @b, @a) @time;
+}
+@primaryColor:  #178acc;
+
+.tabMultiple {
+	margin-top: 10px;
+	font-size: 1.3em;
+	&.grayIt { color: #999;}
+	&.darkIt { color: black;}
+}
+.tabPromotion {
+	margin-top: 10px;
+	font-size: 1.3em;
+	&.grayIt { color: #999;}
+	&.darkIt { color: dark;}
+}
+.mjsPreview {
+	margin-bottom: 15px;
+	.previewName a{
+		text-decoration: none;
+		padding: 5px 10px;
+		color: white;
+		font-size: 1.1em;
+		border-radius: 3px;
+		&.sui-label {
+			margin: 0 10px;
+		}
+	}
+}
+.previewDetail {
+	display: inline-flex;
+	display: -webkit-inline-box;
+}
+
+.page-comments {
+	margin-top: -6px;
+	.comment {
+		padding: 10px 12px 10px 20px;
+		margin-top: 8px;
+		border-radius: 5px;
+		color: #555555;
+	}
+}
+
+.shareTitleImageLi {
+	cursor: pointer;
+	float: left;
+	margin: 0;
+	height: 90px;
+	padding:0 0 10px 5px;
+
+	.imgDiv{
+		width: 70px;
+		height: 70px;
+	}
+}
+
+.renewList {
+	li.renew-list-item {
+		display: inline-block;
+		-webkit-box-shadow: 0 3px 3px rgba(0,0,0,.2);
+		box-shadow: 0 3px 3px rgba(0,0,0,.2);
+		padding: 10px;
+		margin: 5px;
+		a.renew-item-btn {
+			display: block;
+			text-decoration: none;
+			color: #555;
+			box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			.linkPrice {
+				font-size: 1.5em;
+				font-weight: 700;
+				color: #ff8e1b;
+			}
+			.upgradeDiscount {
+				font-weight: 700;
+				font-size: 1.5em;
+			}
+		}
+	}
+}
+.advertisement {
+	font-size: 17px;
+    padding: 15px;
+    background-color: antiquewhite;
+    border-radius: 8px;
+}
+.btn-discount {
+	background-image: linear-gradient(#ff8e1b, #ff8e1b 60%, #ff8e1b);
+    color: white;
+}
+
+.fix {
+    width: 100%;
+    padding: 0px;
+    position: relative;
+}
+div.imgTitle {
+    background-color: #000;
+    bottom: 0;
+    color: #fff;
+    left: 0;
+    opacity: 0.5;
+    position: absolute;
+    width: 100%;
+    p {
+    	margin: 5px;
+    }
+}
+
+h1.posterCollapse {
+	margin: 0 auto;
+	color: #666;
+	position: relative;
+	background-color: #eee;
+	a {
+		display: block;
+		font-weight: 400;
+		font-size: 20px;
+		color: #666;
+		line-height: 38px;
+		padding: 0 0 0 36px;
+		cursor: pointer;
+		text-decoration: none;
+		span.hint {
+			font-size: 16px;
+		}
+	}
+}
+
+.posterListBox {
+	border: 1px solid #ccc;
+	margin: 5px;
+	padding: 0;
+	width: 48%;
+	span.posterInfo {
+		display: block;
+		color:  #999;
+		font-size: 14px;
+		line-height: 24px;
+	}
+	.posterPortraits {
+		img {
+			max-width: 100%;
+			height: auto;
+		}
+	}
+	.span4 {
+		display: inline;
+		margin-top: 15px;
+		line-height: 60px;
+	}
+}
+
+.posterArea {
+	position: relative;
+	border: 1px solid #d9d9d9;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+	.span3 {
+		float: left;
+		display: inline;
+		.span12 .content {
+			cursor: pointer;
+			padding: 5px;
+			a {
+				text-decoration: none;
+				display: block;
+				padding: 0 15px 0 0;
+				line-height: 36px;
+				font-size: 16px;
+				color: #2e92d9;
+			}
+		}
+		.setBox {
+			background: #fdfdfd;
+			margin-bottom: 10px;
+			border: 1px solid #d9d9d9;
+			border-left: none;
+			box-shadow: 5px 5px 6px -5px #000;
+			padding-right: 0px;
+			.content {
+				a {
+					text-decoration: none;
+					h4 {
+						color: darken(#999, 15%);
+					}
+					span {
+						text-align: right;
+						display: block;
+					}
+				}
+				span.alert.alert-info {
+					display: block;
+					display: -webkit-box;
+					padding: 6px;
+					margin-right: 6px;
+					font-size: 14px;
+					text-align: left;
+					line-height: 24px;
+				}
+			}
+		}
+	}
+	.span9 {
+		float: right;
+		display: inline;
+		background: #fff;
+		.posterPreviewBox {
+			h3 {
+				color: darken(#999, 15%);
+			}
+			.span12.previewTip {
+				span.alert {
+					display: block;
+					background-color: #eee;
+					color: darken(#999, 20%);
+					text-align: center;
+				}
+			}
+		}
+		.slideSelector{
+			position: absolute;
+			border: 1px solid #eee;
+			top: 70px;
+			box-shadow: 5px 5px 6px -5px #000;
+			z-index: 10;
+			background-color: #fff;
+			margin-left: -30px;
+			border-left: 5px solid @primaryColor;
+			.transition(0.250, 0.460, 0.450, 0.940, 0.3s);
+			&.ng-hide {
+				opacity: 0;
+				padding: 0 10px;
+			}
+		}
+	}
+}
+
+.posterChecked {
+	border: 5px solid lighten(@primaryColor, 20%);
+}
+.posterUncheck {
+	border: 2px solid darken(#eee, 10%);
+}
+
+.horizonDivide {
+	width: 100%;
+	border-bottom: 1px solid lighten(@primaryColor, 40%);
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.imageBox {
+	width: 120px;
+	height: 120px;
+	border: 1px solid #999;
+	margin: 0 auto;
+}

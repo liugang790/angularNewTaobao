@@ -1,0 +1,22 @@
+<div class="sui-row" ng-if="posters.length > 0">
+	<ng-transclude></ng-transclude>
+	<div class="span12" style="padding: 0;" ng-hide="errorMessage">
+		<div class="sui-msg msg-error msg-large msg-block"><div class="msg-con">当前活动只能添加一张海报，如要另添加海报，请删除原来的海报再创建新海报</div><s class="msg-icon"></s></div>
+	</div>
+	<div class="span12" style="padding: 0;" ng-show="errorMessage">
+		<div class="sui-msg msg-error msg-block"><div class="msg-con">{{errorMessage}}</div><s class="msg-icon"></s></div>
+	</div>
+	<div class="posterListBox" ng-repeat="poster in posters">
+		<div class="span5" align="left" style="margin: 5px 0;">
+			<span class="posterInfo">{{poster.infoStr}}</span>
+			<div class="posterPortraits">
+				<img ng-src="{{poster.templateImg}}">
+			</div>
+		</div>
+		<div class="span4" ng-if="activity.statusName !== '已结束'">
+			<a href="javascript:;" ng-click="clearPoster(poster)">删除海报</a>
+			<a href="javascript:;" ng-click="checkPoster(poster)">查看详情 <i class="sui-icon icon-double-angle-right"></i></a>
+		</div>
+	</div>
+	<div ng-if="checkPosterStatus"><activity-poster-detail activity="activity" poster="posterToCheck"></activity-poster-detail></div>
+</div>

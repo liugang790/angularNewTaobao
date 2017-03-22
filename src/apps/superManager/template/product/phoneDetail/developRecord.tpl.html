@@ -1,0 +1,130 @@
+<div class="container">
+    <div class="container-innner">
+        <div class="developphonedetail">
+            <div class="developphonedetailtable developrecord">
+                <div class="developHeader flex">
+                    <div class="searchgoods" style="justify-content:flex-start">
+                        <form class="sui-form form-dark" style="margin:0  10px 0 0">
+                           <div class="input-control">
+                            <input type="text" class="input-fat" ng-model="searchKey" style="border-radius:20px;width:200px;"  placeholder="输入宝贝名称" style="text-indent:5px;">
+                          </div> 
+                        </form>  
+                        <a href="javascript:void(0);" ng-click="listLoad('1')" class="sui-btn btn-large btn-primary">搜索</a>
+                   </div>
+                   <a href="javascript:void(0);" ng-click="listLoad('1')" class="sui-btn btn-large btn-primary">刷新</a>
+                </div>
+                <div style="margin-top:20px;">
+                    <table class="sui-table table-bordered">
+                      <thead>
+                        <tr>
+                          <th width="55%">宝贝名称和图片</th>
+                          <th width="15%" class="center">同步时间</th>
+                          <th width="15%" class="center">状态</th>
+                          <th width="15%" class="center">预览</th>
+                        </tr>
+                      </thead>
+                    </table>
+                </div>
+                <div class="developTable  developrecord">
+                    <table class="sui-table table-sideheader">
+                          <tbody>
+                              <tr style="border-top:none;border-bottom:1px solid #ddd;" ng-repeat="item in list.items">
+                                  <td width="55%" style="background-color: #ffffff;">
+                                      <div class="flexstart">
+                                          <span class="display" style="width:10%;"><img width="80%" ng-src="{{item.picUrl}}"></span>
+                                          <span class="display" style="width:90%">
+                                              <a href="https://item.taobao.com/item.htm?id={{item.numiid}}" target="_blank" class="block-text" style="max-width:285px;">{{item.title}}</a>
+                                          </span>
+                                      </div>
+                                  </td>
+                                  <td width="15%" class="center">
+                                      <span style="display:block">{{item.reNewDt}}</span>
+                                  </td>
+                                  <td width="15%" class="center" ng-switch on="item.status">
+                                      <div ng-switch-when="执行中" class="sui-progress progress-striped active" style="margin-bottom:0;">
+                                          <div style="width: 100%;" class="bar">{{item.status}}</div>
+                                      </div>
+                                      <div ng-switch-when="执行完成" class="sui-progress progress-success" style="margin-bottom: 0">
+                                          <div style="width: 100%;" class="bar">{{item.status}}</div>
+                                      </div>
+                                      <div ng-switch-when="执行失败" class="sui-progress progress-danger" style="margin-bottom: 0">
+                                          <div style="width: 100%;" class="bar">{{item.status}}</div>
+                                      </div>
+                                  </td>
+                                  <td width="15%" class="center">
+                                      <a href="javascript:void(0);" class="sui-btn btn-bordered btn-large btn-info" ng-click="viewHtml(item.numiid)">预览详情</a>
+                                      <a href="javascript:void(0);" class="sui-btn btn-bordered btn-large btn-info" ng-click="qrcodeS(item.numiid)">显示二维码</a>
+                                  </td>
+                              </tr>
+                              <tr ng-if="list.isLoading()">
+                                  <td colspan="4" style="padding:0;">
+                                  <div class="sui-msg msg-large msg-block msg-notice" style="padding:0;margin-bottom:0;">
+                                    <div class="msg-con">数据正在加载中,请稍后...</div>
+                                    <s class="msg-icon"></s>
+                                  </div>
+                                  </td>
+                              </tr>
+                              <tr ng-if="list.isLoadFailure()">
+                                  <td colspan="4" style="padding:0;">
+                                <div class="sui-msg msg-large msg-block msg-error" style="padding:0;margin-bottom:0;">
+                                  <div class="msg-con">数据加载失败!!!</div>
+                                  <s class="msg-icon"></s>
+                                </div>
+                                </td>
+                              </tr>
+                              <tr ng-if="!list.isLoadFailure() && list.isEmpty()">
+                            <td  colspan="4" style="padding:0;">
+                                <div class="sui-msg msg-large msg-block msg-warning" style="padding:0;margin-bottom:0;">
+                                  <div class="msg-con">数据列表为空!!!</div>
+                                  <s class="msg-icon"></s>
+                                </div>
+                              </td>
+                        </tr>
+                          </tbody>
+                    </table>
+                    <div ng-if="list.items.length == 0">
+                        <div style="text-align: center;" class="ng-scope">
+                            <a ui-sref="member.product.phone.developphonedetail" style="text-decoration: none;color: #555;" href="member/product/phone/developphonedetail">
+                                <i class="sui-icon icon-tb-cart" style="font-size: 8em;"></i>
+                            </a>
+                            <h2 class="sui-text-warning">亲，您当前还没有手机详情生成记录！</h2>
+                            <p>
+                                你可以在
+                                <a ui-sref="member.product.phone.developphonedetail" href="member/product/phone/developphonedetail">一键生成手机详情</a>，为你的商品生成手机详情吧！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                 <div class="sui-pagination goodsPage flexalign">
+                     <div class="pageTotal" style="margin:0 auto">
+                        <ul>
+                          <li class="prev disabled"><a href="#">«上一页</a></li>
+                          <li class="active"><a href="#">1</a></li>
+                          <li class="next disabled"><a href="#">下一页»</a></li>
+                        </ul>
+                        <div><span>共1页&nbsp;</span><span>
+                            到
+                            <input type="text" class="page-num"><button class="page-confirm" onclick="alert(1)">确定</button>
+                            页</span>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+  </div>
+</div>
+<!--显示二维码-->
+<div id="myModal" tabindex="-1" role="dialog" data-hasfoot="false" class="sui-modal hide fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">×</button>
+        <h4 id="myModalLabel" class="modal-title" style="text-align: center">手机扫描下方二维码，查看宝贝的手机详情</h4>
+      </div>
+      <div class="modal-body" style="text-align:center;">
+          <!--<img src="http://yddz.zhikr.cn/QianNiuCloudWeb/pc/img/iphone6_back.png" style="width:20%;">-->
+          <qrcode version="7" error-correction-level="M" size="150" data="{{qrcodeUrl}}"> </qrcode>
+      </div>
+    </div>
+  </div>
+</div>

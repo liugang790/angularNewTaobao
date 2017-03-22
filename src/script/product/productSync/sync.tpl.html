@@ -1,0 +1,58 @@
+<div ng-cloak>
+<page-header page-title="商品同步" page-sub-title="第二步：配置同步参数" ng-style="'margin-bottom: 10px;'">
+	<button ng-show="taskStatus !== 'creating'" class="btn btn-primary" ng-click="createSyncTask()"><i class="fa fa-copy"></i> 开始同步</button>
+	<button ng-show="taskStatus === 'creating'" class="btn btn-warning" ng-disabled><i class="fa fa-spinner fa-spin"></i> 正在创建任务</button>
+	<button class="btn btn-default" style="margin-right: 1%;" ng-click="returnList()"><i class="fa fa-reply"></i> 返回商品列表</button>
+</page-header>
+
+	<div class="row" style="margin-left: 0px; margin-right: 0px;">
+		<div class="col-md-6" style="height: 5px; background-color: #EB951C;"></div>
+		<div class="col-md-6" style="height: 5px; background-color: #286091;"></div>
+	</div>
+	<div class="col-md-12" style="background-color: #E8E8E8; margin-bottom: 6px;">
+		<div class="col-md-5">
+			<div class="col-md-12 text-right"><h4>已选择商品列表</h4></div>
+			<div class="col-md-12 text-right"><div class="help-block">选择同步到目标店铺的商品</div></div>
+		</div>
+		<div class="col-md-2 text-center" style="margin-top: 5px;">
+			<div class="row"><span style="font-size: 1.2em;"><i class="fa fa-3x fa-arrow-circle-o-right" style="color: gray;"></i></span></div>
+		</div>
+		<div class="col-md-3">
+			<div class="col-md-12 text-left"><h4>选择同步目标店铺</h4></div>
+			<div class="col-md-12 text-left"><div class="help-block">可添加多个目标店铺</div></div>
+		</div>
+	</div>
+	<div class="row" style="padding-top: 15px;">
+		<div class="col-md-6">
+			<div class="col-md-12" style="padding-left: 0;margin: 15px 0;">
+        		<product-list-inbox-list list="list"></product-list-inbox-list>
+			</div>
+		</div>
+		<div class="col-md-6" style="padding: 0 0 0 25px;">
+			<div class="row" style="margin: 15px 5px 0 10px;">
+		        <form class="form-inline">
+		        	<label class="control-label">目标店铺：</label>
+		            <div class="form-group">
+		                <shop-select-new shop-model="currentShop" filter="shopFilter" default-label="请选择同步店铺" disabled-default="true"></shop-select-new>
+		            </div>
+		            <button class="btn btn-default" ng-click="addShop()">添加</button>
+		        </form>
+			</div>
+			<div ng-repeat="shop in targetShops" style="margin-top: 5px;" ng-controller="targetShopItemCtrl">
+				<div class="col-md-12">
+					<div class="panel panel-default">
+					  	<div class="panel-heading">
+					    	<h3 class="panel-title">{{shop.displayName}}
+					    		<a href="javascript:;" ng-click="removeShop()"><i class="fa fa-close" style="float:right;"></i></a>
+					    	</h3>
+					  	</div>
+					  	<div class="panel-body">
+					  		<shop-category shop="shop"></shop-category>
+					  	</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

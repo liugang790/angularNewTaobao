@@ -1,0 +1,28 @@
+<div>
+	<div class="sui-row">
+		<button type="button" class="sui-btn btn-primary pull-right" ng-click="selectBanner()">选择</button>
+	</div>
+	<div ng-if="selectedBanner">
+		<img ng-src="{{selectedBanner.src}}" style="width: 100px;">
+	</div>
+	<div ng-show="selectBannerStatus" style="border-top: 6px solid #eee;padding: 5px;margin-top: 5px;">
+		<span class="sui-dropdown dropdown-bordered dropdown-large select">
+            <span class="dropdown-inner">
+                <a href="javascript:;" id="promotionTypeDrop" role="button" data-toggle="dropdown" class="dropdown-toggle">
+					<input ng-model="data.promotionType" name="type" type="hidden"><i class="caret"></i><span>{{cateName}}</span>
+				</a>
+                <ul id="typeMenu" role="menu" aria-labelledby="promotionTypeDrop" class="sui-dropdown-menu">
+                	<li role="presentation" ng-repeat="category in categories">
+						<a href="javascript:;" role="menuitem" tabindex="-1" value="{{category.code}}" ng-click="selectCategory(category)">{{category.name}}</a>
+					</li>	
+				</ul>
+			</span>
+		</span>
+        <div>
+        	<div ng-repeat="banner in bannerImages | filter: {cateCode: selectCate}" ng-click="select(banner)"
+            style="width: 30%;margin: 5px 5px 5px 0;height: 70px;display: inline-block;">
+            	<img ng-src="{{banner.src}}" style="width: 100%;" ng-class="{selectBanner: selected===banner, unselectedBanner: selected!==banner}">
+			</div>
+		</div>
+	</div>
+</div>

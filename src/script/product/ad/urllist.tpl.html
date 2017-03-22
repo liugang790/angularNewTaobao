@@ -1,0 +1,43 @@
+<page-header page-title="流量无忧"></page-header>
+<list list-service="list">
+	<div class="well">
+	    <list-filter list-filter-init-promise="filterInitPromise">
+	    	 <div class="form-group">
+				 <label>商品数据来源</label>
+				 <select class="form-control" ng-model="listFilterData.shopId" ng-options="source.id as source.displayName for source in productSources">
+				 </select>
+	        </div>
+	    </list-filter>
+	</div>
+
+	<list-notify></list-notify>
+	<div class="col-md-12 alert alert-danger" ng-show="errorStatus">
+       {{errorMessage}}
+    </div>
+	<div class="col-md-12">
+		<table class="table table-striped">
+		<thead>
+			<tr class="info">
+				<th style="width: 40%;">url</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody ng-repeat="item in list.items" >
+			<tr>
+				<td>
+					<div class="media">
+						<div class="media-body"><span class="media-heading">
+							<a ng-href="{{item.url}}" target="_blank">{{item.url}}</a>
+						</span></div>
+					</div>
+				</td>
+				<td >
+					<a ng-href="{{item.url}}" target="_blank">查看</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+
+	<list-pagination></list-pagination>
+</list>

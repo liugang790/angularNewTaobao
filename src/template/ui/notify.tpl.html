@@ -1,0 +1,16 @@
+<div>
+    <div class="sui-msg msg-info msg-block" ng-if="list.isLoading()">
+        <div class="msg-con">
+            <div class="sui-loading loading-xxsmall loading-inline"><i class="sui-icon icon-pc-loading"></i></div> {{listMessages.loading}}
+        </div>
+    </div>
+    <div class="sui-msg msg-tips msg-block" ng-if="list.isEmpty() && !listMessages.emptyTemplate">
+        <div class="msg-con">{{listMessages.empty}}</div>
+        <s class="msg-icon"></s>
+    </div>
+    <div ng-if="list.isEmpty() && listMessages.emptyTemplate" ng-include="listMessages.emptyTemplate"></div>
+    <div class="sui-msg msg-error msg-block" ng-if="list.isLoadFailure()">
+        <div class="msg-con">获取列表数据出错了：{{list.loadError.errorMessage}}</div>
+        <s class="msg-icon"></s>
+    </div>
+</div>

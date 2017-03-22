@@ -1,0 +1,23 @@
+<div>
+    <input type="text" class="input-large" ng-model="activity.page.shareTitle" ng-focus="selectTitle=false;"/>
+    <button class="sui-btn btn-primary pull-right" ng-click="selectTitle=!selectTitle;">从素材库选择</button>
+</div>
+<div>
+    <div>
+        <span class="sui-text-info">微信分享到朋友圈后的标题</span>
+    </div>
+    <div ng-transclude></div>
+</div>
+<div ng-hide="!selectTitle" style="padding-left:30px;">
+    <ul class="list-group">
+        <li class="list-group-item info text-right" style="background-color:#d9edf7; padding: 5px 10px 5px 0;display: table;width: 100%;">
+            <a href="javascript:;">
+                <i class="fa fa-close" ng-click="selectTitle =!selectTitle"></i>
+            </a>
+        </li>
+        <li ng-repeat="title in titles" role="menuitem" class="list-group-item" style="height: 38px; cursor: pointer; display: table; width: 100%;" ng-click="selectedTitle(title)">
+            {{title}}
+        </li>
+    </ul>
+</div>
+

@@ -1,0 +1,20 @@
+<div >
+<div class="modal-header">
+    <button type="button" class="close"  ng-click="showInboxProductsModal.close()">&times;</button>
+    <h4 class="modal-title {{titleClass}}" >{{title}}
+    	<span class="label label-primary" style="margin-left: 10px;">已添加{{list.inboxStorage.keyCount}}个商品</span>
+    </h4>
+</div>
+<div class="modal-body" style="overflow: auto; height: 400px;">
+	<div class="text-center" ng-show="list.inboxStorage.keyCount <= 0">
+		<span class="text-danger" style="font-size: 1.6em;">当前还未添加商品！</span>
+	</div>
+	<div ng-show="list.inboxStorage.keyCount > 0">
+        <product-list-inbox-list list="list"></product-list-inbox-list>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="showInboxProductsModal.close()">继续选择商品</button>
+    <product-list-actions actions="actions"></product-list-actions>
+</div>
+</div>

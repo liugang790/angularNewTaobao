@@ -1,0 +1,132 @@
+<div class="container">
+    <div class="container-innner">
+        <div class="autoAddGoods">
+            <p class="fonthead">促销新玩儿法：让库存始终处于<span class="fontcolor">库存紧张状态</span>,刺激用户下单付款，饿营销必备神器！</p>
+            <div class="atuoAddselect">
+                <form class="sui-form" style="font-size:15px;">
+                    <div style="border: 1px solid #e0e0e0;padding:20px;">
+                        <div style="padding-bottom: 10px;">
+                            <label class="radio-pretty inline" ng-class="{'checked':closeAutoStock}">
+                               <input type="radio" ng-model="closeAutoStock" name="radio" ng-click="chooseWay = 0; closeAutoStock=true;shortageAutoStock=false;fewAutoStock=false;"><span style="font-weight:700">关闭自动补库存功能</span>
+                            </label>
+                        </div>
+                        <div class="goodsEnough" style="padding-bottom: 10px;">
+                            <label class="radio-pretty inline" ng-class="{'checked':shortageAutoStock}">
+                               <input type="radio" ng-model="shortageAutoStock" name="radio" ng-click="chooseWay = 1; closeAutoStock=false;shortageAutoStock=true;fewAutoStock=false" ><span style="font-weight:700">宝贝不足时</span>
+                            </label>
+                            <div class="goodsNext">当您的宝贝或者其中一个销售属性库存小于10时，自动增加<input type="text" placeholder="" ng-model="soldOutAddCount" class="input-small" style="margin:0 3px">件库存</div>
+                            <div class="goodsNotice goodsNext">注：请用户根据自己的货源库存量进行设置，库存更新后不满足条件将不得进行再次修改。</div>
+                        </div>
+                        <div style="padding-bottom: 10px;">
+                              <label class="radio-pretty inline" ng-class="{'checked':fewAutoStock}">
+                                <input type="radio" ng-model="fewAutoStock" name="radio" ng-click="chooseWay = 2; closeAutoStock=false;shortageAutoStock=false;fewAutoStock=true"><span style="font-weight:700">库存不多时</span>
+                              </label>
+                              <div class="goodsNext">当您的宝贝库存不足<input type="text" placeholder="" ng-model="stockShortCount" value="{{stockShortCount}}" class="input-small" style="margin:0 3px">件时，自动增加<input type="text" placeholder="" ng-model="stockShortAddCount" value="{{stockShortAddCount}}" class="input-small" style="margin:0 3px">件库存</div>
+                        </div>
+                        <div class="goodsSelect">
+                            <span class="sui-dropdown dropdown-bordered select">
+                                <span class="dropdown-inner">
+                                    <a id="drop4" role="button" data-toggle="dropdown" href="#" class="dropdown-toggle"><input value="{{code}}" name="city" type="hidden"><i class="caret"></i><span ng-bind="name"></span></a>
+                                    <ul role="menu" aria-labelledby="drop1" class="sui-dropdown-menu">
+                                      <li role="presentation"  ng-repeat="autoAddWay in autoAddWayList">
+                                          <a role="menuitem" tabindex="-1" href="javascript:void(0);" ng-click="chooseWayClick(autoAddWay.code)">{{autoAddWay.name}}</a>
+                                      </li>
+                                    </ul>
+                                </span>
+                            </span>
+                            <a href="javascript:void(0);" class="sui-btn btn-primary" ng-click="saveSetting()">保存</a>
+                        </div>
+                    </div>
+                    <div style="padding-top:20px;">
+                        <span>
+                            <div style="color : red;">温馨提醒：</div>
+                            <div>1、只针对出售中的宝贝有效，仓库中的不监控。</div>
+                            <div>2、增加库存的数量范围是1~100000件。</div>
+                            <div>3、具体数据请按自己的需求填写，设置后实时生效，执行后不能恢复。</div>
+                            <div>4、库存不足N件，这个N的范围是1~100000件。</div>
+                            <div>5、请保证库存至少保留2个库存，当库存为0时淘宝会自动将商品进行下架处理，无法再自动补充库存</div>
+                        </span>
+                    </div>
+                    <div style="padding-top: 20px;">
+                        <table class="sui-table table-bordered">
+                            <thead>
+                            <tr>
+                                <th class="center">
+                                    <form class="sui-form" style="margin: 0">
+                                        <label class="checkbox-pretty inline" style="margin: 0">
+                                            <input type="checkbox" ng-model="allSelectedStatus" ng-click="selecteAll(allSelectedStatus)"><span></span>
+                                        </label>
+                                    </form>
+                                </th>
+                                <th class="center"></th>
+                                <th class="center">本店宝贝信息</th>
+                                <th class="center" style="width:100px;">操作</th>
+                                <th class="center">上次补库存时间</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbodyId">
+                                <tr ng-if="list.isIdle()" ng-repeat="item in list.items">
+                                    <td style="text-align: center">
+                                        <!--<input ng-switch-when="0" type="checkbox" name="item" numiid="{{item.numIid}}" title="{{item.title}}" picurl="{{item.picUrl}}" checked>
+                                        <input ng-switch-when="1" type="checkbox" name="item" numiid="{{item.numIid}}" title="{{item.title}}" picurl="{{item.picUrl}}" disabled>-->
+                                        <form class="sui-form" style="margin-bottom: 0" ng-switch on="item.isAdd">
+                                            <label ng-switch-when="0" class="checkbox-pretty inline" ng-class="{'checked':item.selected}" style="margin: 0">
+                                                <input class="numiid" type="checkbox" ng-click="item.selected = item.selected ? false : true;" numiid="{{item.numIid}}"><span></span>
+                                            </label>
+                                            <label ng-switch-when="1" class="checkbox-pretty inline disabled" style="margin: 0">
+                                                <input class="numiid" type="checkbox" numiid="{{item.numIid}}" disabled><span></span>
+                                            </label>
+                                        </form>
+                                    </td>
+                                    <td><img style="height: 60px;width: 60px;" ng-src="{{item.picUrl}}" /></td>
+                                    <td><a href="https://item.taobao.com/item.htm?id={{item.numIid}}" target="_blank">{{item.title}}</a></td>
+                                    <td ng-switch on="item.isAdd">
+                                        <a ng-switch-when="0" href="javascript:void(0);" class="sui-btn btn-primary" ng-click="addStockGoods(item)">自动补库存</a>
+                                        <a ng-switch-when="1" href="javascript:void(0);" class="sui-btn btn-success" ng-click="delStockGoods(item)">取消补库存</a>
+                                    </td>
+                                    <td>{{item.date | date:'yyyy-MM-dd'}}</td>
+                                </tr>
+                                <tr ng-if="list.isLoading()">
+                                    <td colspan="4">
+                                        数据正在加载中,请稍后...
+                                    </td>
+                                </tr>
+                                <tr ng-if="list.isLoadFailure()">
+                                    <td colspan="4">
+                                        数据加载失败，请稍后重试。
+                                        <a href="javascript:void(0);" ng-click="listLoad(1)" class="sui-btn btn-primary">重新加载数据</a>
+                                    </td>
+                                </tr>
+                                <tr ng-if="!list.isLoadFailure() && list.isEmpty()">
+                                    <td  colspan="4">
+                                        在售商品数据列表为空。
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style="display: flex;justify-content: space-between;align-items: center;">
+                        <div class="sui-pagination goodsPage flexalign">
+                            <div class="pageTotal" style="margin:0 auto">
+                                <ul>
+                                    <li class="prev disabled"><a href="#">«上一页</a></li>
+                                    <li class="active"><a href="#">1</a></li>
+                                    <li class="next disabled"><a href="#">下一页»</a></li>
+                                </ul>
+                                <div>
+                                    <span>共1页&nbsp;</span>
+                                    <span>
+                                        到<input type="text" class="page-num"><button class="page-confirm" onclick="alert(1)">确定</button>页
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <a id="saveGoodsList" href="javascript:void(0);" ng-click="batchAddStockGoods()" class="sui-btn btn-primary">批量添加</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

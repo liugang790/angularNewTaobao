@@ -1,0 +1,33 @@
+<div class="span12 page-comments">
+    <div class="span12" style="padding: 0;">
+        <span class="sui-text-danger" style="height: 30px;line-height: 30px;" ng-show="activity.page.comments.length==0;">请添加评论(系统随机产生三条){{commentsMsg}}</span>
+        <span class="sui-text-danger" style="height: 30px;line-height: 30px;" ng-show="commentsMsg">{{commentsMsg}}</span>
+        <span class="sui-text-center pull-right">
+            <button class="sui-btn btn-sm btn-primary" ng-click="appendNext()">添加</button>
+        </span>
+    </div>
+    <div class="span12 comment" ng-model="currentLength" ng-repeat="comment in activity.page.comments" style="margin: 10px 0 10px 5px; border: 1px solid #bce8f1;">
+        <div class="span5">
+            <div class="sui-row">
+                <span style="display: block;padding: 5px;">评论者</span>
+                <input ng-model="comment.name" type="text" placeholder="名字" />
+            </div>
+            <div class="sui-row" style="padding-top: 8px;">
+                <span>匿名</span>
+                <input type="checkbox" ng-model="comment.anonymous" />
+            </div>
+        </div>
+        <div class="span6">
+            <span style="display: block;padding: 5px;">评论内容</span>
+                <textarea ng-model="comment.content" rows="3" placeholder="评论内容"></textarea>
+        </div>
+        <div align="right" class="col-sm-12" style="margin: 10px 0;">
+            <span>
+                <a href="javascript:;" ng-click="closeCurrent($index)">删除</a>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="sui-row">
+    <div class="sui-text-info">活动中&nbsp;人气爆款&nbsp;商品的评论</div>
+</div>

@@ -1,0 +1,16 @@
+<div class="modal-header">
+	<div class="pull-right">
+		<a href="javascript:;" ng-click="popNoticeModal.close();">
+			<i class="fa fa-times"></i>
+		</a>
+	</div>
+	<h3 style="margin:0;padding:0; color: #333;">
+		<strong>{{popNotice.title}}</strong>
+	</h3>
+</div>
+<div class="modal-body">
+	<div marked="popNotice.detail"></div>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-sm btn-primary" ng-click="popNoticeModal.close();">关闭</button>
+</div>

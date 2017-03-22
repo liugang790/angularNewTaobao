@@ -1,0 +1,26 @@
+<table class="table" style="table-layout: fixed;">
+    <thead>
+        <tr class="info">
+            <th>店铺名称</th>
+            <th>店铺应用平台</th>
+            <th>所属企业</th>
+            <th>授权状态</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="shop in shopList.items">
+            <td>{{shop.displayName}}</td>
+            <td>{{shop.app.platformName}}</td>
+            <td>{{shop.company.name}}</td>
+            <td>
+                <div class="label" ng-class="{true: 'label-success', false: 'label-danger'}[shop.oauthInfo.expiresIn]">
+                    {{shop.oauthInfo.expiresIn ? '正常' : '授权过期'}}
+                </div>
+            </td>
+            <td>
+                <div ng-if="!shop.oauthInfo.expiresIn" ng-repeat="oauth in oauthApps | filter: {code: shop.app.code}"><a ng-href="{{oauth.authUrl}}">刷新授权</a></div>
+            </td>
+        </tr>
+    </tbody>
+</table>

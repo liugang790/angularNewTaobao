@@ -1,0 +1,138 @@
+<div class="container">
+    <div class="container-innner">
+        <div class="developphonedetail" style="display:flex;justify-content:flex-start;margin-top:30px;">
+            <div class="developphonedetailtable" style="width:60%;float:left">
+                <div class="developHeader flex">
+                    <div class="searchgoods" style="justify-content:flex-start">
+                        <form class="sui-form form-dark" style="float:left;margin:0  10px 0 0">
+                            <div class="input-control">
+                                <input type="text" ng-model="searchKey" class="input-fat" style="border-radius:20px;width:200px;" placeholder="输入宝贝名称">
+                            </div>
+                        </form>
+                        <a href="javascript:void(0);" ng-click="listLoad(1)" class="sui-btn btn-large btn-primary">搜索</a>
+                    </div>
+                    <div>
+                        <!-- <a href="javascript:void(0);" id="oneKeyWapDesc" ng-click="oneKeyWapDesc()" class="sui-btn btn-xlarge btn-success">一键生成全店手机详情</a> -->
+                        <a href="javascript:void(0);" ng-click="uploadWapDescTask()" class="sui-btn btn-large btn-primary">生成手机详情</a>
+                    </div>
+                </div>
+                <div style="margin-top:20px;">
+                    <table class="sui-table table-bordered">
+                        <thead>
+                        <tr>
+                            <th width="5%" class="center">
+                                <form class="sui-form" style="margin: 0">
+                                    <label class="checkbox-pretty inline" style="margin: 0">
+                                        <input type="checkbox" ng-model="allSelectedStatus" ng-click="selecteAll(allSelectedStatus)"><span></span>
+                                    </label>
+                                </form>
+                            </th>
+                            <th width="55%">宝贝名称和图片</th>
+                            <th width="20%" class="center">上架时间</th>
+                            <th width="20%" class="center">状态(点击查看详情)</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="developTable">
+                    <table class="sui-table table-sideheader">
+                        <tbody>
+                        <tr style="border-top:none;border-bottom:1px solid #ddd;" ng-repeat="item in list.items">
+                            <td width="5%" class="center" style="background-color: #ffffff;">
+                                <form class="sui-form" style="margin-bottom: 0">
+                                    <label class="checkbox-pretty inline" ng-class="{'checked':item.selected}" style="margin: 0">
+                                        <input class="numiid" type="checkbox" ng-click="item.selected = item.selected ? false : true;" numiid="{{item.numIid}}"><span></span>
+                                    </label>
+                                </form>
+                            </td>
+                            <td width="55%">
+                                <div class="flexstart">
+                                    <span class="display" style="width:15%;"><img width="80%" ng-src="{{item.picUrl}}"></span>
+                                    <span class="display" style="width:85%"><a href="https://item.taobao.com/item.htm?id={{item.numIid}}" target="_blank" class="block-text" style="max-width:285px;">{{item.title}}</a></span>
+                                </div>
+                            </td>
+                            <td width="20%" class="center">{{item.listTime | date:'yyyy-MM-dd'}}</td>
+                            <td width="20%" class="center" ng-switch on="item.status">
+                                <div ng-switch-when="0" class="sui-progress progress-striped active" style="margin-bottom:0;">
+                                    <div style="width: 100%;font-size: 14px;" class="bar">正在检测</div>
+                                </div>
+                                <div ng-switch-when="1" class="sui-progress progress-success" style="margin-bottom: 0">
+                                    <div style="width: 100%;font-size: 14px" class="bar" ng-click="viewHtml(item.numIid)">已有手机详情</div>
+                                </div>
+                                <div ng-switch-when="2" class="sui-progress progress-danger" style="margin-bottom: 0">
+                                    <div style="width: 100%;font-size: 14px" class="bar">暂无手机详情</div>
+                                </div>
+                                <div ng-switch-when="3" class="sui-progress progress-success" style="margin-bottom: 0">
+                                    <div style="width: 100%;font-size: 14px" class="bar" ng-click="viewHtml(item.numIid)">生成手机详情成功</div>
+                                </div>
+                                <div ng-switch-when="4" class="sui-progress progress-danger" style="margin-bottom: 0">
+                                    <div style="width: 100%;font-size: 14px" class="bar">生成手机详情失败</div>
+                                </div>
+                                <div ng-switch-when="5" class="sui-progress progress-striped active" style="margin-bottom:0;">
+                                    <div style="width: 100%;font-size: 14px" class="bar">执行中</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr ng-if="list.isLoading()">
+                            <td colspan="4" style="padding:0;">
+                                <div class="sui-msg msg-large msg-block msg-notice" style="padding:0;margin-bottom:0;">
+                                  <div class="msg-con">数据正在加载中,请稍后...</div>
+                                  <s class="msg-icon"></s>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr ng-if="list.isLoadFailure()">
+                            <td colspan="4" style="padding:0;">
+                                <div class="sui-msg msg-large msg-block msg-error" style="padding:0;margin-bottom:0;">
+                                  <div class="msg-con">数据加载失败!!!</div>
+                                  <s class="msg-icon"></s>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr ng-if="!list.isLoadFailure() && list.isEmpty()">
+                            <td  colspan="4" style="padding:0;">
+                                <div class="sui-msg msg-large msg-block msg-warning" style="padding:0;margin-bottom:0;">
+                                  <div class="msg-con">数据列表为空!!!</div>
+                                  <s class="msg-icon"></s>
+                                </div>
+                              </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <div class="sui-pagination goodsPage flexalign">
+                        <div class="pageTotal">
+                            <ul>
+                                <li class="prev disabled"><a href="#">«上一页</a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li class="next disabled"><a href="#">下一页»</a></li>
+                            </ul>
+                            <div><span>共1页&nbsp;</span><span>
+                                到
+                                <input type="text" class="page-num"><button class="page-confirm" onclick="alert(1)">确定</button>
+                                页</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="developphonedetailphone" style="text-align: right;width:38%;float:right">
+                <div style="width:300px;text-align: right;margin-left:50px;height:600px;border:2px solid #43cd6e;border-radius:20px;">
+                    <div ng-show="viewDefault" style="text-align:center;margin-top:30px;font-size: 14px;">手机详情预览区域</div> 
+                    <div style="overflow-x: hidden;text-align: center;width: 100%;height: 100%;color:#ffffff;border-radius:20px;" ng-bind-html="view"></div>
+                </div>
+            </div>
+    </div>
+</div>
+<!--上传中-->
+<div id="myModal" tabindex="-1" role="dialog" data-hasfoot="false" class="sui-modal hide fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                正在上传中...
+            </div>
+        </div>
+    </div>
+</div>
+
+

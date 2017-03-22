@@ -1,0 +1,11 @@
+<div class="row" style="font-size: 1.1em">
+	<div class="col-md-12">
+		<div class="col-md-2"><span style="font-weight: bold;">{{log.typeName}}</span></div>
+		<div class="col-md-3" style="max-width: 200px;"><span>{{log.taskCreated}}</span></div>
+		<div class="col-md-2" style="font-weight: bold;">{{log.operator.displayName}}</div>
+		<div class="col-md-5">
+			<div>将商品从<span class="label label-info" style="font-wight: bold;margin: 0 5px;"><a style="color: white;" ng-href="{{log.desc.sourceUrl}}">商品源链接</a></span>同步到
+			<span class="label label-info" style="font-weight: bold; margin: 0 5px;">{{log.desc.targetShop.displayName}}</span>中</div>
+		</div>
+	</div>
+</div>

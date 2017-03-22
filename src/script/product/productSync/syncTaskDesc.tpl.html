@@ -1,0 +1,9 @@
+<div class="media" ng-controller="productSyncTaskDescCtrl">
+	<div class="media-left"><img class="media-object" ng-src="{{task.desc.logo}}" style="max-height:50px;"></div>
+	<div class="media-body">
+		<p class="media-heading">{{task.desc.title}}</p>
+		<label class="label label-info">{{task.desc.originShop.displayName}}</label>
+		<small>同步到 <i class="fa fa-angle-right"></i></small>
+		<label class="label label-info">{{task.desc.targetShop.displayName}}</label>
+	</div>
+</div>

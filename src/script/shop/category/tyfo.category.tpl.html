@@ -1,0 +1,75 @@
+<!-- page-swapper start -->
+<div>
+    <!-- 配置 开始 -->
+    <div class="context-container">
+        <div class="context-title">
+            <div class="row">
+            <div class="col-md-4">复制配置选项</div>
+                <div class="col-md-8 toptip color-green"></div> 
+           </div>
+        </div>
+        <!-- copy-config-box start -->
+        <div class="copy-config-box">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label class="control-label">店铺类目选择：</label>
+                    <div ng-show="categoryLoading" class="text-center"><span><i class="fa fa-spinner fa-spin"></i>正在获取分类信息，请稍候...</span></div>
+                    <div ng-show="!categoryLoading" style="padding: 0;">
+                        <div>
+                            <select
+                                class="form-control"
+                                ng-model="shop.level1Cid"
+                                ng-change="shop.level2Cid='';getBrands(shop.level1Cid, 1);"
+                                ng-options="category.FPC_ID as category.FPC_Name for category in categorys | filter:{FPC_FatherID:0}:tbLevel1FilterComparator">
+                                <option value="">请选择第一级类目</option>
+                            </select>
+                            <select
+                                class="form-control"
+                                ng-show="level2show"
+                                ng-model="shop.level2Cid"
+                                ng-change="shop.level3Cid='';getBrands(shop.level2Cid, 2);"
+                                ng-options="category.FPC_ID as category.FPC_Name for category in categorys | filter:{FPC_FatherID:shop.level1Cid}: tbLevel1FilterComparator">
+                                <option value="">请选择第二级类目</option>
+                            </select>
+                            <select
+                                class="form-control"
+                                required
+                                ng-show="level3show"
+                                ng-model="shop.level3Cid"
+                                ng-change="shop.category='';getBrands(shop.level3Cid, 3);"
+                                ng-options="category.FPC_ID as category.FPC_Name for category in categorys | filter:{FPC_FatherID:shop.level2Cid}: tbLevel1FilterComparator">
+                                <option value="">请选择第三级类目</option>
+                            </select>
+                            <select
+                                class="form-control"
+                                required
+                                ng-show="level4show"
+                                ng-model="shop.level4Cid"
+                                ng-change="getBrands(shop.category);"
+                                ng-options="category.FPC_ID as category.FPC_Name for category in categorys | filter:{FPC_FatherID:shop.level3Cid}: tbLevel1FilterComparator">
+                                <option value="">请选择第四级类目</option>
+                            </select>
+                        </div>
+                    </div>
+               </div>
+               <div class="form-group">
+                    <label class="control-label">商品品牌选择：</label>
+                    <div ng-show="categoryLoading" class="text-center"><span><i class="fa fa-spinner fa-spin"></i>正在获取店铺信息，请稍候...</span></div>
+                    <div ng-show="!categoryLoading && brands.length > 0">
+                            <select
+                                class="form-control"
+                                required
+                                ng-model="shop.brand"
+                                ng-options="brand.GB_ID as brand.GB_Name for brand in brands">
+                                <option value="">请选择商品品牌</option>
+                            </select>
+                    </div>
+               </div>
+           </form>
+        </div>
+        <!-- copy-config-box end -->
+    
+    </div>
+    <!-- 配置 结束 -->
+</div>
+<!-- page-swapper end -->

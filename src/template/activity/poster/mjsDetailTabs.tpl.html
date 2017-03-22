@@ -1,0 +1,10 @@
+<ul class="sui-nav nav-tabs nav-large">
+	<li ng-repeat="tab in tabs" ng-class="{'active': $index===0}">
+		<a href="#tab" data-toggle="tab" ng-click="currentTab=tab">{{tab.title+($index+1)}}</a>	
+	</li>
+</ul>
+<div class="tab-content">
+	<div id="tab" class="tab-pane active">
+		<mjs-detailposter-set data="currentTab" activity="activity"></mjs-detailposter-set>
+	</div>
+</div>

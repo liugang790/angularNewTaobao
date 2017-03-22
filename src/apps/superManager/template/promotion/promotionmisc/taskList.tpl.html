@@ -1,0 +1,73 @@
+<list list-service="list">
+	<list-filter>
+		<span class="sui-dropdown dropdown-bordered select">
+			<span class="dropdown-inner">
+				<a id="drop4" role="button" data-toggle="dropdown" href="#" class="dropdown-toggle"><input value="hz" name="city" type="hidden"><i class="caret"></i><span ng-bind="typeName"></span></a>
+				<ul id="menu4" role="menu" aria-labelledby="drop4" class="sui-dropdown-menu">
+					<li role="presentation"><a href="javascript:;;" role="presentation" tabindex="-1" ng-click="list.filterOptions.typeCode=''">所有类型</a></li>
+					<li role="presentation" ng-repeat="type in typeCodeOptions">
+	                	<a role="menuitem" tabindex="-1" href="javascript:void(0);" ng-click="list.filterOptions.typeCode=type.code">{{type.name}}</a>
+	            	</li>
+	        	</ul>
+			</span>
+	    </span>
+		<span class="sui-dropdown dropdown-bordered select">
+			<span class="dropdown-inner">
+				<a id="drop4" role="button" data-toggle="dropdown" href="#" class="dropdown-toggle"><input value="hz" name="city" type="hidden"><i class="caret"></i><span ng-bind="statusName"></span></a>
+				<ul id="menu4" role="menu" aria-labelledby="drop4" class="sui-dropdown-menu">
+					<li role="presentation"><a href="javascript:;;" role="presentation" tabindex="-1" ng-click="list.filterOptions.status=''">所有状态</a></li>
+					<li role="presentation" ng-repeat="status in statusOptions">
+	                	<a role="menuitem" tabindex="-1" href="javascript:void(0);" ng-click="list.filterOptions.status=status.code">{{status.name}}</a>
+	            	</li>
+				</ul>
+			</span>
+		</span>
+		<button class="pull-right sui-btn btn-primary" class="button" ng-click="list.load()">刷新任务</button>
+	</list-filter>
+	<table class="sui-table table-responsive table-hover">
+		<thead>
+			<tr>
+				<th style="width: 15%;">任务类型</th>
+				<th style="width: 30%;">任务活动</th>
+				<th style="width: 20%;">任务时间</th>
+				<th style="width: 15%;">任务状态</th>
+				<!-- <th style="width: 10%;">操作</th> -->
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-if="list.isLoading() || list.isEmpty() || list.isLoadFailure()">
+				<td colspan="4"><list-notify messages="list.messages"></list-notify></td>
+			</tr>
+			<tr ng-repeat="task in list.items">
+				<td ng-repeat="type in typeCodeOptions | filter: task.typeCode : equalComparator">
+					<span class="tag taskTag default {{type.code}}">{{type.name}}</span>
+				</td>
+				<td>
+					<a href="javascript:;" ui-state="'member.promotion.promtionmisc.manage'" ui-state-params="{activityId: task.desc.activity.id, tab: 'products'}" style="text-decoration: none;color: black;" ng-if="task.typeCode !== 'posterAdd' && task.typeCode !== 'posterClear'">
+						<activity-label activity="task.desc.activity"></activity-label>
+                    	<span>{{task.desc.activity.title}}</span>
+					</a>
+					<a ng-href="{{task.desc.originUrl}}" target="_blank">{{task.desc.originUrl}}</a>
+					<a href="/products/relateselllist" ng-if="task.typeCode === 'posterAdd'">投放关联营销模板任务</a>
+					<a href="/products/relateselllist" ng-if="task.typeCode === 'posterClear'">取消投放关联营销模板任务</a>
+				</td>
+				<td>
+					{{task.created*1000 | date: 'yyyy-MM-dd HH:mm:ss'}}
+				</td>
+				<td ng-repeat="status in statusOptions | filter: task.status">
+					<span class="label"
+						ng-class="{'label-success': task.status==='success',
+								'label-danger': task.status==='failure',
+								'label-primary': task.status==='running',
+								'label-default': task.status==='new',
+								'label-warning': task.status==='wait'}">{{status.name}}
+					</span>
+					<a ng-show="task.status==='failure'" href="javascript:;" class="sui-text-danger" sui-tooltip sui-tooltip-title="task.failureMessage" data-type="attention" style="text-decoration: none;"> &nbsp;<i class="sui-icon icon-tb-warn" style="font-weight: 700;"></i></a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div ng-if="list.total > 0">
+		<list-pagination></list-pagination>
+	</div>
+</list>

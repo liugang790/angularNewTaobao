@@ -1,0 +1,6 @@
+<div class="shop-card-icon-group">
+    <div ng-repeat="shop in shops" class="group-item" ng-controller="shopIconListItemCtrl" ng-mouseover="showCard = true;" ng-mouseout="showCard = false;" ng-class="'card-' + shop.getCardStyle()">
+        <i ng-class="shop.getCardIcon()"></i>
+        <shop-card shop="shop" read-only="true" ng-show="showCard"></shop-card>
+    </div>
+</div>

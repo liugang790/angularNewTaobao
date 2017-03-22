@@ -1,0 +1,21 @@
+<div class="container-sm">
+    <h3 class="page-header">重设密码
+    	<a type="button" href="/login" class="btn btn-default btn-sm pull-right">返回登录</a>
+    </h3>
+    <span>输入您的账号邮箱，点击发送邮件</span>
+    <div class="alert alert-danger" ng-if="errorMessage">{{errorMessage}}</div>
+    <form class="form-horizontal" name="loginForm" ng-submit="sendEmail(email)">
+        <div class="form-group" show-errors>
+            <label class="col-sm-2 control-label">电子邮件</label>
+            <div class="col-sm-10">
+                <input
+                    type="email"
+                    name="email"
+                    class="form-control"
+                    ng-model="email"
+                    required>
+            </div>
+     	</div>
+     	<button type="submit" class="btn btn-primary pull-right" ng-disabled="!loginForm.$valid || sending || sended"><i class="fa fa-spinner fa-spin" ng-show="sending"></i> 发送邮件</button>
+    </form>
+</div>

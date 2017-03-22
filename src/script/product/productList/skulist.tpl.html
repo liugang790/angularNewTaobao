@@ -1,0 +1,23 @@
+<table class="table table-striped" style="max-height: 200px; overflow: auto; display: block;">
+	<thead>
+		<tr class="warning">
+			<th style="width: 23%;">商品编码</th>
+			<th style="width: 38%;">商品详情</th>
+			<th style="width: 10%;">价格</th>
+			<th style="width: 17%;">数量</th>
+			<th style="width: 140px;">所在店铺</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-show="skus.length <= 0">
+			<td colspan="12" class="text-center">未设置sku（颜色分类和尺码等）</td>
+		</tr>
+		<tr ng-repeat="sku in skus">
+			<td>{{sku.outerId ? sku.outerId : '未设置'}}</td>
+			<td><div ng-repeat="property in sku.properties">{{property.name}}：{{property.value}}</div></td>
+			<td>{{sku.price}}</td>
+			<td>{{sku.stock}}</td>
+			<td><div ng-repeat="shop in sku.shops">{{shop.displayName}}</div></td>
+		</tr>
+	</tbody>
+</table>

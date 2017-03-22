@@ -1,0 +1,131 @@
+<div class="container" style="margin-top: -10px;">
+	<div class="container-inner">
+		<div class="sui-row-fluid">
+			<div class="span12">
+				<h3>{{data.title}}
+				<div style="display: inline-block;">
+					<div class="sui-msg msg-info" ng-if="isBooting"><div class="msg-con">正在加载......</div><s class="msg-icon"></s></div>
+					<div ng-switch="data.status">
+						<div ng-switch-when="synced">
+							<div class="sui-msg msg-success" ng-if="!data.isClosed()">
+								<div class="msg-con">淘宝活动创建成功</div><s class="msg-icon"></s>
+							</div>
+							<div class="sui-msg msg-tips msg-block" ng-if="data.isClosed()">
+								<div class="msg-con">此活动已关闭</div><s class="msg-icon"></s>
+							</div>
+						</div>
+						<div ng-switch-when="syncFailure">
+							<div class="sui-msg msg-error">
+								<div class="msg-con">创建淘宝活动失败：{{data.syncFailureMsg}}</div><s class="msg-icon"></s>
+							</div>
+						</div>
+						<div ng-switch-when="close">
+							<div class="sui-msg msg-tips msg-block">
+								<div class="msg-con">此活动已关闭</div><s class="msg-icon"></s>
+							</div>
+						</div>
+					</div>
+				</div></h3>
+			</div>
+			<div class="span12">
+				<ul class="sui-nav nav-tabs nav-pills text-center" style="margin-bottom: 5px;margin-top: 15px;">
+					<li ng-class="{'active': currentTab==='info'}">
+						<a href="#info" data-toggle="tab" ng-click="currentTab='info'">活动信息管理</a>
+					</li>
+					<li ng-class="{'active': currentTab === 'products'}">
+						<a href="#products" data-toggle="tab" ng-click="currentTab='products'">活动商品管理</a>
+					</li>
+					<li ng-class="{'active': currentTab === 'pagesetting'}">
+						<a href="#pagesetting" data-toggle="tab" ng-click="currentTab='pagesetting'">活动页面设置</a>
+					</li>
+					<li ng-class="{'active': currentTab === 'poster'}">
+						<a href="#poster" data-toggle="tab" ng-click="currentTab='poster'">活动海报管理</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div id="info" class="tab-pane" ng-class="{'active': currentTab==='info'}">
+						<div ng-switch="data.typeCode" style="margin-top: 15px;">
+								<div ng-switch-when="taobaocommonitem" ng-controller="CommonItemEditCtrl">
+									<form class="sui-form form-horizontal" sui-validate ng-submit="submitEdit()">
+										<div ng-include="'/template/promotion/promotionmisc/commonitem/form.tpl.html'"></div>
+										<div class="text-center">
+											<button type="button" class="sui-btn btn-primary btn-large" ng-click="submitEdit()" ng-disabled="editing || data.status==='close'"><div class="sui-loading loading-xxsmall loading-inline loading-light" ng-show="editing"><i class="sui-icon icon-pc-loading"></i></div> 更新活动信息</button>
+										</div>
+									</form>
+								</div>
+								<div ng-switch-when="taobaoitem" ng-controller="TaobaoItemEditCtrl">
+									<form class="sui-form form-horizontal" sui-validate ng-submit="submitEdit()">
+										<div ng-include="'/template/promotion/promotionmisc/taobaoitem/form.tpl.html'"></div>
+										<div class="text-center">
+											<button type="button" class="sui-btn btn-primary btn-large" ng-click="submitEdit()" ng-disabled="editing || data.status==='close'"><div class="sui-loading loading-xxsmall loading-inline loading-light" ng-show="editing"><i class="sui-icon icon-pc-loading"></i></div> 更新活动信息</button>
+										</div>
+									</form>
+								</div>
+								<div ng-switch-when="taobaomjs" ng-controller="TaobaomjsEditCtrl">
+									<form class="sui-form form-horizontal" sui-validate ng-submit="submitEdit()">
+										<div ng-include="'/template/promotion/promotionmisc/taobaomjs/form.tpl.html'"></div>
+										<mjs-detail-set activity="data" actions="tabActions"></mjs-detail-set>
+										<div class="text-center">
+											<button type="button" class="sui-btn btn-primary btn-large" ng-click="submitEdit()" ng-disabled="editing || data.status==='close'"><div class="sui-loading loading-xxsmall loading-inline loading-light" ng-show="editing"><i class="sui-icon icon-pc-loading"></i></div> 更新活动信息</button>
+										</div>
+									</form>
+								</div>
+						</div>
+					</div>
+					<div id="products" class="tab-pane" ng-class="{'active': currentTab === 'products'}">
+						<div style="margin-top: 5px;">
+							<activity-products-list list="list" actions="actions" setting="setting">
+								<div class="sui-msg msg-error msg-clear" ng-show="errorMessage"><div class="msg-con">{{errorMessage}}</div><s class="msg-icon"></s></div>
+								<div ng-show="data.participateRangeCode !== 'fullShop'">
+									<span>您最多还可添加{{limitCount - list.cacheStorage.keyCount - list.total}}个商品哦！<a href="javascript:;" sui-tooltip sui-tooltip-title="'每次活动数量最多'+ alllimitCounts + '个，如需给更多商品打折请再创建活动'" data-type="info">说明</a></span>
+								</div>
+								<div ng-show="data.participateRangeCode === 'fullShop'" class="col-md-12 text-center">
+									<h4 class="sui-text-warning">当前活动为全店商品活动，不能添加或删除商品活动；如需操作请重新创建新的部分商品优惠活动。<p ng-if="activity.typeCode==='taobaoitem'" style="font-size: 14px;" class="sui-text-info">如活动商品不显示折扣，请检查本活动优惠是否低于店铺最低折扣设置。</p></h4>
+								</div>			
+							</activity-products-list>
+						</div>
+					</div>
+					<div id="pagesetting" class="tab-pane" ng-class="{'active': currentTab === 'pagesetting'}">
+						<div style="width:45%;margin-top: 15px;display: inline-block;">
+							<activity-page-setting activity="data" page-refresh="changePageRefresh"  ng-if="data">
+								<div>
+									<label class="control-label">评论设置：</label>
+									<comments-setting activity="data"></comments-setting>
+								</div>
+								<div class="sui-row" style="margin-top: 15px;">
+									<div class="span2">
+										<button type="submit" ng-hide="data.isClosed()" class="sui-btn btn-primary btn-large" ng-click="doEditActivityPage(data.page)">保存</button>
+									</div>
+									<div class="span6">
+										<div class="sui-msg msg-info" ng-show="isEdit">
+											<div class="msg-con">正在修改......</div><s class="msg-icon"></s>
+										</div>
+										<div class="sui-msg msg-success" ng-show="successMessage">
+											<div class="msg-con">{{successMessage}}</div><s class="msg-icon"></s>
+										</div>
+										<div class="sui-msg msg-error" ng-show="errorMessage"><div class="msg-con">{{errorMessage}}</div><s class="msg-icon"></s></div>
+										<div class="alert alert-warning" > </div>
+									</div>
+								</div>
+							</activity-page-setting>
+						</div>
+						<div style="width:45%;padding:0px;margin-left: 30px;float:right;">
+							<div class="text-center">
+								<div class="sui-row">
+									<div ng-include="'/template/promotion/promotionmisc/qrcode.tpl.html'"></div>
+								</div>
+								<div class="row">
+									<label>{{data.shareTitle}}</label>
+								</div>
+							</div>
+							<div ng-if="data"><activity-preview activity="data" refresh="refresh"></activity-preview></div>
+						</div>
+					</div>
+					<div id="poster" class="tab-pane" ng-class="{'active': currentTab === 'poster'}">
+						<div ng-if="data"><activity-poster-set activity="data"></activity-poster-set></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

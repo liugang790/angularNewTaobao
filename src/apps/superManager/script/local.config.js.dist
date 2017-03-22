@@ -1,0 +1,17 @@
+(function(app, undefined) {'use strict';
+
+app.constant('appConfig', {
+    gateway: '@@apiGateway',
+    baseUrl: '@@appBaseUrl',
+    activityUrl: '@@activityUrl',
+    oauthApps: [{
+        code: 'meidan',
+        name: '淘宝店铺'
+    }],
+    appName: '@@appName',
+    pageSetting: {
+    	bodyContent: 'topFull'
+    }
+});
+
+})(window.angular.module('app'));

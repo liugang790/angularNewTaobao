@@ -1,0 +1,49 @@
+<h3 class="page-header">商品详情</h3>
+<div ng-show="loadingStatus">
+	<div class="row text-center"><span class="alert alert-info"><i class="fa fa-spinner fa-spin"></i>正在加载商品详情，请稍侯...</span></div>
+</div>
+<div ng-hide="loadingStatus">
+	<div class="row">
+		<div class="col-md-6 page-header" style="margin-left: 15px;font-size: 1.3em;">商品基本信息</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12" style="margin-bottom: 10px;">
+			<label class="col-md-2 control-label">商品名称：</label>
+			<div class="col-md-6 media-heading">{{product.title}}</div>
+		</div>
+		<div class="col-md-12" style="margin-bottom: 10px;">
+			<label class="col-md-2 control-label">商品主图：</label>
+			<div class="col-md-5 media-left"><img class="media-object" ng-src="{{product.logo ? product.logo : '/src/img/defaultProduct.jpg'}}" style="max-height:50px;"></div>
+		</div>
+		<div class="col-md-12" style="margin-bottom: 10px;">
+			<label class="col-md-2 control-label">主商家货号：</label>
+			<div class="col-md-5"><span>{{product.customId ? product.customId : '未设置'}}</span></div>
+		</div>
+		<div class="col-md-12">
+			<label class="col-md-2 control-label">商品所属店铺</label>
+			<div class="col-md-5"><shop-icon-list shops="product.getOnsaleShops()"></shop-icon-list></div>
+		</div>
+	</div>
+
+	<div class="row" style="margin-top: 15px;">
+		<div class="col-md-6 page-header" style="margin-left: 15px;font-size: 1.3em;">商品规格信息</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12" style="margin-bottom: 5px;">
+			<label class="col-md-2 control-label">商品总库存：</label>
+			<div class="col-md-5"><span>{{product.stockTotal}}</span></div>
+		</div>
+		<div class="col-md-12" style="margin-left: 15px;">
+			<sku-list ng-model="skus" product="product"></sku-list>
+		</div>
+	</div>
+
+	<div ng-if="logStatus">
+		<div class="row">
+			<div class="col-md-6 page-header" style="margin-left: 15px;font-size: 1.3em;">商品操作日志</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12"><log-list list="logList"></log-list></div>
+		</div>
+	</div>
+</div>

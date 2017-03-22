@@ -1,0 +1,16 @@
+<div class="well">
+    <form class="sui-form form-inline" ng-submit="load()">
+<!--         <span class="sui-dropdown dropdown-bordered select">
+            <span class="dropdown-inner"><a id="drop4" role="button" data-toggle="dropdown" href="#" class="dropdown-toggle">
+                <input value="hz" name="city" type="hidden"><i class="caret"></i><span ng-bind="'每次加载'+pageSize+'条'"></span></a>
+                <ul id="menu4" role="menu" aria-labelledby="drop4" class="sui-dropdown-menu">
+                    <li role="presentation" ng-repeat="pageSize in list.pageSizeOptions">
+                        <a role="menuitem" tabindex="-1" href="javascript:void(0);" ng-click="list.pageSize=pageSize">{{'每次加载'+pageSize+'条'}}</a>
+                    </li>
+                </ul>
+            </span>
+        </span> -->
+        <ng-transclude></ng-transclude>
+        <button type="submit" class="sui-btn btn-primary" ng-disabled="list.isLoading()"><i class="sui-icon icon-tb-search"></i>筛选</button>
+    </form>
+</div>

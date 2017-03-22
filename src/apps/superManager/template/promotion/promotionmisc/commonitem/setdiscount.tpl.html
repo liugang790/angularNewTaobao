@@ -1,0 +1,75 @@
+<step-bar steps="steps"></step-bar>
+<list list-service="list">
+	<div class="">
+		<list-filter>
+			<label class="control-label" for="searchText">搜索商品：</label>
+			<input type="text" id="searchText" ng-model="list.filterOptions.searchText" placeholder="输入商品关键词">	
+		</list-filter>
+	</div>
+	<list-notify></list-notify>
+	<div class="well">
+		<div style="width: 16.7%;display: inline-block;float: left;"> <span class="sui-label label-info" style="font-size: 1.3em; padding: 8px;">商品总数： {{productsStorage.keyCount}}</span></div>
+		<form class="sui-form form-inline" style="margin-left: 10%;float: left; margin-top: -15px;">
+			<div style="padding-left: 0; width: 100%;">批量打折：</div>
+			<div style="width: 100%;" class="input-append" show-errors>
+				<input class="span2 input-fat" type="number" name="allDiscount" ng-model="allDiscountIndex" type="number" step="0.01" max="10" min="0" ng-focus="showDiscountBtn=true;showCutBtn=false;"/>
+				<span class="add-on">折</span>
+			</div>
+			<div align="center" style="margin-top: 8px;width: 100%;" ng-show="showDiscountBtn">
+					<button class="sui-btn btn-small" type="button" ng-click="showDiscountBtn=false">取消</button>
+					<button class="sui-btn btn-primary btn-small" type="button" ng-click="discountAll(allDiscountIndex);allCutIndex=0;showDiscountBtn=false;" ng-disabled="allDiscountIndex === undefined;">确定</button>
+			</div>
+		</form>
+		<form class="sui-form form-inline" style="float: left;margin-top: -15px;margin-left: 5px;">
+			<div style="padding-left: 0;width: 100%;">批量减价：</div>
+			<div class="input-append" style="width: 100%;" show-errors>
+				<input class="span2 input-fat" ng-model="allCutIndex" name="allCut" type="number" step="0.01" min="0" ng-focus="showCutBtn=true;showDiscountBtn=false;"/>
+				<span class="add-on">元</span>
+			</div>
+			<div class="text-center" style="margin-top: 8px;width: 100%;" ng-show="showCutBtn">
+				<button class="sui-btn btn-small" type="button" ng-click="showCutBtn=false">取消</button>
+				<button class="sui-btn btn-primary btn-small" type="button" ng-click="cutAll(allCutIndex);allDiscountIndex=0;showCutBtn=false;" ng-disabled="allCutIndex === undefined">确定</button>
+			</div>
+		</form>
+		<div style="width: 25%;float: left;margin-top: -15px;margin-left: 10px;">
+			<div style="padding-left: 0;width: 100%;">批量操作：</div>
+			<button class="sui-btn" ng-click="cutPenny()">抹去分</button>
+			<button class="sui-btn" ng-Click="cutPennyDime()">抹去分和角</button>
+		</div>
+	</div>
+	<div style="text-align: right; margin-top: 10px; margin-bottom: 10px;">
+		<div class="sui-msg msg-notice msg-large">
+			<div class="msg-con">
+				<b>重要提示：</b>不显示折扣价？<button class="sui-btn btn-small" type="button" sui-modal-toggle sui-modal-template-url="'/template/activity/minDiscountTip.tpl.html'">点我设置</button>
+			</div>	
+		</div>
+    </div>
+
+	<div ng-repeat="product in list.items">
+		<div>
+			<discount-product item="product" click="removeListItem(product)">
+				<div class="sui-text-danger" ng-show="product.errorMessage" style="width: 100%;text-align: center;">{{product.errorMessage}}</div>
+			</discount-product>
+		</div>	
+	</div>
+	<div class="sui-row-fluid">
+		<div class="sui-msg msg-error msg-large msg-block" ng-show="errorMessage">
+			<div class="msg-con">{{errorMessage}}</div>
+			<s class="msg-icon"></s>
+		</div>
+	</div>
+	<div ng-show="!pageStatus" style="padding-top: 20px;text-align: center;">
+		<button class="sui-btn btn-xlarge" type="button" ng-click="stepTwo()"><i class="sui-icon icon-arrow-left"></i>上一步</button>
+		<button class="sui-btn btn-primary btn-xlarge" type="button" ng-click="createActivity()" ng-disabled="creating">
+			<i class="sui-icon icon-arrow-right" ng-hide="creating"></i>
+			<i class="sui-loading loading-inline loading-xxsmall" ng-show="creating"></i> 完成并创建
+		</button>
+	</div>
+	<div ng-show="pageStatus" style="padding-top: 20px;text-align: center;">
+		<button type="button" class="sui-btn btn-xlarge" ng-click="addProduct()">添加商品</button>
+		<button type="button" class="sui-btn btn-primary btn-xlarge" ng-click="updateProduct()" ng-disabled="updating">
+			<i class="sui-loading loading-xxsmall loading-inline" ng-show="updating"></i> 完成并提交
+		</button>
+	</div>
+	<list-pagination></list-pagination>
+</list>

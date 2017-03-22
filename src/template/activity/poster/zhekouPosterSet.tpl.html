@@ -1,0 +1,100 @@
+<div class="sui-row">
+	<div class="span12">
+		<h1 class="posterCollapse">
+			<a href="javascript:;" ng-click="chnageStatus('posterAddedCollapse')">
+				<i class="sui-icon" ng-class="{'icon-tb-unfold': !posterAddedCollapse, 'icon-tb-fold': posterAddedCollapse}"></i> 
+				已投放的海报 <span class="hint" ng-if="posterAddedCollapse">点击查看详情</span>
+			</a>
+		</h1>
+		<div ng-if="activityPosters.length > 0" ng-show="posterAddedCollapse">
+			<activity-poster-list activity="activity" posters="activityPosters"></activity-poster-list>
+		</div>
+	</div>
+	<div class="span12" style="margin-top: 15px;" ng-if="activityPosters.length === 0">
+		<h1 class="posterCollapse">
+			<a href="javascript:;" ng-click="chnageStatus('posterSetCollapse')">
+				<i class="sui-icon" ng-class="{'icon-tb-unfold': !posterSetCollapse, 'icon-tb-fold': posterSetCollapse}"></i> 
+					投放新活动海报 <span class="hint"> 在您的宝贝详情页展示打折商品</span>
+			</a>
+		</h1>
+	</div>
+	<div class="span12" ng-if="activityPosters.length === 0" ng-show="posterSetCollapse && !activity.isClosed()">
+		<div class="posterArea">
+			<div class="span3">
+				<div class="span12 setBox posterContent" style="border-top: none;">
+					<div class="content">
+						<a href="javascript:;" ng-click="openPosterSelector()">
+							<h4>1. 选择海报风格</h4>
+							<img src="{{checkPosterImage}}" style="display: block; margin: 0 auto;max-width: 180px;">
+							<span>选择海报风格 <i class="sui-icon icon-chevron-sign-right"></i></span>
+						</a>
+					</div>
+				</div>
+				<div class="span12 setBox posterStyle">
+					<div class="content">
+						<a href="javascript:;" ng-click="openProductsSetToPoster()">
+							<h4>2. 设置海报商品</h4>
+							<span>选择海报商品 <i class="sui-icon icon-chevron-sign-right"></i></span>
+						</a>
+					</div>
+				</div>
+				<div class="span12 setBox posterSet">
+					<div class="content">
+						<a href="javascript:;" ng-click="openProductsToSetPoster()">
+							<h4>3. 选择投放海报的商品</h4>
+							<span style="text-align: left; font-size: 14px; color: #6F6E6E;">已选择了{{productsToSetPoster.length ? productsToSetPoster.length : 0}}件投放的商品</span>
+							<span>选择投放的商品 <i class="sui-icon icon-chevron-sign-right"></i></span>
+							<div class="sui-msg msg-info"><div class="msg-con">海报会被投放到您选择商品的商品详情页</div><s class="msg-icon"></s></div>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="span9">
+				<div class="posterPreviewBox">
+					<h3>海报预览</h3>
+					<div class="span11" ng-if="errorMessage">
+						<div class="sui-msg msg-error msg-block"><div class="msg-con">{{errorMessage}}</div><s class="msg-icon"></s></div>
+					</div>
+					<div class="span11" ng-if="creating">
+						<div class="sui-msg msg-info msg-block"><div class="msg-con">正在投放海报......</div><s class="msg-icon"></s></div>
+					</div>
+					<div class="span11 previewTip" ng-if="productsSetToPoster.length <= 0 || !checkPoster">
+						<span class="alert">在左侧选择<b style="color: #2E92d9;">海报商品</b>后，这里可以看到预览效果</span>
+					</div>
+					<div ng-if="productsSetToPoster.length > 0 && checkPoster !== false">
+						<div class="span11" ng-repeat="poster in zhekouPosters | filter: {tplName: checkPoster}">
+							<div ng-include="poster.dir"></div>
+						</div>
+					</div>
+				</div>
+				<div class="slideSelector" ng-show="selectPosterStyles" style="padding-bottom: 15px;margin-left:0;padding-bottom: 15px;">
+					<div class="span11" style="margin: 15px 0 0;">
+						<label class="sui-label" ng-repeat="type in posterTypes" ng-click="posterSelectType = type.code" 
+						ng-class="{'label-info': posterSelectType===type.code, 'label-': posterSelectType!== type.code}"
+						style="padding: 6px;">{{type.name}}</label>
+					</div>	
+					<div ng-repeat="poster in zhekouPosters | filter: {typeCode: posterSelectType}">
+						<div class="span11" ng-class="{'posterChecked': checkPoster === poster.tplName, 'posterUncheck': checkPoster !== poster.tplName}" ng-click="selectPoster(poster)" style="padding: 15px;">
+							<img ng-src="{{poster.image}}" style="width: 100%;vertical-align: middle;">
+						</div>
+					</div>	
+					<div class="span11" align="right">
+						<button type="button" class="sui-btn btn-primary" style="margin: 15px 0 0 0;" ng-click="openProductsSetToPoster()">下一步 <i class="sui-icon icon-chevron-sign-right"></i></button>
+					</div>
+				</div>
+				<div class="slideSelector" ng-show="selectProductsSetToPoster" style="margin-left:0;">
+					<activity-products-list list="activityProductsList" setting="setting"></activity-products-list>
+					<div class="span11" align="right">
+						<button type="button" class="sui-btn btn-primary" style="margin: 15px 0 5px 0;" ng-click="openProductsToSetPoster()">下一步 <i class="sui-icon icon-chevron-sign-right"></i></button>
+					</div>
+				</div>
+				<div class="slideSelector" ng-show="selectProductsToSetPoster" style="margin-left:0;margin-bottom: 10px;padding-bottom: 15px;">
+					<activity-products-list list="productsList" setting="setting"></activity-products-list>
+					<div class="span11" align="right">
+						<button type="button" class="sui-btn btn-primary btn-large" ng-click="createPoster()" style="margin: 15px 0 0 0;" ng-disabled="creating">确定投放</button>
+					</div>
+				</div>		
+			</div>
+		</div>
+	</div>
+</div>

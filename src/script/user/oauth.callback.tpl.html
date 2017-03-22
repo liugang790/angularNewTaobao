@@ -1,0 +1,14 @@
+<div class="sui-container">
+	<div class="sui-row">
+		<div class="span3"></div>
+		 <div class="sui-msg msg-large msg-info" ng-if="isRequesting()">
+	    	<div class="msg-con">正在获取您的授权信息，请稍后...</div>
+	        <s class="msg-icon sui-loading loading-xxsmall loading-inline"></s>
+	    </div>
+
+	    <div class="sui-msg msg-large msg-error" ng-if="isFailure()">
+	        <div class="msg-con">{{errorMessage}}</div>
+	        <s class="msg-icon"></s>
+	    </div>
+	</div>
+</div>

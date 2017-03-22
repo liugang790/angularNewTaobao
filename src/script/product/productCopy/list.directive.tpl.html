@@ -1,0 +1,27 @@
+<table class="table">
+	<thead>
+		<tr>
+			<th style="width:80%;">商品</th>
+			<th>选择</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="product in listItems">
+			<td>
+				<div class="media">
+					<div class="media-left">
+						<img class="media-object" ng-src="{{product.logo}}" style="max-height:50px;">
+					</div>
+					<div class="media-body">
+						<span class="media-heading">
+							<a ng-href="{{product.url}}" target="_blank">{{product.title}}</a>
+						</span>
+					</div>
+				</div>
+			</td>
+			<td>
+				<a href="javascript:;" ng-click="deleteUrl(product.url)">删除</a>
+			</td>
+		</tr>
+	</tbody>
+</table>

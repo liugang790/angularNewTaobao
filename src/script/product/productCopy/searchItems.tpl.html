@@ -1,0 +1,59 @@
+<page-header page-title="批量复制"></page-header>
+<list list-service="productList">
+	<div class="well">
+	    <list-filter list-filter-init-promise="filterInitPromise">
+	        <div class="form-group">
+				<input type="text" class="form-control" ng-model="listFilterData.q" placeholder="输入商品标题查询商品">
+	        </div>	        
+	        <div class="form-group">
+				<input type="text" class="form-control" ng-model="listFilterData.nick" placeholder="输入店铺昵称查询商品">
+	        </div>
+	    </list-filter>
+	</div>
+	
+	<div class="col-md-12 alert alert-danger" ng-show="errorStatus">
+       {{errorMessage}}
+    </div>
+	<div class="col-md-12" style="margin-bottom: 5px;">
+		<label><input type="checkbox" ng-model="productList.isSelectedAll" ng-change="selecteAll(productList.isSelectedAll)"> 全选</label>
+		<a style="text-decoration: none; margin-top: 15px;" ng-href="#" ng-click="showInboxProducts()"><i class="fa fa-shopping-cart"></i> 已选择{{productList.inboxStorage.keyCount}}个商品</a>
+
+		<div class="pull-right" ng-if="actions.length > 0">
+			<div class="btn-group"><product-list-actions actions="actions"></product-list-actions></div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<table class="table table-striped">
+		<thead>
+			<tr class="info">
+				<th style="width: 8%;">选择</th>
+				<th style="width: 40%;">商品名</th>
+				<th style="width: 10%;">价格</th>
+			</tr>
+			<tr>
+				<th colspan="12" ng-if="productList.isEmpty() || productList.isLoading() || productList.isLoadFailure()"><list-notify></list-notify></th>
+			</tr>
+		</thead>
+		<tbody ng-repeat="product in productList.items" >
+			<tr>
+				<td>
+					<input type="checkbox" ng-disabled="product.isAdded" ng-model="product.isInbox" ng-change="productList.toggleInboxProduct(product)">
+				</td>
+				<td>
+					<div class="media">
+						<div class="media-left"><img class="media-object" ng-src="{{product.picUrl ? product.picUrl : '/src/img/defaultProduct.jpg'}}" style="max-height:50px;"></div>
+						<div class="media-body"><span class="media-heading">
+							<a ng-href="{{getProductUrl(product)}}" target="_blank">{{product.title}}</a>
+						</span></div>
+					</div>
+				</td>
+				<td >
+					{{product.price}}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+
+	<list-pagination></list-pagination>
+</list>

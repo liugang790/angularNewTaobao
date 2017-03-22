@@ -1,0 +1,43 @@
+<ui-page layout="admin">
+	<page-header page-title="微信推广"></page-header>
+	<div style="padding: 0 15px;">
+		<p>一天中打开微信30次以上的用户占总用户的25%，流量庞大，因此我们为您开创了推广到微信！拥有原创美观的手机活动页，您可以将活动分享到朋友圈，分享给朋友，甚至用您的公众号推送给更多的人！打破微信对淘宝的壁垒，流量再也不是难题。</p>
+	</div>
+
+	<div class="col-xs-12 col-sm-12 col-md-12">
+		<list list-service="activityList">
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>活动名称</th>
+						<th>活动时间</th>
+						<th>活动状态</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td colspan="4"><list-notify messages="listMessages"></list-notify></td>
+					</tr>
+					<tr ng-repeat="activity in activityList.items">
+						<td>
+							<a href="javascript:;" ng-click="gotoPage('/activity-manage/products/'+activity.id)" style="text-decoration: none;color: black;">
+								<activity-label activity="activity"></activity-label>
+		                    	<span>{{activity.title}}</span>
+							</a>
+						</td>
+						<td>
+							{{activity.startTime*1000 | date: 'yyyy-MM-dd HH:mm'}} - {{activity.endTime*1000 | date: 'yyyy-MM-dd HH:MM'}}
+						</td>
+						<td>{{activity.statusName}}</td>
+						<td>
+							<button class="btn btn-primary btn-sm" type="button" ng-click="shareWeixin(activity)">分享到微信</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<list-pagination></list-pagination>
+		</list>
+		<share-pop share="share" ng-if="currentActivity" activity="currentActivity"></share-pop>
+	</div>
+</ui-page>

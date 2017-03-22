@@ -1,0 +1,29 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom: none;text-align: center">
+        <h4 id="myModalLabel" class="modal-title" style="margin-top:20px;">{{progressFont}}</h4>
+        <div class="sui-progress progress-striped active" ng-class="{'progress-warning':progressWarning,'progress-success':progressSuccess}" style="margin-bottom:0;margin-top:14px;">
+          <div ng-style="progressWidth"  class="bar">{{progressWidth.width}}</div>
+        </div>
+      </div>
+      <div class="modal-body" style="height:106px;overflow:scroll">
+        <table class="sui-table table-sideheader">
+            <tbody>
+              <tr ng-repeat="item in copyProcessItems">
+                <td width="10%"><img ng-src="{{item.picUrl}}"></td>
+                <td><a ng-href="{{item.urlHref}}" target="_blank" class="block-text" style="max-width:285px;">{{item.title}}</a></td>
+                <td  width="25%">
+                  <div  ng-class="{'progress-info':item.progressInfo,'progress-warning':item.progressWarning,'progress-success':item.progressSuccess,'progress-danger':item.progressDanger}" class="sui-progress progress-striped active" style="margin-bottom:0;">
+                    <div style="width: 100%;" class="bar">{{item.mark}}</div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+      <div class="modal-footer" style="text-align: center">
+         <button type="button" class="sui-btn btn-primary btn-large" data-ok="modal">关闭窗口</button>
+         <a href="javascript:void(0);" data-ok="modal" ui-state="'member.product.copy.copyrecord'" class="sui-btn btn-primary btn-large">查看复制记录</a>
+      </div>
+    </div>
+</div>

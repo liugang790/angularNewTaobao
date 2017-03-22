@@ -1,0 +1,89 @@
+<div class="container">
+    <div class="container-innner">
+        <div class="copyrecordHeader" style="padding-top:15px;">
+           <div class="sui-btn-group">
+                <button style="font-size: 14px;" class="sui-btn  btn-primary" ng-class="{'btn-bordered' : activeAll}" ng-click="changeTab(0)">全部</button>
+                <button style="font-size: 14px;" class="sui-btn  btn-primary" ng-class="{'btn-bordered' : activeWait}" ng-click="changeTab(1)">等待复制</button>
+                <button style="font-size: 14px;" class="sui-btn  btn-primary" ng-class="{'btn-bordered' : activeCopying}" ng-click="changeTab(2)">复制中</button>
+                <button style="font-size: 14px;" class="sui-btn  btn-primary" ng-class="{'btn-bordered' : activeSuccess}" ng-click="changeTab(3)">复制完成</button>
+                <button style="font-size: 14px;" class="sui-btn  btn-primary" ng-class="{'btn-bordered' : activeFail}" ng-click="changeTab(4)">复制失败</button>
+            </div>
+           <div class="searchgoods">
+                <form class="sui-form form-dark" style="margin:0  10px 0 0">
+                   <div class="input-control">
+                    <input type="text" class="input-fat" style="border-radius:20px;width:200px;"  ng-model="searchKey"><i class="sui-icon icon-touch-magnifier"></i>
+                  </div> 
+                </form>  
+                   <a href="javascript:void(0);" class="sui-btn btn-large btn-primary" ng-click="listLoad()">搜索</a>
+                   <a style="margin-left:20px;" href="javascript:void(0);" class="sui-btn btn-large btn-primary" ng-click="list.load()">刷新</a>
+           </div>
+        </div>
+        <div class="copyrecordMain">
+            <div class="copyrecordMessage" style="padding-bottom:20px;">
+                <table class="sui-table table-bordered-simple">
+                      <thead>
+                        <tr>
+                          <th style="border-right:1px solid #ddd" width="50%">宝贝名称和图片(点击打开复制来源地址)</th>
+                          <th width="10%" style="border-right:1px solid #ddd" class="center">宝贝id</th>
+                          <th width="10%" style="border-right:1px solid #ddd" class="center">复制时间</th>
+                          <th width="10%" style="border-right:1px solid #ddd" class="center">状态</th>
+                          <th width="20%" class="center">操作</th>
+                        </tr>
+                      </thead> 
+                </table>
+                <div class="copyTotal">
+                   <table  class="sui-table">
+                        <tbody>
+                          <tr ng-if="list.isLoading()">
+                                <td colspan="4" style="padding:0;">
+                                <div class="sui-msg msg-large msg-block msg-notice" style="padding:0;margin-bottom:0;">
+                                  <div class="msg-con">数据正在加载中,请稍后...</div>
+                                  <s class="msg-icon"></s>
+                                </div>
+                                </td>
+                            </tr>
+                            <tr ng-if="list.isLoadFailure()">
+                                <td colspan="4" style="padding:0;">
+                                <div class="sui-msg msg-large msg-block msg-error" style="padding:0;margin-bottom:0;">
+                                  <div class="msg-con">数据加载失败!!!</div>
+                                  <s class="msg-icon"></s>
+                                </div>
+                                </td>
+                            </tr>
+                            <tr ng-if="list.isEmpty()">
+                                <td  colspan="4" style="padding:0;">
+                                <div class="sui-msg msg-large msg-block msg-warning" style="padding:0;margin-bottom:0;">
+                                  <div class="msg-con">数据列表为空!!!</div>
+                                  <s class="msg-icon"></s>
+                                </div>
+                              </td>
+                            </tr>                            
+                            <tr ng-repeat="item in  arrayList" ng-if="list.isIdle()">
+                              <td  width="50%"><div class="copyPicture"><span class="copyImg"><img  ng-src="{{item.picUrl}}"></span>
+                                 <span class="copyFont"><a ng-href="{{item.urlHref}}" target="_blank" class="block-text" style="max-width:285px;">{{item.title}}</a></span></div></td>
+                              <td  width="10%" class="center">{{item.newNumiid}}</td>
+                              <td  width="10%" class="center"><span class="copyDate">{{item.reNewDt}}</span></td>
+                              <td  width="10%"class="center">
+                                  <div class="sui-progress" ng-class="{'progress-danger':item.progressDanger,'progress-success':item.progressSuccess,'progerss-warning':item.progress-warning}" style="margin-bottom: 0">
+                                     <div style="width: 100%;font-size: 14px;" class="bar">{{item.mark}}</div>
+                                 </div>
+                              </td>
+                              <td  width="20%" class="center">
+                                   <div ng-if="item.editGoods">
+                                      <a ng-href="https://upload.taobao.com/auction/publish/edit.htm?spm=686.1000925.0.0.RhJM0L&item_num_id={{item.newNumiid}}&auto=false" class="sui-btn btn-bordered btn-large btn-primary" target="_blank">编辑宝贝</a>
+                                    <a href="https://sell.taobao.com/auction/merchandise/auction_list.htm?type=1&orderField=0&orderBy=0&otherOrderBy=0&otherOrderBy2=0" class="sui-btn btn-bordered btn-large btn-primary" target="_blank">查看仓库</a>
+                                    </div>
+                                    <div ng-if="item.failReason">
+                                      <a href="" class="sui-btn btn-bordered btn-large btn-danger" ng-click="filedReason(item);">失败原因</a>
+                                    </div>
+                              </td>
+                            </tr>
+                        </tbody>
+                    </table> 
+                </div>
+            </div>
+            <div class="goodsSearch" style="float:right">
+            </div>
+        </div>
+        </div>
+</div>

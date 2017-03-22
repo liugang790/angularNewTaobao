@@ -1,0 +1,89 @@
+<!-- page-swapper start -->
+<div>
+    <!-- 配置 开始 -->
+    <div class="context-container">
+        <div class="context-title">
+            <div class="row">
+            <div class="col-md-4">复制配置选项</div>
+                <div class="col-md-8 toptip color-green"></div> 
+           </div>
+        </div>
+        <!-- copy-config-box start -->
+        <div class="copy-config-box">
+            <form class="form-inline">
+                <div ng-if="false" class="form-group group-tip bg-warning">
+                <label class="label-title">复制隐私数据</label> 
+                <input type="checkbox" class="checkbox-lg"><label class="color-black">复制JD商品SKU商家编码</label><p>&nbsp;&nbsp;&nbsp;&nbsp;需要对方店铺授权才能复制，当前授权0个</p><button type="button" class="btn btn-blue-in">授权清单</button>
+               </div>
+                <div class="form-group">
+                <label class="label-title">发布到京东的标准分类<p class="sub-label">务必选择正确分类</p></label> 
+                    <select
+                        class="form-control"
+                        ng-model="shop.level1Cid"
+                        ng-change="shop.level2Cid='';shop.category='';"
+                        ng-options="category.id as category.name for category in categorys | filter:{lev:1}">
+                        <option value="">请选择一级类目</option>
+                    </select>
+
+                    <select
+                        class="form-control"
+                        ng-show="shop.level1Cid"
+                        ng-model="shop.level2Cid"
+                        ng-change="shop.category=''"
+                        ng-options="category.id as category.name for category in categorys | filter:{fid:shop.level1Cid}">
+                        <option value="">请选择二级类目</option>
+                    </select>
+
+                    <select
+                        class="form-control"
+                        required
+                        ng-show="shop.level2Cid"
+                        ng-model="shop.category"
+                        ng-options="category.id as category.name for category in categorys | filter:{fid:shop.level2Cid}">
+                        <option value="">请选择三级类目</option>
+                    </select>
+               </div>
+               <div class="form-group">
+                <label class="label-title">商品品牌<br><p class="sub-label">选择商品品牌</p></label> 
+                    <select
+                        class="form-control"
+                        required
+                        ng-model="shop.brand"
+                        ng-options="brand.erpBrandId as brand.brandName for brand in brands">
+                        <option value="">请选择商品品牌</option>
+                    </select>
+               </div>               
+               <div ng-if="false" class="form-group">
+                <label class="label-title">宝贝分类<br><p class="sub-label">店铺宝贝的分类</p></label> 
+                    <select class="form-control long"><option>－请选择宝贝店铺分类－</option></select>
+               
+               </div>
+               <div ng-if="false" class="form-group">
+                <label class="label-title">重复复制</label> 
+                <input type="checkbox" class="checkbox-lg"><label>过滤已经复制过的宝贝</label>
+                <label class="label-title">描述外链</label> 
+                <input type="checkbox" class="checkbox-lg"><label >过滤外链内容</label>
+                </div>
+                <div ng-if="false" class="form-group">
+                    <div class="row">
+                        <div class="col-md-2 no-padding"><label class="label-title">价格复制</label> </div>
+                      <div class="col-md-2">
+                      <input type="radio" name="price_1" checked><label>一口价复制</label><br>
+                      <input type="radio" name="price_1"><label>折扣价复制</label></div>
+                      <div class="col-md-1 big-plus"><span>+</span></div>
+                      <div class="col-md-7">
+                            <input type="radio" name="price_2" checked><label>百分比</label> <input type="text" class="text-short"><label>％ （可输入负数，负数表示减）</label><br>
+                            <input type="radio" name="price_2"><label>固定值</label> <input type="text" class="text-short"><label>元（可输入负数，负数表示原价上减）</label>
+                      </div>
+                    </div>
+                </div>
+                
+                
+           </form>
+        </div>
+        <!-- copy-config-box end -->
+    
+    </div>
+    <!-- 配置 结束 -->
+</div>
+<!-- page-swapper end -->

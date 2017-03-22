@@ -1,0 +1,8 @@
+<div ng-controller="weidianFilterCtrl">
+	<select class="form-control" ng-model="listFilterData.status" ng-options="status.code as status.name for status in filterStatus">
+		<option value="">选择商品状态</option>
+	</select>
+	<select class="form-control" ng-model="listFilterData.orderby" ng-options="status.code as status.name for status in filterOrder">
+		<option value="">选择商品排序</option>
+	</select>
+</div>

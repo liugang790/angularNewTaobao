@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" ng-cloak>
+	<head>
+		<script>
+			var _hmt = _hmt || [];
+			(function() {
+			  var hm = document.createElement("script");
+			  hm.src = "https://hm.baidu.com/hm.js?6c171c5f6eb0e7cd3bd16d6705afcbbc";
+			  var s = document.getElementsByTagName("script")[0]; 
+			  s.parentNode.insertBefore(hm, s);
+			})();
+		</script>
+
+		<title>@@appName</title>
+		<base href="@@webRoot/index.html">
+		<meta charset="utf-8">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!--build:css theme/apptheme.css?v=@@ver-->
+            <!-- apptheme:css -->
+            <!-- endinject -->
+		<!--/build-->
+		<!-- <link rel="stylesheet" type="text/css" href="//g.alicdn.com/sj/qnui/1.5.1/css/sui.min.css?v=1"> -->
+		<link rel="stylesheet" type="text/css" href="//g.alicdn.com/sj/qnui/1.5.1/css/sui-append.min.css?v=1">
+		<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1471917136_488434.css">
+		<link rel="stylesheet" type="text/css" href="/walletpop/css/walletpop.css">
+		<!--build:replace '<link rel="stylesheet/less" type="text/css" href="/less/theme.less?v=@@ver" />' -->
+            <!-- theme:less -->
+            <!-- endinject -->
+		<!--/build-->
+		<!--build:css css/style.css?v=@@ver-->
+            <!-- style:css -->
+            <!-- endinject -->
+		<!--/build-->
+		@@headContent
+	</head>
+	<body>
+		<ui-view></ui-view>
+
+		@@bodyContent
+
+		<script type="text/javascript" src="http://g.alicdn.com/sj/lib/jquery.min.js?v=@@ver"></script>
+		<script type="text/javascript" src="http://g.alicdn.com/sj/qnui/1.5.1/js/sui.min.js?v=@@ver"></script>
+		<script type="text/javascript" src="http://g.tbcdn.cn/sj/qn/jssdk.js?v=@@ver"></script>
+		<script src="http://yddz.zhikr.cn/QianNiuCloudWeb/searchShop/getShopItemList.js?v=20160405" type="text/javascript"></script>
+		<script type="text/javascript" src="http://g.alicdn.com/sj/qn/lib/js/less.js?v=@@ver" charset="utf-8"></script>
+		<script type="text/javascript" src="layer/layer.js"></script>
+		<script type="text/javascript" src="walletpop/walletpop.js"></script>
+		<!--build:js js/vendor.js?v=@@ver-->
+	        <!-- vendorJs:js -->
+	        <!-- endinject -->
+		<!--/build-->
+
+		<!--build:js js/index.js?v=@@ver-->
+	        <!-- app:js -->
+	        <!-- endinject -->
+		<!--/build-->
+
+		<!--build:js js/config.js?v=@@ver-->
+		<!--/build-->
+    </body>
+</html>

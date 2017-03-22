@@ -1,0 +1,44 @@
+<form name="editActivityForm" class="sui-form">
+    <div class="control-group">
+        <label class="control-label">分享标题：</label>
+    </div>
+    <share-title activity="activity"></share-title>
+    <div class="control-group">
+        <label class="control-label">分享标题图片：</label>
+    </div>
+    <share-title-image activity="activity"></share-title-image>
+    <div class="control-group">
+        <label class="control-label">活动专题选择：</label>
+    </div>
+    <share-banner activity="activity"></share-banner>
+    <!--<div class="form-group">
+        <label class="control-label">店铺评分：</label>
+        <div class="col-sm-12">
+            <div  class="checkbox"
+                style="float: left;padding: 0px;margin: 0 0 0 30px;">
+                <input type="checkbox" name="isShowShopScore"
+                       ng-true-value="true"
+                       ng-false-value="false"
+                       ng-model="activity.isShowShopScore"
+                       ng-click="linstenIsShowScore(activity)"/>展示
+            </div>
+            <div  class=" checkbox"
+                style="float: left;padding: 0px;margin: 0 0 0 40px;">
+                <input type="checkbox"
+                       ng-true-value="true"
+                       ng-false-value="false"
+                       ng-model="noShow"
+                       ng-click="linstenNoScore(activity)"/>不展示
+            </div>
+        </div>
+    </div>
+    <div class="form-group" >
+        <label class="control-label">活动描述：</label>
+        <div class="col-sm-12">
+            <textarea class="form-control" rows="6"
+                ng-model="activity.activityDesc" >
+            </textarea>
+        </div>
+    </div>-->
+    <div ng-transclude></div>
+</form>

@@ -1,0 +1,185 @@
+<div class="sui-row-fluid">
+	<div class="span6">
+		<div class="sui-row-fluid">
+			<label class="span3 control-label" style="font-size: 1.7em;">优惠条件</label>
+			<div class="span8">
+				<div class="sui-row-fluid tabMultiple" ng-class="{grayIt: !tab.amountMultiple.check, darkIt: tab.amountMultiple.check}">
+					<form class="sui-form form-inline">
+						<div class="control-group">
+							<label data-toggle="checkbox" class="checkbox-pretty inline" ng-class="{'checked': tab.amountMultiple.check}">
+								<input type="checkbox" ng-model="tab.amountMultiple.check" checked="tab.amountMultiple.check" ng-change="tab.itemMultiple.check=false;"/><span>满</span>
+							</label>
+							<div class="controls" style="display: inline-block;">
+								<input type="number" 
+									step="1" 
+									min="0"
+									ng-model="tab.amountMultiple.totalPrice" 
+									ng-focus="tab.amountMultiple.check=true;tab.itemMultiple.check=false" />
+							</div>
+							<label>&nbsp;元</label>
+						</div>
+					</form>
+				</div>
+				<div class="sui-row-fluid tabMultiple" ng-class="{grayIt: !tab.itemMultiple.check, darkIt: tab.itemMultiple.check}">
+					<form class="sui-form form-inline">
+						<div class="control-group">
+							<label data-toggle="checkbox" class="checkbox-pretty inline" ng-class="{'checked': tab.itemMultiple.check}"> 
+								<input type="checkbox" ng-model="tab.itemMultiple.check" checked="tab.itemMultiple.check" ng-change="tab.amountMultiple.check=false;"/><span>满</span>
+							</label>
+							<div class="controls" style="display: inline-block;">
+								<input type="number" 
+									step="1" 
+									min="0"
+									ng-model="tab.itemMultiple.itemCount" 
+									ng-focus="tab.itemMultiple.check=true;tab.amountMultiple.check=false"/>
+							</div>
+							<label>&nbsp;件</label>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="span6">
+		<div class="sui-row-fluid">
+			<label class="span3 control-label" style="font-size: 1.7em;">优惠内容</label>
+			<div class="span8">
+				<div class="sui-row-fluid tabPromotion" ng-class="{grayIt: !tab.promotion[0].check, darkIt: tab.promotion[0].check}">
+					<form class="sui-form form-inline">
+						<div class="control-group">
+							<label data-toggle="checkbox" class="checkbox-pretty inline" ng-class="{'checked': tab.promotion[0].check}">
+								<input type="checkbox" ng-model="tab.promotion[0].check" checked="tab.promotion[0].check" ng-change="tab.promotion[1].check=false"/><span>减</span>
+							</label>
+							<div class="controls" style="display: inline-block;">
+								<input type="number"
+									step="1"
+									min="0"
+									max="99999"
+									ng-model="tab.promotion[0].value"
+									ng-focus="tab.promotion[0].check=true;tab.promotion[1].check=false" />
+							</div>
+							<label>&nbsp;元</label>
+						</div>
+					</form>
+				</div>
+				<div class="sui-row-fluid tabPromotion" ng-class="{grayIt: !tab.promotion[1].check, darkIt: tab.promotion[1].check}">
+					<form class="sui-form form-inline">
+						<div class="control-group">
+							<label data-toggle="checkbox" class="checkbox-pretty inline" ng-class="{'checked': tab.promotion[1].check}">
+								<input type="checkbox" ng-model="tab.promotion[1].check" checked="tab.promotion[1].check" ng-change="tab.promotion[0].check=false"/><span>打</span>
+							</label>
+							<div class="controls" style="display: inline-block;">
+								<input type="number"
+									step="0.01" 
+									max="10"
+									min="0"
+									ng-model="tab.promotion[1].value" 
+									ng-focus="tab.promotion[1].check=true;tab.promotion[0].check=false"/>
+							</div>
+							<label>&nbsp;折</label>
+						</div>
+					</form>
+				</div>
+				<div class="sui-row-fluid tabPromotion">
+					<form class="sui-form form-inline">
+						<div class="control-group">
+							<label data-toggle="checkbox" class="checkbox-pretty inline" ng-class="{'checked': tab.promotion[3].check}">
+								<input type="checkbox" checked="tab.promotion[3].check" ng-model="tab.promotion[3].check" ><span>&nbsp;包邮</span></label>
+							<a id="postFree" href="javascript:;" sui-modal-toggle sui-modal-template-url="'/template/activity/poster/postArea.tpl.html'">设置包邮地区</a>
+						</div>
+					</form>
+				</div>
+				<div class="sui-row-fluid tabPromotion">
+					<form class="sui-form form-inline form-validate">
+						<div class="control-group">
+							<label data-toggle="checkbox" class="checkbox-pretty inline" ng-class="{'checked': tab.promotion[2].check}">
+								<input type="checkbox" checked="tab.promotion[2].check" ng-model="tab.promotion[2].check" ng-change="!tab.promotion[2].check ? disabledCursor='not-allowed' : disabledCursor='';"><span>&nbsp;送礼物</span>
+							</label>
+							<input ng-show="tab.promotion[2].giftName" ng-disabled="!tab.promotion[2].check" ng-model="tab.promotion[2].giftName" ng-style="{cursor: disabledCursor}" name="giftName" data-rules="maxlength=32" style="margin-left:5px;">
+							<a href="javascript:;" type="button" class="sui-btn btn-primary btn-small" sui-modal-toggle sui-modal-template-url="'/template/activity/poster/gifts.tpl.html'" style="margin-left:5px;">选择礼物</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>		
+	</div>
+	<div class="sui-row-fluid" style="font-size: 1.2em; margin-top: 15px;text-align: center;">
+		<label data-toggle="checkbox" class="checkbox-pretty inline" ng-class="{'checked': tab.multipleCheck}">
+				<input type="checkbox" ng-model="tab.multipleCheck"/>上不封顶<span style="color: #999;font-weight: normal;">（满100减10元、满200减20元、满300减30元上不封顶）</span>
+		</label>
+		<div style="text-align: right; margin-bottom: 15px;">
+			<div class="sui-msg msg-notice msg-large">
+				<div class="msg-con">
+					<b>重要提示：</b>不显示折扣价？<button class="sui-btn btn-small" type="button" sui-modal-toggle sui-modal-template-url="'/template/activity/minDiscountTip.tpl.html'">点我设置</button>
+				</div>	
+			</div>
+	    </div>
+	</div>
+	<div class="sui-row-fluid">
+		<div class="mjsPreview">
+			<div class="previewName col-md-12">
+				<a href="javascript:;"
+					class="sui-label"
+					ng-click="setPoster('none')" 
+					ng-class="{'label-info' : mjsPosterSet==='none', '': mjsPosterSet!=='none'}">
+					不显示横幅
+				</a>
+				<a href="javascript:;" class="sui-label" ng-repeat="poster in mjsPosters" 
+		           	ng-class="{'label-info':mjsPosterSet===$index, '':mjsPosterSet!==$index}"
+		           	ng-click="setPoster($index)">{{poster.name}}</a>
+			</div>
+		</div>
+	</div>
+	<div ng-show="mjsPosterSet === 'none'" class="sui-row-fluid">
+		<div class="sui-row-fluid" style="text-align: center;">
+			<span style="color: red;">--以下内容不会显示在宝贝详情页--</span>
+		</div>
+		<div class="sui-row-fluid">
+			<div class="sui-row-fluid">
+				<label class="span2" style="font-weight: bold; text-align: center;">{{activity.priceTag}}</label>
+				<label class="span6" style="color: #999; font-weight: normal;">
+					{{activity.startDate | date: 'yyyy-MM-dd HH:mm'}} - {{activity.endDate | date: 'yyyy-MM-dd HH:mm'}}
+				</label>
+			</div>
+			<div class="sui-row-fluid previewDetail">
+				<div>
+					<span>单笔订单满</span>
+					<span ng-show="tab.amountMultiple.check" >
+						<span style="color: red; font-weight: bold;">{{tab.amountMultiple.totalPrice}}</span>元：
+					</span>
+					<span ng-show="tab.itemMultiple.check">
+						<span style="color: red; font-weight: bold;">{{tab.itemMultiple.itemCount}}</span>件：
+					</span>
+				</div>
+				<div>
+					<span ng-show="tab.promotion[0].check">减
+						<span style="color: red;font-weight: bold;">{{tab.promotion[0].value}}</span>元
+					</span>
+					<span ng-show="tab.promotion[1].check">打
+						<span style="color: red;font-weight: bold;">{{tab.promotion[1].value}}</span>折
+					</span>
+				</div>
+				<div>
+					<span ng-show="tab.multipleCheck">&nbsp;上不封顶</span>
+				</div>
+				<div style="display: inline-block;" ng-show="tab.promotion[3].check">
+					<span style="color: red;font-weight: bold;">&nbsp;包邮</span>
+					<span style="display: inline-block;color: #999;">（{{activity.postFreeAreasStr}}）</span>
+				</div>
+				<div style="display: inline-block;" ng-show="tab.promotion[2].check">
+					<span style="color: red;font-weight: bold;">&nbsp;送礼物</span>
+					<span style="display: inline-block;color: #999;"> {{tab.promotion[2].giftName}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div ng-show="mjsPosterSet !== 'none'" class="sui-row-fluid">
+		<div ng-include="mjsPosters[mjsPosterSet].dir"></div>
+	</div>
+	<div ng-show="mjsPosterSet !== 'none'" class="sui-row-fluid" style="margin: 15px auto;">
+		<label class="control-label span2" style="font-size: 16px;text-align: center;">优惠说明：</label>
+		<div class="span7">
+			<textarea style="width: 100%;" rows="4" ng-model="activity.posterData.desc" placeholder="补充您想让买家了解的其他活动信息"></textarea>
+		</div>
+	</div>
+</div>

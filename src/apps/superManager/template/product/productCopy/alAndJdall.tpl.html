@@ -1,0 +1,277 @@
+<div class="container">
+  <div class="container-innner">
+    <div class="highselect" ng-click="toggleBtn()">
+             <i class="sui-icon icon-tb-fold" ng-if="menuSelect"></i>
+             <i class="sui-icon icon-tb-unfold" ng-if="!menuSelect"></i>
+             <span>高级设置</span>
+             <span class="select">(点击隐藏/展开设置)</span>
+             <span class="notice">不知道如何设置，请不用修改下列选项，直接点击"开始复制"按钮</span>
+        </div>
+        <div class="select_box" ng-if="menuSelect">
+            <form class="sui-form">
+              <label class="checkbox-pretty inline" ng-class="{'checked':ifSku}">
+                <input type="checkbox"  ng-model="ifSku" ng-change="setValue('ifSku',ifSku)"><span>自动复制SKU</span>
+              </label>
+              <label class="checkbox-pretty inline" ng-class="{'checked':ifLink}">
+                <input type="checkbox"  ng-model="ifLink" ng-change="setValue('ifLink',ifLink)"><span>自动去外链</span>
+              </label>
+              <label class="checkbox-pretty inline" ng-class="{'checked':filterDup}">
+                <input type="checkbox"  ng-model="filterDup" ng-change="setValue('filterDup',filterDup)"><span>过滤已复制过的宝贝</span>
+              </label>
+              <label class="checkbox-pretty inline" ng-class="{'checked':graphicMode}">
+                <input type="checkbox"  ng-model="graphicMode" ng-change="setValue('graphicMode',graphicMode)"><span>全图模式</span>
+              </label>
+              <label class="checkbox-pretty inline" ng-class="{'checked':flipImage}">
+                <input type="checkbox"  ng-model="flipImage" ng-change="setValue('flipImage',flipImage)"><span><a sui-tooltip="toolTipOptions" data-placement="bottom" sui-tooltip-title="wholeMjsHelpPop" data-type="default" style="color:#000;text-decoration:none">主图反转(点击查看效果)</a></span>
+              </label>
+              <label class="checkbox-pretty inline" ng-class="{'checked':autoWapDesc}">
+                <input type="checkbox"  ng-model="autoWapDesc" ng-change="setValue('autoWapDesc',autoWapDesc)"><span>自动生成手机详情</span>
+              </label>
+              <label class="checkbox-pretty inline" ng-class="{'checkbox':dPrice}">
+                <input type="checkbox"  ng-model="dPrice" ng-change="setValue('dPrice',dPrice)"><span>复制宝贝折扣价</span>
+              </label>
+              <label class="checkbox-pretty inline" ng-class="{'checked':syncGoods}">
+                <input type="checkbox"  ng-model="syncGoods" ng-change="setValue('syncGoods',syncGoods)"><span>是否同步库存</span>
+              </label>
+              <div class="select_menu">
+                  <div class="select_kind">
+                       <span>宝贝分类：</span>
+                       <span class="sui-dropdown dropdown-bordered select  zhigh">
+                       <span class="dropdown-inner"><a id="select" role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">
+                          <input value="" name="city" type="hidden"><i class="caret" ng-bind=""></i><span>{{sellerCats[0].name}}</span></a>
+                        <ul role="menu" aria-labelledby="drop1" class="sui-dropdown-menu">
+                          <li role="presentation" ng-repeat="sellerCat in sellerCats"><a role="menuitem" tabindex="-1" href="javascript:void(0);" value="hz" ng-click="selectSellerCat(sellerCat.id)">{{sellerCat.name}}</a></li>
+                        </ul></span>
+                        </span>
+                   </div>
+                   <div class="select_kind">
+                       <span>运费模板：</span>
+                       <span class="sui-dropdown dropdown-bordered select zhigh">
+                       <span class="dropdown-inner"><a id="select" role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">
+                          <input value="" name="city" type="hidden"><i class="caret"></i><span>{{templates[0].name}}</span></a>
+                        <ul role="menu" aria-labelledby="drop1" class="sui-dropdown-menu">
+                          <li role="presentation" ng-repeat="template in templates"><a role="menuitem" tabindex="-1" href="javascript:void(0);" value="hz" ng-click="selectTemplate(template.id)">{{template.name}}</a></li>
+                        </ul></span>
+                        </span>
+                   </div> 
+                   <div class="select_kind">
+                       <span>图片目录：</span>
+                       <span class="sui-dropdown dropdown-bordered select zhigh">
+                       <span class="dropdown-inner"><a id="select" role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">
+                          <input value="" name="city" type="hidden"><i class="caret"></i><span>{{Categorys[0].picture_category_name}}</span></a>
+                        <ul role="menu" aria-labelledby="drop1" class="sui-dropdown-menu">
+                          <li role="presentation" ng-repeat="Category in Categorys"><a role="menuitem" tabindex="-1" href="javascript:void(0);" value="hz" ng-click="selectCategory(Category.picture_category_id)">{{Category.picture_category_name}}</a></li>
+                        </ul></span>
+                        </span>
+                   </div>  
+               </div> 
+             </form> 
+        </div>
+        <div class="messMain">
+            <div class="messLeft">
+                 <div class="searchWay">
+                       <div class="wayfont">请输入阿里/京东宝贝链接地址进行搜索</div>
+                      <form class="form-inline sui-form">
+                        <textarea rows="3" class="textarea" placeholder="京东宝贝地址,示例：http://item.jd.com/979761.html" ng-model="copyLink" style="min-height:0"></textarea>
+                      </form>
+                  </div>
+                  <div class="searchWay" style="min-height:234px;">
+                       <div class="wayfont">请输入宝贝对应的淘宝分类</div>
+                       <div class="kindLeft">
+                          <form class="sui-form my-advanced-setting-area">
+                            <div class="sui-row-fluid">
+                            <div class="span6" style="width:100%;margin-top:20px;">
+                                  <div>一级类目：&nbsp;&nbsp;
+                                      <span class="sui-dropdown dropdown-bordered select">
+                                        <span class="dropdown-inner">
+                                          <a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle" style="min-width: 150px;">
+                                            <input id="myFirstCat" value="0" type="hidden">
+                                            <i class="caret"></i>
+                                            <span id="myFirstCatSpan">{{level0CategoryName}}</span>
+                                          </a>
+                                          <ul id="myFirstCatUl" role="menu" aria-labelledby="drop4" 
+                                          class="sui-dropdown-menu">
+                                             <li role="presentation" ng-repeat="item in categories"><a role="menuitem" tabindex="-1" href="javascript:void(0);" value="hz" ng-click="selectkind('level0',item)">{{item.name}}</a></li>
+   
+                                          </ul>
+                                        </span>
+                                      </span>
+                                  </div>
+                                  <div ng-show="levelFirst" style="margin:10px 0;">二级类目：&nbsp;&nbsp;
+                                      <span class="sui-dropdown dropdown-bordered select">
+                                        <span class="dropdown-inner">
+                                          <a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle" style="min-width: 150px;">
+                                            <input id="mySecondCat" value="0" type="hidden">
+                                            <i class="caret"></i>
+                                            <span id="mySecondCatSpan">{{level1CategoryName}}</span>
+                                          </a>
+                                          <ul id="mySecondCatUl" role="menu" aria-labelledby="drop4" class="sui-dropdown-menu">
+                                            <li role="presentation" ng-repeat="item in categories | filter:{fatherCid: level0Cid}"><a role="menuitem" tabindex="-1" href="javascript:void(0);" value="hz" ng-click="selectkind('level1',item)">{{item.name}}</a></li>
+                                          </ul>
+                                        </span>
+                                      </span>
+                                  </div>
+                                  <div ng-show="levelSecond">三级类目：&nbsp;&nbsp;
+                                      <span class="sui-dropdown dropdown-bordered select">
+                                        <span class="dropdown-inner">
+                                          <a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle" style="min-width: 150px;">
+                                            <input id="myThirdCat" value="0" type="hidden">
+                                            <i class="caret"></i>
+                                            <span id="myThirdCatSpan">{{level2CategoryName}}</span>
+                                          </a>
+                                          <ul id="myThirdCatUl" role="menu" aria-labelledby="drop4" class="sui-dropdown-menu">
+                                            <li role="presentation" ng-repeat="item in categories | filter:{fatherCid: level1Cid}"><a role="menuitem" tabindex="-1" href="javascript:void(0);" value="hz" ng-click="selectkind('level2',item)">{{item.name}}</a></li>
+                                          </ul>
+                                        </span>
+                                      </span>
+                                  </div>
+                                  <div ng-show="levelThird" style="margin:10px 0">四级类目：&nbsp;&nbsp;
+                                      <span class="sui-dropdown dropdown-bordered select">
+                                        <span class="dropdown-inner">
+                                          <a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle" style="min-width: 150px;">
+                                            <input id="myFourthCat" value="0" type="hidden">
+                                            <i class="caret"></i>
+                                            <span id="myFourthCatSpan">{{level3CategoryName}}</span>
+                                          </a>
+                                          <ul id="myThirdCatUl" role="menu" aria-labelledby="drop4" class="sui-dropdown-menu">
+                                            <li role="presentation" ng-repeat="item in categories | filter:{fatherCid: level2Cid}"><a role="menuitem" tabindex="-1" href="javascript:void(0);" value="hz" ng-click="selectkind('level3',item)">{{item.name}}</a></li>
+                                          </ul>
+                                        </span>
+                                      </span>
+                                  </div>
+                                  <div ng-show="levelFourth">五级类目：&nbsp;&nbsp;
+                                      <span class="sui-dropdown dropdown-bordered select">
+                                        <span class="dropdown-inner">
+                                          <a role="button" href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle" style="min-width: 150px;">
+                                            <input id="myFifthCat" value="0" type="hidden">
+                                            <i class="caret"></i>
+                                            <span id="myFifthCatSpan">{{level4CategoryName}}</span>
+                                          </a>
+                                          <ul id="myThirdCatUl" role="menu" aria-labelledby="drop4" class="sui-dropdown-menu">
+                                            <li role="presentation" ng-repeat="item in categories | filter:{fatherCid: level3Cid}"><a role="menuitem" tabindex="-1" href="javascript:void(0);" value="hz" ng-click="selectkind('level4',item)">{{item.name}}</a></li>
+                                          </ul>
+                                        </span>
+                                      </span>
+                                  </div>
+                              </div>
+                           <!--  <div class="span6" style="width:95%;margin-top:20px;border:1px solid #000;">
+                                {{selectAllkind}}
+                              </div> -->
+                            </div>
+                          </form>
+                       </div>
+                       <div class="kindRight"></div>
+                  </div>
+            </div>
+            <div class="messRight" ng-if="list" style="width:55%;">
+                 <div class="goodsCopy" style="height:357px;">
+                    <form>
+                      <table class="sui-table table-bordered">
+                          <thead style="background-color:#eeeeee;font-weight: bold;">
+                            <tr>
+                                <td class="center">
+                                    <label class="checkbox-pretty inline"  ng-class="{'checked':allSelect}" style="margin-right:0;">
+                                      <input type="checkbox" ng-click="Select()" ng-model="allSelect"><span></span>
+                                    </label>   
+                                </td>
+                                <td>宝贝名称和图片</td>
+                                <td class="center">宝贝ID</td>
+                                <td class="center">价格</td>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr style="border:none" ng-if="list.isIdle()" ng-repeat="item in list.items" id="tr">
+                              <td width="5%" class="center" style="border-left:none">
+                                 <label class="checkbox-pretty inline" ng-class="{'checked':item.itemSelect}" style="margin-right: 0;">
+                                      <input type="checkbox" ng-model="item.itemSelect"><span></span>
+                                 </label>
+                              </td>
+                              <td width="60%" style="border-left:none">
+                                <div class="typographic">
+                                <img style="width:10%;" ng-src="{{item.picUrl}}">
+                                <a ng-href="{{item.urlHref}}" target="_blank" class="block-text" style="max-width:285px;">{{item.title}}</a>
+                                </div>
+                              </td>
+                              <td width="13%" class="center" style="border-left:none">{{item.numiid}}</td>
+                              <td width="13%" class="center" style="border-left:none;border-right: none">{{item.price}}</td>
+                            </tr>
+                            <tr ng-if="list.isLoading()">
+                                <td colspan="4" style="padding:0;">
+                                <div class="sui-msg msg-large msg-block msg-notice" style="padding:0;margin-bottom:0;">
+                                  <div class="msg-con">数据正在加载中,请稍后...</div>
+                                  <s class="msg-icon"></s>
+                                </div>
+                                </td>
+                            </tr>
+                            <tr ng-if="list.isLoadFailure()">
+                                <td colspan="4" style="padding:0;">
+                                <div class="sui-msg msg-large msg-block msg-error" style="padding:0;margin-bottom:0;">
+                                  <div class="msg-con">数据加载失败!!!</div>
+                                  <s class="msg-icon"></s>
+                                </div>
+                                </td>
+                            </tr>
+                            <tr ng-if="list.isEmpty()">
+                                <td  colspan="4" style="padding:0;">
+                                <div class="sui-msg msg-large msg-block msg-warning" style="padding:0;margin-bottom:0;">
+                                  <div class="msg-con">数据列表为空!!!</div>
+                                  <s class="msg-icon"></s>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </form>    
+                 </div>
+            </div>  
+        </div>        
+        <div class="goodsSearch" style="padding-bottom:10px;">
+          <div class="goodsBtn" style="width:40%;"><a href="javascript:void(0);"  ng-click="searchGoods()" class="sui-btn btn-xlarge btn-primary" data-keyboard="false">搜索宝贝</a></div>
+          <div class="sui-pagination goodsPage" ng-if="list" style="width:29%;">
+             <!-- <div class="pageTotal">
+                <ul>
+                  <li class="prev disabled"><a href="#">«上一页</a></li>
+                  <li class="active"><a href="#">1</a></li>
+                  <li class="next disabled"><a href="#">下一页»</a></li>
+                </ul>
+                <div><span>共1页&nbsp;</span><span>
+                    到
+                    <input type="text" class="page-num"><button class="page-confirm" onclick="alert(1)">确定</button>
+                    页</span>
+                </div>
+              </div> -->
+              <div>
+                 <a href="javascript:void(0);" class="sui-btn btn-xlarge btn-primary" ng-click="startCopy()">开始复制</a>
+               </div>
+        </div>
+  </div>
+  </div>
+</div>
+
+
+
+
+
+<!--复制完成对话框
+<div id="myModal" tabindex="-1" role="dialog" data-hasfoot="false" class="sui-modal hide fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body" style="max-height:none;min-height:30px;font-size:15px;text-align:center;line-height:30px;">
+       <div style="font-size: 16px;">全部复制完成，成功<span>13</span>个，失败<span>10</span>个</div>
+        <div>
+              <a href="#" class="block-text" style="color:red">查看失败原因</a>
+              <a href="#" class="block-text">马上查看仓库中的宝贝</a>
+              <a href="#" class="block-text">马上设置商品折扣</a>
+          </div>
+          <div>
+              <a href="#" class="block-text" style="color:red">NEW~</a>
+              <a href="#" class="block-text">查询宝贝排名</a>
+              <a href="#" class="block-text">分析同类竞品</a>
+          </div>
+      </div>
+      <div class="modal-footer" style="text-align: right;">
+        <button type="button" data-dismiss="modal" aria-hidden="true" data-ok="modal" class="sui-btn btn-primary btn-large">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>-->

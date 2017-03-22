@@ -1,0 +1,17 @@
+<div class="col-md-12" style="margin-top:10px;">
+	<div class="form-group">
+        <label class="col-md-4 control-label" style="margin-top: 10px;">店铺类目选择：</label>
+        <div ng-show="categoryLoading" class="col-md-12 text-center"><span><i class="fa fa-spinner fa-spin"></i>正在获取分类信息，请稍候...</span></div>
+        <div ng-show="!categoryLoading" class="col-md-6" style="padding: 0;">
+        	<div class="text-center" ng-show="categorys.length > 0 <= 0"><span><i class="fa fa-info-circle"></i>当前店铺无商品类目信息！</span></div>
+        	<div class="col-md-12" ng-show="categorys.length > 0">
+	        	<select
+                    class="form-control"
+                    ng-model="shop.category"
+                    ng-options="category.cate_id as category.cate_name for category in categorys">
+                    <option value="">请选择类目</option>
+                </select>
+	        </div>
+        </div>
+    </div>
+</div>

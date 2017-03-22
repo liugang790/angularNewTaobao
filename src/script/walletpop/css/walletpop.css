@@ -1,0 +1,60 @@
+@charset "UTF-8";
+/* CSS Document */
+
+.wallet-pop img,.wallet-pop-2 img,.wallet-pop-3 img ,.wallet-pop-4 img { border:none;}
+/* type1*/
+.wallet-pop div,.wallet-pop p { padding:0; margin:0;font-family:"Microsoft YaHei",Arial,Helvetica,sans-serif,"宋体";}
+.wallet-pop a {font-family:"Microsoft YaHei",Arial,Helvetica,sans-serif,"宋体"; text-decoration:none;}
+.wallet-pop {position:absolute;  z-index:999; width:350px; height:auto; left:50%; right:50%; margin-left:-175px; top:35%; border-radius:4px; background:#cc002c; transition:all ease .4s; padding-bottom:20px;}
+.wallet-pop .wallet-close {background:#f91546; height:18px; overflow:hidden; border-radius:4px 4px 0 0; overflow:hidden; text-align:right;}
+.wallet-pop .wallet-info-title { width:100%; height:auto;  text-align:center; background:#f91546 url(https://img.alicdn.com/imgextra/i1/48298907/TB2MvLZjVXXXXbxXXXXXXXXXXXX-48298907.png) no-repeat center bottom;}
+.wallet-pop .wallet-info-title p { line-height:24px; padding:10px; color:#ffdb15; font-size:24px; }
+.wallet-pop .wallet-info-title p a { color:#ffdb15;}
+.wallet-pop .wallet-subtitle { width:100%; height:auto; }
+.wallet-pop .wallet-subtitle p { padding:0px 10px 10px 10px; color:#fff; font-size:16px;text-align:center; line-height:20px;}
+.wallet-pop .wallet-subtitle p a { color:#fff; }
+.wallet-pop .wallet-btn a { display:block; text-decoration:none; text-align:center; width:260px; height:50px; margin:0 auto; line-height:50px; text-align:center; font-size:24px; color:#960928; background:url(https://img.alicdn.com/imgextra/i2/48298907/TB2HN2TjVXXXXcsXXXXXXXXXXXX-48298907.gif) no-repeat;}
+.wallet-bg { width:100%; height:100%; background:rgba(0,0,0,0.5);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#7f000000,endColorstr=#7f000000); position:absolute; left:0; top:0; z-index:998;}
+.wallet-pop .wallet-middlelink { width:100%; height:107px; display:block;}
+.wallet-pop .logintip { font-size:12px; text-align:center; height:22px; line-height:22px; color:#ffdb15;}
+
+/* type2*/
+.wallet-pop-2 div,.wallet-pop-2 p { padding:0; margin:0;font-family:"Microsoft YaHei",Arial,Helvetica,sans-serif,"宋体";}
+.wallet-pop-2 {position:absolute;  z-index:999; width:350px; height:auto; left:50%; right:50%; margin-left:-175px; top:33%; border-radius:4px; background:#fb4c21; transition:all ease .4s; padding-bottom:20px;}
+.wallet-pop-2 .wallet-close { position:absolute ; margin-left:334px; background:none; height:18px; overflow:hidden; border-radius:4px 4px 0 0; overflow:hidden; text-align:right;}
+.wallet-pop-2 .wallet-2-info { padding:20px; padding-top:10px; text-align:center; color:#fff; font-size:16px;}
+.wallet-pop-2 .wallet-2-info p { padding:0px; margin:0;}
+.wallet-pop-2 .wallet-2-info a { color:#fff; font-size:14px; text-decoration:none;}
+.wallet-pop-2 .wallet-2-info a .info-title { color:#ffff00; font-size:20px;line-height: 30px;}
+.wallet-pop-2 .wallet-btn a { display:block; text-decoration:none; text-align:center; width:260px; height:50px; margin:0 auto; line-height:50px; text-align:center; font-size:24px; color:#fff; background:none; border:2px solid #fff; border-radius:4px;}
+.wallet-pop-2 .logintip { font-size:12px; text-align:center; height:22px; line-height:22px; color:#fff;}
+/* type3*/
+.wallet-pop-3 div,.wallet-pop-3 p { padding:0; margin:0;font-family:"Microsoft YaHei",Arial,Helvetica,sans-serif,"宋体";}
+.wallet-pop-3 {position:absolute;  z-index:999; width:350px; height:auto; left:50%; right:50%; margin-left:-175px; top:33%; border-radius:4px; background:#fff; transition:all ease .4s; padding-bottom:20px;}
+.wallet-pop-3 .wallet-close { position:absolute ; margin-left:334px; background:none; height:18px; overflow:hidden; border-radius:4px 4px 0 0; overflow:hidden; text-align:right;}
+.wallet-pop-3 .wallet-3-info { padding:20px; padding-top:10px; text-align:center; color:#333; font-size:16px;}
+.wallet-pop-3 .wallet-3-info p { padding:2px; margin:0;}
+.wallet-pop-3 .wallet-3-info a { color:#333; font-size:16px; text-decoration:none;}
+.wallet-pop-3 .wallet-3-info a .info-title { color:#df3e3e; font-size:24px; line-height:24px;}
+.wallet-pop-3 .wallet-btn a { display:block; text-decoration:none; text-align:center; width:260px; height:50px; margin:0 auto; line-height:50px; text-align:center; font-size:24px; color:#fff; background:#e53f3f; border-radius:50px;}
+.wallet-pop-3 .logintip { font-size:12px; text-align:center; height:22px; line-height:22px; color:#e53f3f;}
+
+/* type4*/
+.wallet-pop-4 div,.wallet-pop-4 p { padding:0; margin:0;font-family:"Microsoft YaHei",Arial,Helvetica,sans-serif,"宋体";}
+.wallet-pop-4 {position:absolute;  z-index:999; width:350px; height:363px; overflow:hidden; left:50%; right:50%; margin-left:-175px; top:33%; border-radius:4px; background:#fff; transition:all ease .4s; }
+.wallet-pop-4 .wallet-close { position:absolute ; margin-left:330px; background:none; height:18px; overflow:hidden; border-radius:4px 4px 0 0; overflow:hidden; text-align:right;}
+.wallet-pop-4 .wallet-4-bg { width:350px; height:363px;}
+.wallet-pop-4 .wallet-4-title { position:absolute; width:350px; height:30px; line-height:30px; top:250px; text-align:center;} 
+.wallet-pop-4 .wallet-4-title a { color:#fff; font-size:24px; text-decoration:none;}
+
+/* type5*/
+.wallet-pop-5 span{ padding:0; margin:0;font-family:"Microsoft YaHei",Arial,Helvetica,sans-serif,"宋体";}
+.wallet-pop-5 {width:450px;position:absolute;z-index: 999;overflow: hidden;left: 50%;right: 50%;margin-left: -175px;top: 33%;border-radius: 4px;background:#fff;transition: all ease 4s;} 
+.wallet-5-header {width:450px;background-color: red;height:191px;background:url(https://img.alicdn.com/imgextra/i2/14502574/TB2SOVnc9mK.eBjSZPfXXce2pXa_!!14502574.png);background-size: 100% 100%;}
+.wallet-pop-5 .wallet-close { position:absolute ; margin-left:430px; background:none; height:18px; overflow:hidden; border-radius:4px 4px 0 0; overflow:hidden; text-align:right;}
+.wallet-5-bottom {height:100px;background-color: green;width:450px}
+.wallet-5-left {display: inline-block;width:50%;float: left;height: 100px;background:url(https://img.alicdn.com/imgextra/i3/14502574/TB29blrc8aM.eBjSZFMXXcypVXa_!!14502574.png);background-size: 100% 100%;}
+.wallet-5-right {display: inline-block;width:50%;float: right;height: 100px;background:url(https://img.alicdn.com/imgextra/i2/14502574/TB2Gtxcc.WO.eBjSZPcXXbopVXa_!!14502574.png);background-size: 100% 100%;}
+
+
+

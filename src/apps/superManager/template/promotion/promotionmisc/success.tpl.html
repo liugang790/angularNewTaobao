@@ -1,0 +1,85 @@
+<div class="container">
+	<div class="container-inner">
+		<div class="sui-row" style="text-align: center;">
+			<h3 style="font-size:16.1px;">{{pageStatus}}活动成功！下一步：活动推广</h3>
+			<a href="javascript:;" class="sui-btn btn-large btn-primary" ng-click="toManage(activity, 'products')">查看活动商品</a>
+		</div>
+		<div class="sui-row" style="text-align: center;">
+			<strong style="font-size: 14px;">
+				<h3 style="margin-top: 5px;">
+					<span style="border: 1px dashed #317EAC;padding: 5px;"> 活动 <i class="sui-icon icon-pc-chevron-right"></i> 流量转化</span>&nbsp;<i class="sui-icon icon-tb-add"></i>&nbsp;<span style="border: 1px dashed #317EAC;padding: 5px;"> 推广 <i class="sui-icon icon-pc-chevron-right"></i> 吸引流量</span> = <span> 1+1>2</span> </h3>活动创建只是第一步，赶快通过以下方式推广活动，为店铺引流，同时活动促进流量的转化，为您带来1+1>2的效果！
+			</strong>
+		</div>
+		
+		<div class="sui-row" style="margin-top: 30px;padding-left: 0;padding-right: 0;display: flex;justify-content: space-between;align-items: center;">
+			<div style="padding: 5px; border: 1px solid #ccc;height: 150px;width: 32%;margin-right: 5px;display: inline-block;">
+				<div>
+					<h4 style="font-size:14px;">微信推广</h4>
+					<i class="iconfont icon-weixin" style="color: #86C610; font-size:3.5em; text-shadow: 1px 1px #555;"> </i>
+					<p style="white-space: pre-wrap;width: 100%;margin-bottom: 0;">聚流宝独家技术可以帮你分享活动信息到朋友圈，赶快试试吧！</p>	
+					<a href="javascript:;" class="sui-btn btn-small btn-primary pull-right"
+						ng-click="setSharePlat('weixin')"
+						ng-disabled="!activity"
+					> 立即推广</a>
+				</div>
+			</div>
+			<div style="padding: 5px; border: 1px solid #ccc;height: 150px;width: 32%;margin-right: 5px;display: inline-block;">
+				<div>
+					<h4 style="margin-bottom: 0;margin-top: 5px;font-size:14px;">微淘推广</h4>
+					<i class="sui-icon icon-tb-mobiletao" style="color: #ff8700; font-size: 3.5em; text-shadow: 1px 1px #555;"></i>
+					<p style="white-space: pre-wrap;width: 100%;margin-bottom: 0;">现在手机流量已经全面超越淘宝网页版，赶快将你的活动信息分享到手机淘宝中，获取更多手机淘宝流量吧！</p>
+					<a href="javascript:;" class="sui-btn btn-small btn-primary pull-right"
+						ng-click="setSharePlat('weitao')"
+						ng-disabled="!activity"
+						>立即推广</a>
+				</div>
+			</div>
+			<!-- <div style="padding: 5px; border: 1px solid #ccc;height: 150px;width: 31%;display: inline-block;">
+				<div>
+					<h4>手机联盟推广</h4>
+					<i class="iconfont icon-app text-center carousel-inner img-responsive img-rounded" style="color: #00A2EA; font-size: 3.5em; text-shadow: 1px 1px #555;"> </i>
+					<p style="white-space: pre-wrap;width: 100%;margin-bottom: 0;">聚流宝联合多家手机APP，将您的活动商品投放入APP展示，拓展市场，吸引更多流量</p>
+					<a href="javascript:;" class="sui-btn btn-small btn-primary pull-right" 
+						ui-state="''"
+						ng-disabled="!activity"
+					>立即推广</a>
+				</div>
+			</div> -->
+		</div>
+		<!-- <div class="sui-row" style="margin-top: 30px;padding-left: 0;padding-right: 0;">
+			<div style="padding: 5px; border: 1px solid #ccc;height: 150px;width: 32%;margin-right: 5px;display: inline-block;">
+				<div>
+					<h4>滞销商品优化</h4>
+					<img src="/image/unsaleble.jpg"  class="carousel-inner img-responsive img-rounded" alt="" style="width: 50px;">
+					<p style="white-space: pre-wrap;width: 100%;margin-bottom: 0;">将0销量、低权重商品下架到仓库，重新生成一个一模一样的新品，获取新品标签和淘宝对新商品的流量扶持！</p>
+					<a href="javascript:;" ui-state="''" class="sui-btn btn-small btn-primary pull-right"
+						ng-disabled="!activity"
+					>立即使用</a>
+					
+				</div>
+			</div>
+			<div style="padding: 5px; border: 1px solid #ccc;height: 150px;width: 32%;margin-right: 5px;display: inline-block;">
+				<div>
+					<h4>关联营销二次转化</h4>
+					<img src="/image/relatesell.jpg"  class="carousel-inner img-responsive img-rounded" alt="" style="width: 50px;">
+					<p style="white-space: pre-wrap;width: 100%;margin-bottom: 0;">有利于提升店铺访问深度、间接成交率、客户黏着度，是提升客单价最有效利器之一！</p>
+					<a href="javascript:;" ui-state="''" class="sui-btn btn-small btn-primary pull-right"
+						ng-disabled="!activity"
+						>立即使用</a>
+				</div>
+			</div>
+			<div style="padding: 5px; border: 1px solid #ccc;height: 150px;width: 31%;display: inline-block;">
+				<div>
+					<h4>选款助手商品引流</h4>
+					<img src="/image/bestseller.jpg"  class="carousel-inner img-responsive img-rounded" alt="" style="width: 50px;">
+					<p style="white-space: pre-wrap;width: 100%;margin-bottom: 0;">帮你快速找到流量高、销量好的宝贝，一键复制到你的店铺中，助你快速开店获取自然流量！</p>
+					<a href="javascript:;" ui-state="''" class="sui-btn btn-small btn-primary pull-right"
+						ng-disabled="!activity"
+						>立即使用</a>
+				</div>
+			</div>
+		</div> -->
+		<div class="alert alert-danger" ng-show="errorMessage">{{errorMessage}}</div>
+		<share-pop share="share" activity="activity" ng-if="activity"></share-pop>
+	</div>
+</div>

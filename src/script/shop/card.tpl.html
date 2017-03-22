@@ -1,0 +1,26 @@
+<div class="card shop-card" ng-class="'card-' + shop.getCardStyle()">
+    <div class="card-heading">
+        <i class="iconfont platform-icon" ng-class="'icon-' + shop.app.platformCode"></i> {{shop.app.platformName}}
+        <shop-card-editor shop="shop" ng-if="!readOnly" class="pull-right"></shop-card-editor>
+    </div>
+    <div class="card-body">
+        <i class="shop-icon-big" ng-class="shop.getCardIcon()"></i>
+    </div>
+    <h4 class="card-title">
+        {{shop.displayName}}
+        <br>
+        <div class="info">
+            <i class="iconfont icon-goods"></i> 20
+            <i class="iconfont icon-order"></i> 3
+        </div>
+    </h4>
+    <ul class="card-info-list">
+        <li class="card-info-list-item">
+            <strong>授权状态</strong>
+            <span ng-class="{true: 'text-success', false: 'text-danger'}[shop.oauthInfo.expiresIn]">
+                {{shop.oauthInfo.expiresIn ? '正常' : '授权过期'}}
+            </span>
+            <div class="pull-right" ng-if="!shop.oauthInfo.expiresIn || shop.app.platformCode==='tyfo'"><a ng-href="{{authUrl}}">刷新授权</a></div>
+        </li>
+    </ul>
+</div>

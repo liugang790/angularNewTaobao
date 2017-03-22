@@ -1,0 +1,33 @@
+<div class="sui-row" style="padding-left: 0;">
+	<h1 class="posterCollapse span12">
+		<a href="javascript:;" ng-click="posterPrevewCollapse = !posterPrevewCollapse">
+			<i class="sui-icon" ng-class="{'icon-tb-fold': !posterPrevewCollapse, 'icon-tb-unfold': posterPrevewCollapse}"></i>海报预览
+		</a>
+	</h1>
+</div>
+<div class="sui-row" ng-show="posterPrevewCollapse" align="center" style="margin: 15px 0;">
+	<div class="span12" align="right">
+		<button type="button" class="sui-btn btn-default" ng-click="copyPoster(poster)">复制代码</button>
+		<div ng-show="tooltipIsOpen" class="sui-msg msg-success"><div class="msg-con">复制成功</div><s class="msg-icon"></s></div>
+	</div>
+	<div ng-bind-html="poster.template" ></div>
+</div>
+
+<div class="sui-row" style="margin-top: 5px; padding: 0;">
+	<h1 class="posterCollapse span12">
+		<a href="javascript:;" ng-click="posterAddedCollapse = !posterAddedCollapse">
+			<i class="fa" ng-class="{'con-tb-fold': !posterAddedCollapse, 'icon-tb-unfold': posterAddedCollapse}"></i> 
+			投放了海报的商品
+		</a>
+	</h1>
+</div>
+<div class="sui-row" ng-show="posterAddedCollapse" style="margin: 15px 0;">
+	<div class="productBox" ng-repeat="product in products" ng-if="products">
+		<div class="media" style="padding: 5px; float: left;">
+			<div class="media-left"><div class="media-object imageWrapper" style="width: 70px;"><img ng-src="{{product.logo}}"></div></div>
+			<div class="info media-body">
+				<span class="name"><a href="https://item.taobao.com/item.htm?id={{product.source.wareId ? product.source.wareId: product.itemId}}" target="_blank">{{product.title}}</a></span>
+			</div>
+		</div>
+	</div>	
+</div>

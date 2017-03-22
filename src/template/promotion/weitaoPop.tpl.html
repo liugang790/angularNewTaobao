@@ -1,0 +1,28 @@
+<div class="sui-msg msg-info msg-block" ng-show="weitao.publish">
+	<div class="msg-con">淘宝微淘每天只允许发布一条促销信息，下图为本活动在淘宝微淘的显示样式。<a href="javascript:;" ng-click="toPreviewTab()">点击预览</a></div><s class="msg-icon"></s>
+</div>
+<div class="sui-msg msg-error msg-block" style="padding: 5px 20px;" ng-show="!weitao.publish">{{weitao.notify}}</div>
+<div ng-show="weitao.publish">
+	<form class="sui-form" name="weitaoForm">
+		<div class="control-group" show-errors>
+		 	<div class="controls">
+		 		<input type="text" class="input-large" name="shareTitle" data-rules="required|minlength=2|maxlength=22" ng-model="weitao.title"/>
+		 		<div class="sui-msg msg-tips msg-naked"><div class="msg-con">分享内容字数为2到22个字</div><s class="msg-icon"></s></div>
+		 	</div>
+		</div>
+		<div class="control-group">
+		 	<div class="controls">
+		 		<b class="sui-text-danger" ng-show="weitao.notify"> {{weitao.notify}} </b>
+		 	</div>
+		 	<div class="sui-msg msg-warning msg-block" align="center" ng-show="weitao.loadImage">
+		 		<div class="msg-con">正在加载图片......</div>
+		 		<s class="msg-icon"></s>
+		 	</div>
+		 	<div class="well" style="margin-top: 10px;" ng-show="weitao.images.length > 0">
+		 		<div style="width: 33%;display: inline-block;" ng-repeat="image in weitao.images">
+		 			<div class="imageBox" style="background: url({{image}}) no-repeat; background-size: contain;"></div>
+		 		</div>
+		 	</div>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,27 @@
+<div class="col-md-12">
+    <div class="form-group">
+        <label class="col-md-6 control-label" style="margin-top: 10px;">店铺类目选择：</label>
+        <div ng-show="categoryLoading" class="col-md-12 text-center"><span><i class="fa fa-spinner fa-spin"></i>正在获取分类信息，请稍候...</span></div>
+        <div ng-show="!categoryLoading" class="col-md-12" style="padding: 0;">
+            <div class="text-center" ng-show="categorys.length > 0 <= 0"><span><i class="fa fa-info-circle"></i>当前店铺无商品类目信息！</span></div>
+            <div class="col-md-6" ng-show="categorys.length > 0">
+                <select
+                    class="form-control"
+                    ng-model="shop.level1Cid"
+                    ng-change="shop.category=''"
+                    ng-options="category as category.name for category in categorys | filter: {parent_cid:0}: tbLevel1FilterComparator">
+                    <option value="">请选择一级类目</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <select
+                    class="form-control"
+                    ng-show="shop.level1Cid"
+                    ng-model="shop.category"
+                    ng-options="category.cid as category.name for category in shop.level1Cid.sub_categories">
+                    <option value="">请选择二级类目</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>

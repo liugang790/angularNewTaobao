@@ -1,0 +1,70 @@
+<div class="modal-dialog">
+	<div class="modal-content" style="text-align: left;color: #000;">
+		<div class="modal-body" style="height: 500px;overflow: auto;">
+			<div class="sui-row">
+				<ul class="sui-nav nav-tabs nav-large">
+					<li ng-class="{'active': share.active[0]}" ng-if="inPlats('weitao')"><a href="#weitao" data-toggle="tab" ng-click="toPreviewTabWt()">推广到微淘</a></li>
+					<li ng-class="{'active': share.active[1]}" ng-if="inPlats('weixin')"><a href="#weixin" data-toggle="tab" ng-click="toPreviewTabWx()">推广到微信</a></li>
+					<li ng-class="{'active': share.active[2]}" ng-if="inPlats('preview')"><a href="#preview" data-toggle="tab" ng-click="toPreviewTabYl()">活动预览</a></li>
+				</ul>
+			</div>
+			<div class="tab-content">
+				<div id="weitao" class="tab-pane" ng-class="{'active': share.active[0]}" ng-if="inPlats('weitao')">
+					<div class="sui-row" ng-if="isSubscribeDisable" style="margin: 5px 0;">
+						<div class="sui-msg msg-warning msg-block"><div class="msg-con">您当前订购的是试用版，不能进行微淘分享！请<a href="javascript:;" ng-click="popBuyLinks()">升级到标准版</a>后重新进入工具再操作。</div><s class="msg-icon"></s></div>
+					</div>
+					<div class="sui-row" align="left" ng-if="!isSubscribeDisable">
+						<span class="sui-text-danger">{{weitao.errorMessage}}</span>
+						<div ng-include="'/template/promotion/weitaoPop.tpl.html'"></div>
+					</div>
+				</div>
+				<div id="weixin" class="tab-pane" ng-class="{'active': share.active[1]}" ng-if="inPlats('weixin')">
+					<div class="sui-row" ng-if="isSubscribeDisable" style="margin: 5px 0;">
+						<div class="sui-msg msg-warning msg-block"><div class="msg-con">您当前订购的是试用版，不能进行微信分享！请<a href="javascript:;" ng-click="popBuyLinks()">升级到标准版</a>后重新进入工具再操作。</div><s class="msg-icon"></s></div>
+					</div>
+					<div class="sui-row" ng-if="!isSubscribeDisable">
+						<div ng-if="weixin.step.one" ng-include="'/template/promotion/weixin.step1.tpl.html'"></div>
+						<div ng-if="weixin.step.two" ng-include="'/template/promotion/weixin.step2.tpl.html'"></div>
+					</div>
+				</div>
+				<div id="preview" class="tab-pane" ng-class="{'active': share.active[2]}" ng-if="inPlats('preview')">
+					<div class="sui-row" align="center">
+						<label>可用{{platName}}扫描二维码，查看真实效果</label>
+					</div>
+					<div class="sui-row" align="center">
+						<qrcode version="6" error-correction-level="M" size="150" data="{{share.qrcode}}"></qrcode>
+					</div>
+					<activity-preview activity="activity" refresh="refresh"></activity-preview>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal-footer">
+		<div ng-show="share.active[0]">
+			<button type="button" class="sui-btn btn-default btn-large" data-dismiss="modal" ng-click="closeShare()">关闭</button>
+			<button type="button" class="sui-btn btn-primary btn-large" data-ok="modal" 
+					ng-click="weitao.share()" 
+					ng-disabled="weitao.images.length <= 1" >
+					<div class="sui-loading loading-xxsmall loading-inline" ng-if="weitao.sharing"><i class="sui-icon icon-pc-loading"></i> </div>确认
+			</button>
+		</div>
+		<div ng-show="share.active[1]">
+			<button type="button" class="sui-btn btn-default btn-large" data-dismiss="modal" ng-click="closeShare()">关闭</button>
+			<button type="button" class="sui-btn btn-default btn-large"
+			 		ng-show="weixin.step.one"
+			 		ng-disabled="weixin.sharing"
+			 		ng-click="editWeiXin(activity)">
+			 		<div class="sui-loading loading-xxsmall loading-inline" ng-if="weixin.sharing"><i class="sui-icon icon-pc-loading"></i> </div>保存设置
+	            </button>
+	        	<button type="button" class="sui-btn btn-default btn-large"
+	        		ng-show="weixin.step.onePageSetting"
+	        		ng-click="backEdit()">
+	        		上一步
+	        	</button>
+		</div>
+		<div ng-show="share.active[2]">
+			<button type="button" class="sui-btn btn-default btn-large" data-dismiss="modal" ng-click="closeShare()">关闭</button>
+		</div>
+	</div>
+</div>

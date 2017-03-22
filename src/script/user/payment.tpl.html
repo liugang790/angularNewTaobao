@@ -1,0 +1,28 @@
+<div class="card-list">
+    <div class="card shop-card ng-isolate-scope" ng-class="(ver.code == version.code) ? 'card-danger' : 'card-info'" ng-repeat="version in versions">
+    <div class="card-heading">
+        <i class="iconfont platform-icon"></i>
+    </div>
+    <h3 class="card-title">
+         {{version.title}}
+    </h3>
+    <div class="card-body">
+        <h2 class="text-danger">￥{{version.price}}元</h2> <br>原价 {{version.marketPrice}} 元
+    </div>
+    <ul class="card-info-list">
+        <li class="card-info-list-item">
+            <button class="btn center-block" ng-class="(ver.code == version.code) ? 'btn-danger' : 'btn-primary'" ng-click="chose(version)">选择此版本</button>
+        </li>
+    </ul>
+	</div>
+</div>
+<div class="panel panel-primary" ng-if="ver != null">
+    <div class="panel-heading">
+
+
+    </div>
+    <div class="panel-body text-danger" style="font-size:20px">
+        {{ver.title}} 支付 ￥{{ver.price}} 元  <button class="btn btn-primary pull-right" ng-click="pay(ver)">去支付</button>
+    </div>
+
+</div>

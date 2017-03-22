@@ -1,0 +1,111 @@
+<div class="container">
+	<div class="container-inner">
+		<div class="sui-row-fluid">
+			<div class="span12">
+				<ul class="sui-nav nav-tabs nav-xlarge nav-pills text-center" style="margin-bottom: 5px;margin-top: 15px;">
+					<li class="active"><a style="font-size:14px;" href="#status" data-toggle="tab" ng-click="listLoad('unFinish')">未结束活动</a></li>
+					<li><a style="font-size:14px;" href="#status" data-toggle="tab" ng-click="listLoad('finished')">已结束活动</a></li>
+				</ul>
+				<!-- <div align="right">
+					<label ng-show="isStatus('finished')" class="checkbox-pretty inline checked">
+					    <input type="checkbox" checked="checked" ng-model="allSelectedStatus" ng-click="selecteAll(allSelectedStatus)"><span>全选</span>
+					</label>
+	        		<button ng-show="isStatus('finished')" class="sui-btn btn-primary" type="button" ng-click="deleteActivity()" style="margin-right: 15px;">批量删除</button>
+				</div> -->
+				<div class="tab-content">
+					<div id="status" class="tab-pane active">
+						<list list-service="list"> 
+							<!-- 活动状态切换Tab END -->
+							<table class="sui-table tabel-bordered-simple">
+								<thead>
+									<tr>
+										<th></th>
+										<th>活动名称</th>
+										<th>活动时间</th>
+										<th>活动状态</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td colspan="5" style="text-align: center;" ng-if="list.isLoading() || list.isLoadFailure() || list.isEmpty()">
+											<list-notify messages="listMessages"></list-notify>
+										</td>
+										<td colspan="5" style="text-align: center;" ng-if="isClosing">
+											<div class="sui-msg msg-info msg-block">
+												<div class="msg-con"><div class="sui-loading loading-xxsmall loading-inline"><i class="sui-icon icon-pc-loading"></i></div>正在终止活动，请稍侯......
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr ng-repeat="activity in list.items">
+										<td>
+											<label class="checkbox-pretty inline" ng-class="{'checked': activity.selected}">
+    											<input type="checkbox" name="activitySelected" ng-model="activity.selected" ng-change="toggleSelected(activity)"><span></span>
+  											</label>
+										</td>
+										<td>
+											<activity-label activity="activity"></activity-label>	
+											<a href="javascript:;" ng-click="toManage(activity, 'info')" style="text-decoration: none;">{{activity.title}}</a>
+										</td>
+										<td>
+											<span>{{activity.startTime*1000 | date: 'yyyy-MM-dd HH:mm'}} - {{activity.endTime*1000 | date: 'yyyy-MM-dd HH:mm'}}</span>
+										</td>
+										<td>
+											<span>{{activity.statusName}}</span>
+										</td>
+										<td>
+											<div ng-if="!activity.isClosed()" class="sui-btn-toolbar">
+												<div class="sui-btn-group">
+						                        	<button class="sui-btn btn-bordered btn-primary" ng-disabled="activity.isClosed()" ng-click="setSharePlat('weixin', activity)"><i class="iconfont icon-weixin" style="font-size:14px;"></i> 微信分享</button>
+						                        	<button class="sui-btn btn-bordered btn-primary" ng-disabled="activity.isClosed() || isShareWeitaoDisable()" ng-click="setSharePlat('weitao', activity)"><i class="sui-icon icon-tb-we"></i> 微淘分享</button>
+						                        </div>
+						                        <div class="sui-btn-group">
+						                        	<button class="sui-btn btn-bordered btn-primary" ng-click="toManage(activity, 'info')">活动管理</button>
+						                        	<button data-toggle="dropdown" class="sui-btn btn-primary dropdown-toggle"><i class="caret"></i>更多</button>
+												    <ul role="menu" aria-labelledby="drop1" class="sui-dropdown-menu">
+												    	<li role="presentation" ng-if="activity.typeCode==='taobaocommonitem'"><a role="menuitem" tabindex="-1" href="javascript:;" ng-click="updateProducts(activity)">修改商品</a></li>
+												      	<li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:;" ng-click="addProduct(activity)">添加商品</a></li>
+												      	<li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:;" ng-click="editActivity(activity)">修改活动</a></li>
+												      	<li role="presentation" class="active"><a role="menuitem" tabindex="-1" href="javascript:;" ng-click="close(activity)"> 终止活动</a></li>
+												    </ul>
+						                        </div>
+						                    </div>
+						                    <div ng-if="activity.isClosed()" class="sui-btn-toolbar">
+						                    	<div class="sui-btn-group">
+						                    		<button class="sui-btn btn-bordered btn-primary" ng-click="restartActivity(activity)" ng-disabled="restartStatus[activity.id]">重启活动</button>
+						                    		<!-- <button class="sui-btn btn-bordered btn-warning" ng-click="deleteActivity(activity)" ng-disabled="deleteStatus[activity.id]"><i class="sui-icon icon-tb-delete"></i> 永久删除</button> -->
+						                    		<button style="margin-left:5px;" class="sui-btn btn-bordered btn-primary" ng-click="clearPoster(activity)" ng-disabled="clearStatus[activity.id]">
+						                    			<i class="iconfont icon-iconclear" ng-show="!clearStatus[activity.id]" style="font-size: 12px;"></i> 
+														<i class="fa fa-spinner fa-spin" ng-show="clearStatus[activity.id]"></i> 清除海报</button>
+						                    	</div>
+						                    </div>
+										</td>
+									</tr>
+									<tr ng-show="!isStatus('finished') && list.items.length>0">
+										<td colspan="5" style="text-align: center;padding-top:20px;">
+											<a class="sui-btn btn-primary btn-xlarge" type="button" ui-state="'member.promotion.promotionmisc.commonitem.create'"><i class="sui-icon icon-tb-roundaddfill"></i>创建活动</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<div style="width: 100%;" ng-if="!list.isEmpty()">
+								<div style="text-align: right;margin-bottom: 0px;">
+									<div class="sui-msg msg-notice msg-large">
+										<div class="msg-con">
+											<b>重要提示：</b>不显示折扣价？<button class="sui-btn btn-small" sui-modal-toggle sui-modal-template-url="'/template/activity/minDiscountTip.tpl.html'">点我设置</button>
+										</div>
+									</div>
+							    </div>
+							</div>
+							<div style="width: 100%; float: left;" ng-if="list.total > 0">
+    							<list-pagination></list-pagination>
+    						</div>
+						</list>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<share-pop share="share" ng-if="currentActivity" activity="currentActivity"></share-pop>

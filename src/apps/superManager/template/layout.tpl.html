@@ -1,0 +1,40 @@
+<header class="sui-navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<a href="#" class="sui-brand"><img src="https://img.alicdn.com/imgextra/i4/14502574/TB2s6SCXyGO.eBjSZFEXXcy9VXa_!!14502574.png">{{appConfig.appName}}</a>
+		<menu-list menu-filter="menuRootNodes" menu-list-class="'sui-nav'"></menu-list>
+		<a style="display:inline-block;margin-top: 35px;margin-left:20px;font-size: 16px;color: red;float: left" href="http://tb.cn/6lGQlQx" target="_blank" ng-if="teHui">15元/3个月特惠升级</a>
+		<a target="_blank" style="width:200px;display:block;position:absolute;right:155px;top:80px;" ng-if="moneyBack" href="http://tb.cn/cOaqgNx"><img  src="https://img.alicdn.com/imgextra/i1/14502574/TB2R9h3b3hJc1FjSZFDXXbvnFXa-14502574.jpg"></a>
+		<ul class="sui-nav pull-right nav-links">
+	    	<li ng-repeat="link in navLinks"><a ng-href="{{link.href}}" target="_blank" style="color: #ffffff; font-weight: bold;"><i class="sui-icon {{link.icon}}" style="color: #ffffff;"></i>&nbsp;{{link.label}}</a></li>
+		    <li>
+		        <a href="https://www.taobao.com/go/market/webww/ww.php?ver=3&touid=维丹电商&siteid=cntaobao&status=1&charset=utf-8" target="_blank" style="color: white;"><IMG border=0 alt=点击这里给我发消息 align=absMiddle src="http://amos.im.alisoft.com/online.aw?v=2&site=cntaobao&charset=utf-8&s=1&uid=维丹电商"></IMG></a>
+		    </li>
+		</ul>
+	</div>
+</header>
+
+<div class="menu">
+	<div style="padding: 10px 0 0 10px;width: 88%;margin-left: 132px;">
+		<div class="sui-msg msg-tips">
+			<div class="msg-con">为了方便下次打开软件，可以点击<a ui-state="'member.flowcarefree.goods.mybaby'">></a><a ui-state="'member.flowcarefree.advert.advert'">></a><a ui-state="'member.flowcarefree.myuser.vouchercenter'">></a><a href="http://tool.gege5.cn/createMDShortcut.php" style="margin-left:10px;">保存到桌面</a></div>
+			<s class="msg-icon"></s>
+		</div>
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		<div class="sui-msg msg-stop" ng-show="isAlert()">
+			<div class="msg-con">淘宝重要！双11期间官方&第三方优惠工具失效公告，请各位天猫淘宝卖家注意！ >> <a href="https://ump.bbs.taobao.com/detail.html?spm=a1z5d.7629074.top-notice.1.kgITXy&postId=7258604" target="_blank">详细</a></div>
+			<s class="msg-icon"></s>
+		</div>
+	</div>
+		
+	<div ui-view="menu" style="width:88%;margin:20px 0 10px 139px;"></div>
+
+</div>
+
+<div class="container {{appConfig.pageSetting.bodyContent}}" style="margin:0 0 0 139px;width:88%;">
+	<div class="container-innner">
+		<ui-view></ui-view>
+	</div>	
+</div>
+<!-- <div class="footer" style="width:90%;margin:0 auto;padding:10px;">
+	<div style="text-align:center"><img style="width:60%;" src="https://img.alicdn.com/imgextra/i4/14502574/TB2KY_TcUOO.eBjSZFLXXcxmXXa_!!14502574.gif"></div>
+</div> -->

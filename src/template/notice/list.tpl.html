@@ -1,0 +1,44 @@
+<ui-page layout="single">
+	<div class="col-sm-12">
+		<h3>全部通知</h3>
+		<div class="pull-right">
+			<button type="button" class="btn btn-sm btn-default" 
+				ng-click="someReaded()" ng-if="list.total">
+				<i class="fa fa-spin fa-spinner" ng-if="list.allbooted"></i>全标为已读
+			</button>
+		</div>
+	</div>
+	<div class="col-sm-12">
+		<list list-service="list">
+	    	<list-notify messages="list.messages"></list-notify>
+	    	<div class="panel-body" ng-if="list.total">
+		    	<ul class="list-group">
+					<li class="list-group-item" ng-repeat="notice in list.items" 
+						style="border: none; border-bottom: 1px solid #ddd; margin-bottom: 0;" >
+						<div>
+							<div class="pull-right">
+								<a href="javascript:;" ng-if="notice.status === 'read'" 
+									title="标记为已读"><i class="fa fa-check"></i>
+								</a>
+								<span>{{notice.created | toDate |date: "yyyy年MM月dd日 H:mm"}}</span>
+							</div>
+							<h4 style="color: #000;">{{notice.title}}<i class="iconfont icon-tagnew text-danger" 
+									style="position: absolute; margin-top: -8px;" ng-show="notice.status !='read'"></i>
+							</h4>
+						</div>
+						<div>
+							<div class="pull-right" ng-show="notice.status !== 'read'">
+								<button class="btn btn-primary" ng-click="oneReaded(notice)"
+									style="padding: 0 6px; font-size: 10.5px; border-radius: 3px;">
+									标记为已读
+								</button>
+							</div>
+							<div style="color: #999; width: 80%;" marked="notice.detail"></div>
+						</div>
+					</li>
+				</ul>
+	    	</div>
+	    	<list-pagination></list-pagination>
+	    </list>
+	</div>
+</ui-page>

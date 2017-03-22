@@ -1,0 +1,101 @@
+<div class="container">
+    <div class="container-innner">
+        <div class="autoAddGoods">
+            <div style="background-color: #dadada;border: 1px solid #e0e0e0;padding:20px;">
+                <div style="text-align: center;padding-bottom: 10px;font-size:18px;;font-weight: 800;">自动同步注意事项</div>
+                <span>
+                <div style="line-height: 20px;">* 同步前需要先关联宝贝,关联完成之后才能在同步页面展现.</div>
+                <div style="line-height: 20px;">* 系统默认同步方式为手动同步</div>
+                <div style="line-height: 20px;">* 点击'手动'滑动条后可改为自动同步</div>
+                <div style="line-height: 20px;">* 设置自动同步后 8 小时内自动生效</div>
+                <div style="line-height: 20px;">* 设置自动同步后,每8小时同步一次</div>
+                <div style="line-height: 20px;">* 按钮显示"自动"时,为自动同步,按钮显示为"手动"时,不会自动同步库存.</div>
+            </span>
+            </div>
+            <div style="padding-top: 20px;padding-bottom: 40px;">
+                <div>
+                    <div style="float: left">
+                        <input type="text" ng-model="goodsName" class="input-fat" />
+                        <a href="javascript:void(0);" class="sui-btn btn-primary" ng-click="listLoad(list.filterOptions.pageNo)">查找宝贝</a>
+                        <a href="javascript:void(0);" class="sui-btn btn-primary" ng-click="goodsName = '';listLoad(list.filterOptions.pageNo)">全部宝贝</a>
+                    </div>
+                    <div style="float: right">
+                        <a href="javascript:void(0);" id="syncAllGoods" class="sui-btn btn-primary" ng-click="syncAllNow()">宝贝全部设置为同步</a>
+                        <a href="javascript:void(0);" id="cancelSyncAllGoods" class="sui-btn btn-primary" ng-click="cancelSyncAll()">取消宝贝全部设置为同步</a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <table class="sui-table table-bordered">
+                    <thead>
+                    <tr>
+                        <th class="center"></th>
+                        <th class="center">本店宝贝信息</th>
+                        <th class="center">来源店铺宝贝信息</th>
+                        <th></th>
+                        <th class="center" style="width:80px;">立即同步</th>
+                        <th class="center">上次同步时间</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbodyId">
+                        <tr ng-repeat="item in list.items">
+                            <td><img style="height: 60px;width: 90px;" ng-src="{{item.picUrl}}" /></td>
+                            <td>{{item.title}}</td>
+                            <td>{{item.linkGoodsName}}</td>
+                            <td><img style="height: 60px;width: 90px;" ng-src="{{item.linkPicUrl}}" /></td>
+                            <td ng-if="item.autoSync == '1'"><a href="javascript:void(0);" class="sui-btn btn-success" ng-click="cancelSync(item)">取消同步</a></td>
+                            <td ng-if="item.autoSync == '1'">{{item.syncDate | date:'yyyy年MM月dd日 hh时mm分ss秒'}}</td>
+                            <td ng-if="item.autoSync != '1'">
+                                <a href="javascript:void(0);" class="sui-btn btn-primary" ng-click="syncNow(item)">立即同步</a>
+                            </td>
+                            <td ng-if="item.autoSync != '1'">暂无同步时间信息</td>
+                        </tr>
+                        <tr ng-if="list.isLoading()">
+                            <td colspan="4">
+                                数据正在加载中,请稍后...
+                            </td>
+                        </tr>
+                        <tr ng-if="list.isLoadFailure()">
+                            <td colspan="4">
+                                数据加载失败，请稍后重试。
+                                <a href="javascript:void(0);" ng-click="listLoad(1)" class="sui-btn btn-primary">重新加载数据</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div ng-if="!list.isLoading() && !list.isLoadFailure() && list.items.length == 0">
+                    <div style="text-align: center;" class="ng-scope">
+                        <a ui-sref="member.product.stock.link" style="text-decoration: none;color: #555;" href="/index.htm/member/product/stock/link">
+                            <i class="sui-icon icon-tb-cart" style="font-size: 8em;"></i>
+                        </a>
+                        <h2 class="sui-text-warning">亲，您当前还没有关联任何商品！</h2>
+                        <p>
+                            你可以在
+                            <a ui-sref="member.product.stock.link" href="/index.htm/member/product/stock/link">商品关联页面</a>，关联你的商品！
+                        </p>
+                    </div>
+                </div>
+                <div style="display: flex;justify-content: space-between;align-items: center;">
+                    <div class="sui-pagination goodsPage flexalign">
+                        <div class="pageTotal" style="margin:0 auto">
+                            <ul>
+                                <li class="prev disabled"><a href="#">«上一页</a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li class="next disabled"><a href="#">下一页»</a></li>
+                            </ul>
+                            <div>
+                                <span>共1页&nbsp;</span>
+                                <span>
+                                        到<input type="text" class="page-num"><button class="page-confirm" onclick="alert(1)">确定</button>页
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <a id="saveGoodsList" href="javascript:void(0);" ng-click="batchAddStockGoods()" class="sui-btn btn-primary">批量添加</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

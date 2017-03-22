@@ -1,0 +1,114 @@
+<ui-page layout="admin">
+	<page-header page-title="设置推广位商品">
+		<button class="btn btn-primary" redirect-page="/promotion/mobileLeague">返回推广页</button>
+	</page-header>
+	<div class="row">
+		<div class="col-xs-12 col-md-12 col-sm-12">
+			<uib-alert type="info" ng-show="promoting">正在推广......</uib-alert>			
+			<uib-tabset>
+				<uib-tab index="0" heading="推广活动宝贝">
+					<div class="col-xs-12 col-md-12 col-sm-12" ng-show="listActivities" style="padding: 0;">
+						<list list-service="activityList">
+							<table class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th>活动标题</th>
+										<th>活动时间</th>
+										<th>活动状态</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td colspan="4"><list-notify messages="listMessages"></list-notify></td>
+									</tr>
+									<tr ng-repeat="activity in activityList.items">
+										<td>
+											{{activity.title}}
+											<span class="tag">{{activity.getTypeName()}}</span>
+											<span class="tag priceTag">{{activity.detail.priceTag}}</span>
+											<span class="tag addedTag" ng-show="activity.addedTotal">{{activity.addedTotal}}个商品参与</span>
+										</td>
+										<td>
+											{{activity.startTime*1000 | date: 'yyyy-MM-dd HH:mm'}} - {{activity.endTime*1000 | date: 'yyyy-MM-dd HH:mm'}}<br /><span ng-if="!activity.isClosed()">&nbsp;&nbsp;剩{{activity.timeLeft}}</span>
+										</td>
+										<td>
+											{{activity.statusName}}
+										</td>
+										<td>
+											<button type="button" class="btn btn-sm btn-primary" ng-click="getItems(activity)">查看活动宝贝</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="col-xs-12 col-sm-12 col-md-12"><list-pagination></list-pagination></div>
+						</list>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12" ng-if="listItems">
+						<list list-service="itemsList">
+							<list-notify></list-notify>
+							<div class="text-right" style="margin: 10px 30px 0 0;"><button class="btn btn-success btn-sm" ng-click="toListActivity()">重新选择活动</button></div>
+							<div class="col-md-6 col-sm-6 col-xs-12 productBox" ng-repeat="item in itemsList.items" ng-controller="PromoteItemCtrl">
+								<div class="col-xs-9 col-sm-9 col-md-9 media" style="padding: 10px;">
+									<div class="media-left">
+										<div class="media-object"><img ng-src="{{item.picUrl}}" style="height: 50px;"></div>
+									</div>
+									<div class="media-body">
+										<span>{{item.title}}</span>
+									</div>
+								</div>
+								<div class="col-xs-3 col-sm-3 col-md-3" style="margin-top: 10px;">
+									<button type="button" 
+										class="btn btn-primary btn-sm" 
+										ng-click="promote(item)" 
+										ng-hide="item.promoteStatus === 'promoting'"
+										ng-disabled="promoting" >
+										<i class="fa fa-send-o"></i> 点击推广
+									</button>
+									<button type="button"
+										class="btn btn-success btn-sm"
+										ng-show="item.promoteStatus === 'promoting'"
+										disabled>
+										<i class="fa fa-send-o"></i> 正在推广
+									</button>
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-12 col-md-12"><list-pagination></list-pagination></div>
+						</list>	
+					</div>
+				</uib-tab>
+				<uib-tab index="1" heading="推广出售中的宝贝">
+					<list list-service="allProductsList">
+						<list-notify></list-notify>
+						<div class="col-xs-12 col-sm-6 col-md-6 productBox" ng-repeat="item in allProductsList.items" ng-controller="PromoteItemCtrl">
+							<div class="col-xs-9 col-sm-9 col-md-9 media" style="padding: 10px;">
+								<div class="media-left">
+									<div class="media-object"><img ng-src="{{item.logo}}" style="height: 50px;"></div>
+								</div>
+								<div class="media-body">
+									<span>{{item.title}}</span>
+								</div>
+							</div>
+							<div class="col-xs-3 col-sm-3 col-md-3" style="margin-top: 10px;">
+								<button type="button" 
+									class="btn btn-primary btn-sm" 
+									ng-click="promote(item)" 
+									ng-hide="item.promoteStatus === 'promoting'"
+									ng-disabled="promoting">
+									<i class="fa fa-send-o"></i> 点击推广
+								</button>
+								<button type="button"
+									class="btn btn-success btn-sm"
+									ng-show="item.promoteStatus === 'promoting'"
+									disabled>
+									<i class="fa fa-send-o"></i> 正在推广
+								</button>
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-12"><list-pagination></list-pagination></div>
+					</list>
+				</uib-tab>
+			</uib-tabset>
+		</div>
+	</div>
+</ui-page>

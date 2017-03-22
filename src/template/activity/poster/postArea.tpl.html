@@ -1,0 +1,36 @@
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">&times;</button>
+			<h4 class="modal-title" id="postAreaModalTitle">确认包邮区域</h4>
+		</div>
+		<div class="modal-body">
+			<div class="sui-row-fluid">
+				<div class="sui-btn-toolbar">
+					<div class="sui-btn-group">
+						<button type="button" class="sui-btn btn-info btn-small" ng-click="checkAllArea()">全选</button>
+						<button type="button" class="sui-btn btn-info btn-small" ng-click="uncheckAllArea()">全不选</button>
+					</div>
+				</div>
+				<form class="sui-form">
+					<div class="sui-row-fluid" ng-repeat="key in areaKeys">
+						<div style="display: inline-block;">
+							<label data-toggle="checkbox" class="checkbox-pretty inline" ng-class="{'checked': areas[key].check}" style="padding: 5px; font-size: 14px;">
+								<input type="checkbox" checked="areas[key].check" ng-model="areas[key].check" ng-change="toggleProvinceCheck(areas[key].check, key)" ><span>{{areas[key].name}}</span></label>
+						</div>
+						<div style="display: inline-block;" ng-repeat="province in areas[key].provinces">
+							<label data-toggle="checkbox" ng-class="{'checked': province.check}" class="checkbox-pretty inline" style="padding: 5px; font-size: 13px;">
+								<input type="checkbox" ng-model="province.check" checked="province.check" /><span>{{province.name}}</span>
+							</label>
+						</div>
+					</div>
+				</form>
+				<div class="sui-row-fluid">港澳台和海外默认不包邮</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="sui-btn btn-primary btn-large" data-ok="modal" ng-click="surePostArea()">确认</button>
+			<button type="button" class="sui-btn btn-default btn-large" data-dismiss="modal">取消</button>
+		</div>
+	</div>
+</div>

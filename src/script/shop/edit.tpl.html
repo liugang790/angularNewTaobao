@@ -1,0 +1,21 @@
+<div class="card-editor shop-card-editor">
+    <h5>卡片背景</h5>
+    <ul class="bg-selector">
+        <li ng-repeat="color in cardConfig.bgs" class="card" ng-class="'card-' + color">
+            <a class="card-body" ng-click="shop.setCardStyle(color)">
+                <i class="iconfont icon-success" ng-if="color === shop.getCardStyle()"></i>
+            </a>
+        </li>
+    </ul>
+
+    <h5>店铺图标</h5>
+    <ul class="icon-selector">
+        <li ng-repeat="icon in cardConfig.icons" ng-class="{true: 'selected'}[icon === shop.getCardIcon()]">
+            <a href ng-click="shop.setCardIcon(icon)"><i ng-class="icon"></i></a>
+        </li>
+    </ul>
+
+    <div class="text-right">
+        <button class="btn btn-sm btn-primary" type="button">保存</button>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="container-innner">
+        <div class="developphonedetail" style="display:flex;justify-content:flex-start;margin-top:30px;">
+            <div class="developphonedetailtable" style="width:100%;float:left">
+                <div class="developHeader flex">
+                </div>
+                <div class="flexalign" style="margin-top:15px;justify-content: center;height:100px;margin-bottom:25px;">
+                    <div style="width:20%;text-align: right;margin-right:25px;font-size:18px;font-weight:700;color:#000;">充值金额：</div>
+                    <div class="divBor"  style="width:80%;">
+                        <span ng-repeat="item in payData" ng-click="paySelect(item)" class="itemSty"  ng-class="{'activeItem': numberId == item.id, 'activeItemFail': numberId !== item.id}">{{item.name}}</span>
+                    </div>
+                </div>
+                <div class="voucherMoney">
+                    <div class="innnerMoney"><span style="font-size:18px;font-weight:700">支付金额：</span><a style="color:#ff0064;text-decoration: none;margin-left:5%;display:iline-block;font-size:14px;">￥</a><span  style="font-size: 17px;font-weight: normal;color:#ff0064;display: inline-block">{{money}}</span>
+                    </div>
+                </div>
+                <div class="startPaya" ng-if="showData"><a ng-href="{{url}}" target="_blank">开始充值</a></div>
+                <div class="startPay" ng-if="!showData" ><span>开始充值</span></div>
+            </div>
+    </div>
+</div>
+

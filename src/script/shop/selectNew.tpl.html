@@ -1,0 +1,6 @@
+<div>
+    <div ng-if="isLoading()"><i class="fa fa-spinner fa-spin"></i> 加载中...</div>
+    <select class="form-control" ng-model="shopModel" ng-change="onChange(shopModel);" ng-options="shop as shop.displayName for shop in shops" ng-show="!isLoading()">
+        <option value="" ng-if="isShowDefaultOption()">{{getDefaultLabel()}}</option>
+    </select>
+</div>

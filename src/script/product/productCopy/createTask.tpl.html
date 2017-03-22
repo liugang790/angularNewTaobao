@@ -1,0 +1,31 @@
+<page-header page-title="商品复制" page-sub-title="将指定链接的商品复制到您的店铺中">
+
+</page-header>
+<div class="row">
+    <div class="col-md-4">
+        复制到的店铺
+        <shop-select-new shop-model="task.shop" filter="shopFilter" default-label="请选择铺货店铺" disabled-default="true" shop-change="onShopChange"></shop-select-new>
+    </div>
+    <div class="col-md-12">
+        <shop-category shop="task.shop"></shop-category>
+    </div>
+    <!-- 链接复制 开始 -->
+    <div class="col-md-12">
+        <div class="context-container">
+            <div class="context-title">
+                <div class="row">
+                <div class="col-md-6">将想要复制的<span class="color-green">【宝贝链接地址】</span>粘贴到下面的文本框内! <span class="color-green">【每行一个!!!】</span></div>
+               </div>
+            </div>
+            <div ng-show="notifyMsg" class="col-sm-12 alert alert-danger">{{notifyMsg}}<a ng-click="notifyMsg=false"><i class="fa fa-close" style="color: white;float:right;"></i></a></div>
+            <!-- copy-input-box start -->
+            <div class="copy-input-box">
+            <textarea class="copy-line" ng-model="inputUrl"></textarea>
+            <center><button type="button" ng-disabled="isLoading" ng-click="createCopyTask()" class="btn btn-green-in btn-big" data-toggle="modal">将宝贝复制到仓库</button></center>
+            </div>
+            <!-- copy-input-box end -->
+        </div>
+    </div>
+
+    <!-- 链接复制 结束 -->
+</div>

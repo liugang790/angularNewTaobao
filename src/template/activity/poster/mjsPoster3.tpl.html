@@ -1,0 +1,55 @@
+<div style="line-height: 0; font-size: 14px; background-color: #fff; color: #000; width: 96%; overflow: hidden;">
+	<div style="border: 1px solid #d7d7d7; margin:0 auto; padding: 5px 0;">
+		<table background="https://img.alicdn.com/imgextra/i2/14502574/TB2K2hqaoOO.eBjSZFLXXcxmXXa-14502574.png" style="background-repeat: no-repeat; width: 100%;background-position: center top;margin: 15px auto;">
+			<tbody>
+				<tr>
+					<td style="text-align: center;">
+						<span style="line-height: 40px; color: #fff; font-family: '黑体'; font-size: 26px;">
+							<strong>【{{activity.priceTag}}】</strong>
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align: center;">
+						<span style="line-height: 16px;font-size: 14px; color: #999;">
+							活动日期：{{activity.startDate | date: 'yyyy-MM-dd HH:mm'}} - {{activity.endDate | date: 'yyyy-MM-dd HH:mm'}}
+						</span>
+					</td>
+				</tr>
+			</tbody>	
+		</table>
+		<div style="margin: 15px 30px; line-height: 20px;">
+			<div style="font-size: 16px;">
+				<div style="display: inline-block;">
+					<span>单笔订单满</span>
+					<span ng-if="tab.amountMultiple.check" >
+						<span style="color: red; font-weight: bold;">{{tab.amountMultiple.totalPrice}}</span>元：
+					</span>
+					<span ng-if="tab.itemMultiple.check">
+						<span style="color: red; font-weight: bold;">{{tab.itemMultiple.itemCount}}</span>件：
+					</span>
+				</div>
+				<div style="display: inline-block;">
+					<span ng-if="tab.promotion[0].check">减
+						<span style="color: red;font-weight: bold;">{{tab.promotion[0].value}}</span>元
+					</span>
+					<span ng-if="tab.promotion[1].check">打
+						<span style="color: red;font-weight: bold;">{{tab.promotion[1].value}}</span>折
+					</span>
+				</div>
+				<div style="display: inline-block;">
+					<span ng-if="tab.multipleCheck">&nbsp;上不封顶</span>
+				</div>
+				<div style="display: inline-block;" ng-if="tab.promotion[3].check">
+					<span style="color: red;font-weight: bold;">&nbsp;包邮</span>
+					<span style="display: inline-block;color: #999;font-size: 14px;">（{{activity.postFreeAreasStr}}）</span>
+				</div>
+				<div style="display: inline-block;" ng-if="tab.promotion[2].check">
+					<span style="color: red;font-weight: bold;">&nbsp;送礼物</span>
+					<span style="display: inline-block;color: #999;font-size: 14px;"> {{tab.promotion[2].giftName}}</span>
+				</div>
+			</div>
+			<span style="white-space: pre-wrap; display: block; margin: 15px auto;" ng-bind-html="activity.posterData.desc"></span>
+		</div>
+	</div>	
+</div>

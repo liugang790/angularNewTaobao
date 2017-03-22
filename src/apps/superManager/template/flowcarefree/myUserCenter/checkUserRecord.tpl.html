@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="container-innner">
+        <div class="developphonedetail" style="display:flex;justify-content:flex-start;margin-top:30px;">
+            <div class="developphonedetailtable" style="width:100%;float:left">
+                <div>
+                   <table class="sui-table table-bordered">
+                        <thead style="background-color:#f4f4f4;font-weight: bold;">
+                              <tr>
+                                  <td width="40%" class="center">消费项目</td>
+                                  <td width="40%" class="center">消费时间</td>
+                                  <td width="20%" class="center">消费费用</td>
+                              </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="developTable" style="border:1px solid #e6e6e6;border-top:none;height:500px;overflow:auto;width:99.85%;">
+                    <table class="sui-table table-bordered-simple" >
+                        <tbody>
+                          <tr style="border:none"  id="tr" ng-repeat="item in data">
+                            <td style="border-right:none;" width="40%"  style="border-left:none;border-right: none">{{item.consumeMark}}</td>
+                            <td style="border-right:none;" width="40%" class="center" style="border-left:none;border-right: none">{{item.startTime}}</td>
+                            <td style="border-right:none;" width="20%" class="center" style="border-left:none;border-right: none">{{item.fee}}元</td>
+                          </tr>
+                          <tr ng-if="list.isLoading()">
+                              <td colspan="4" style="padding:0;">
+                              <div class="sui-msg msg-large msg-block msg-notice" style="padding:0;margin-bottom:0;">
+                                <div class="msg-con">数据正在加载中,请稍后...</div>
+                                <s class="msg-icon"></s>
+                              </div>
+                              </td>
+                          </tr>
+                          <tr ng-if="list.isLoadFailure()">
+                              <td colspan="4" style="padding:0;">
+                              <div class="sui-msg msg-large msg-block msg-error" style="padding:0;margin-bottom:0;">
+                                <div class="msg-con">数据加载失败!!!</div>
+                                <s class="msg-icon"></s>
+                              </div>
+                              </td>
+                          </tr>
+                          <tr ng-if="list.isEmpty()">
+                              <td  colspan="4" style="padding:0;">
+                              <div class="sui-msg msg-large msg-block msg-warning" style="padding:0;margin-bottom:0;">
+                                <div class="msg-con">数据列表为空!!!</div>
+                                <s class="msg-icon"></s>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- <div style="margin-top: 20px;">
+                    <div class="sui-pagination goodsPage flexalign">
+                        <div class="pageTotal">
+                            <ul>
+                                <li class="prev disabled"><a href="#">«上一页</a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li class="next disabled"><a href="#">下一页»</a></li>
+                            </ul>
+                            <div><span>共1页&nbsp;</span><span>
+                                到
+                                <input type="text" class="page-num"><button class="page-confirm" onclick="alert(1)">确定</button>
+                                页</span></div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+    </div>
+</div>
+
+

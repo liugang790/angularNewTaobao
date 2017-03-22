@@ -1,0 +1,55 @@
+<div>
+    <div style="margin-left: 15px;">
+        <div ng-click="activity.page.titleImage = defaultImg" style="width: 70px;">
+            <img src="{{defaultImg}}" style="height: 70px;">
+            <div style="width: 100%; text-align: center;">
+                <i class="sui-icon icon-tb-check" style="color: red;"></i>
+            </div>
+        </div>
+    </div>
+    <div>
+        <button class="sui-btn btn-primary" ng-click="showTitleImage=!showTitleImage">从素材库选择</button>
+        <span class="sui-text-warning" style="float: left;width: 110px;">{{imageformMessage}}</span>
+    </div>
+</div>
+<div>
+    <div class="sui-text-info">微信分享到朋友圈后的标题图片(默认为第一个商品图片)</div>
+</div>
+<div ng-hide="!showTitleImage" >
+    <div style="border: 1px solid #dedede;padding: 0;border-radius: 5px;">
+        <div class="sui-msg msg-info">
+            <div class="msg-con">
+                来自商品图片<span class="pull-right"><a href="javascript:;"><i class="sui-icon icon-tb-close" ng-click="showTitleImage =!showTitleImage"></i></a>
+            </span>
+            </div>
+        </div>
+
+        <div style="display: table;">
+            <ul class="list-inline" >
+                <li ng-repeat="img in titleImages.product track by $index" class="shareTitleImageLi">
+                    <div ng-click="imageMore(img, 'product')" class="imgDiv">
+                        <img src="{{img}}" style="width: 100%; height: 100%">
+                    </div>
+                    <div style="width: 100%; text-align: center;" ng-if="activity.page.titleImage == img">
+                        <i class="sui-icon icon-tb-check" style="color: red;"></i>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="sui-msg msg-info">
+            <div class="msg-con">来自素材库</div>
+        </div>
+        <div style="display:table;">
+            <ul class="list-inline">
+                <li ng-repeat="img in titleImages.default" class="shareTitleImageLi" >
+                    <div ng-click="imageMore(img, 'default')" class="imgDiv">
+                        <img src="{{img}}" style="width: 100%; height: 100%;">
+                    </div>
+                    <div style="width: 100%; text-align: center;" ng-if="activity.page.titleImage == img">
+                        <i class="sui-icon icon-tb-check" style="color: red;"></i>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

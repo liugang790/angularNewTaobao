@@ -1,0 +1,40 @@
+<page-header page-title="我的店铺列表">
+    <div class="btn-group" uib-dropdown ng-show="oauthStatus == 'complete'">
+        <button type="button" class="btn btn-primary dropdown-toggle" uib-dropdown-toggle> 添加店铺
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li ng-repeat="app in oauthApps">
+                <a ng-href="{{app.authUrl}}" target="_blank">添加{{app.name}}</a>
+            </li>
+        </ul>
+    </div>
+    <div ng-show="oauthStatus == 'loading'">
+        <button type="button" class="btn btn-warning"> <i class="fa fa-spinner fa-spin"></i>正在加载... </button>
+    </div>
+</page-header>
+
+<div>
+    <list list-service="shopList">
+        <div class="well">
+            <list-filter list-filter-data="shopFilters"></list-filter>
+        </div>
+        <div class="text-right" style="margin-bottom: 10px;">
+            <label>列表显示方式：</label>
+            <div class="btn-group">
+                <label class="btn btn-default" ng-model="listType" uib-btn-radio="'card'" ng-change="onChangeListType('card')">
+                    卡片
+                </label>
+                <label class="btn btn-default" ng-model="listType" uib-btn-radio="'table'" ng-change="onChangeListType('table')">
+                    表格
+                </label>
+            </div>
+        </div>
+
+        <list-notify></list-notify>
+
+        <ng-include src="listBodyTemplateUrl"></ng-include>
+
+        <div style="margin-top: 10px;"><list-pagination></list-pagination></div>
+    </list>
+</div>

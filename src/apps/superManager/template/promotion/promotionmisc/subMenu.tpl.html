@@ -1,0 +1,24 @@
+<div class="container">
+	<div class="container-innner">
+		<ul class="sui-nav nav-tabs nav-xlarge" style="padding: 75px 75pxpx 0px 10px;">
+		    <li ui-sref-active="active">
+		        <a href ui-sref="member.promotion.promotionmisc.list">营销活动列表</a>
+		    </li>
+		    <li ng-class="{active: $state.includes('member.promotion.promotionmisc.commonitem')}">
+		    	<a href ui-sref="member.promotion.promotionmisc.commonitem.create">部分商品折扣/减价</a>
+		    </li>
+		    <li ng-class="{active: $state.includes('member.promotion.promotionmisc.taobaoitem')}">
+		    	<a  href ui-sref="member.promotion.promotionmisc.taobaoitem.create">全店商品折扣/减价</a>
+		    </li>
+		    <li ng-class="{active: $state.includes('member.promotion.promotionmisc.taobaomjs')}">
+		    	<a href ui-sref="member.promotion.promotionmisc.taobaomjs.create">部分商品满就送</a>
+		    </li>
+		    <li ng-class="{active: $state.includes('member.promotion.promotionmisc.fullshopmjs')}">
+		    	<a href ui-sref="member.promotion.promotionmisc.fullshopmjs.create">全店商品满就送</a>
+		    </li>
+			<li ui-sref-active="active">
+				<a href ui-sref="member.promotion.promotionmisc.tasklist">任务列表</a>
+			</li>	    
+		</ul>
+	</div>
+</div>

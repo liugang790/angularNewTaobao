@@ -1,0 +1,81 @@
+<div class="container">
+    <div class="container-innner" style="margin-top:-25px;">
+        <div class="developphonedetail" style="display:flex;justify-content:flex-start;margin-top:30px;">
+            <div class="developphonedetailtable" style="width:100%;float:left">
+              <div style="margin:20px 0;"><span style="color:#28a3ef;font-size:14px;">温馨提示：投放网址每半小时会更新一次，保证您的宝贝可以在不同的网页展示，让更多的用户浏览。</span></div>
+                <div class="developHeader flex">
+                </div>
+                <div style="margin-top:15px;">
+                   <table class="sui-table table-bordered">
+                        <thead style="background-color:#eeeeee;font-weight: bold;">
+                              <tr>
+                                  <td width="80%">已投放广告的网页Url地址</td>
+                                  <td width="20%" class="center">操作</td>
+                              </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="developTable" style="border:1px solid #e6e6e6;border-top:none;height:500px;overflow:auto;width:99.85%;">
+                    <table class="sui-table table-bordered-simple" >
+                        <tbody>
+                          <tr style="border:none"  id="tr" ng-repeat="item in lists">
+                            <td style="border-left:none;" width="80%">{{item.url}}</td>
+                            <td style="border-right:none;" width="20%" class="center" style="border-left:none;border-right: none"><a target="_blank" ng-href="{{item.url}}" class="sui-btn btn-large btn-primary">查看</a></td>
+                          </tr>
+                          <tr ng-if="list.isLoading()">
+                              <td colspan="4" style="padding:0;">
+                              <div class="sui-msg msg-large msg-block msg-notice" style="padding:0;margin-bottom:0;">
+                                <div class="msg-con">数据正在加载中,请稍后...</div>
+                                <s class="msg-icon"></s>
+                              </div>
+                              </td>
+                          </tr>
+                          <tr ng-if="list.isLoadFailure()">
+                              <td colspan="4" style="padding:0;">
+                              <div class="sui-msg msg-large msg-block msg-error" style="padding:0;margin-bottom:0;">
+                                <div class="msg-con">数据加载失败!!!</div>
+                                <s class="msg-icon"></s>
+                              </div>
+                              </td>
+                          </tr>
+                          <tr ng-if="list.isEmpty()">
+                              <td  colspan="4" style="padding:0;">
+                              <div class="sui-msg msg-large msg-block msg-warning" style="padding:0;margin-bottom:0;">
+                                <div class="msg-con">数据列表为空!!!</div>
+                                <s class="msg-icon"></s>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="margin-top: 20px;">
+                    <div class="sui-pagination goodsPage flexalign">
+                        <div class="pageTotal">
+                            <ul>
+                                <li class="prev disabled"><a href="#">«上一页</a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li class="next disabled"><a href="#">下一页»</a></li>
+                            </ul>
+                            <div><span>共1页&nbsp;</span><span>
+                                到
+                                <input type="text" class="page-num"><button class="page-confirm" onclick="alert(1)">确定</button>
+                                页</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+<!--上传中-->
+<div id="myModal" tabindex="-1" role="dialog" data-hasfoot="false" class="sui-modal hide fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                正在上传中...
+            </div>
+        </div>
+    </div>
+</div>
+
+

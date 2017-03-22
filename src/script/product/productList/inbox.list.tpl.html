@@ -1,0 +1,40 @@
+<list list-service="list.inboxStorageList" list-items=items>
+    <list-filter>
+        <select
+            class="form-control"
+            ng-model="list.inboxStorageList.filterOptions.sourceShopId"
+            ng-options="shop.id as shop.displayName for shop in list.inboxShopStorage.itemsToArray()">
+            <option value="">所有店铺</option>
+        </select>
+    </list-filter>
+    <table class="table" style="table-layout: fixed;">
+        <thead>
+            <tr>
+                <th>商品</th>
+                <th style="width: 15%">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="product in list.inboxStorageList.items">
+                <td>
+                    <div class="media">
+                        <div class="media-left">
+                            <img class="media-object" ng-src="{{product.logo}}" style="max-height:50px;">
+                        </div>
+                        <div class="media-body">
+                            <span class="media-heading">
+                                <a ng-if="product.url" ng-href="{{product.url}}" target="_blank">{{product.title}}</a>
+                                <div ng-if="!product.url">{{product.title}}</div>
+                            </span>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <button class="btn btn-danger" ng-click="list.removeInboxProduct(product);list.inboxStorageList.load();">移除</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+	<list-pagination></list-pagination>
+</list>

@@ -1,0 +1,91 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="developphonedetailtable" style="width:100%;float:left">
+                    <div class="developHeader flex">
+                      <div class="searchgoods" style="justify-content:flex-start">
+                          <form class="sui-form form-dark" style="float:left;margin:0  10px 0 0">
+                              <div class="input-control">
+                                  <input type="text" ng-model="searchKeya" class="input-fat" style="border-radius:20px;width:200px;"  placeholder="输入宝贝名称">
+                              </div>
+                          </form>
+                          <a href="javascript:void(0);" ng-click="searchGoodsOnsale(searchKeya,1)" class="sui-btn btn-primary btn-large">搜索</a>
+                      </div>
+                    </div>
+                    <div style="width:100%;overflow:hidden;margin:10px 0;display:flex;align-items:center">
+                        <div style="color:#46b8da;margin-left:10px;font-size: 14px;float:left;"> 温馨提示：最多可选择5个商品进行投放，投放后不能修改所投放的商品。</div>
+                    </div>
+                  <div style="margin-top:20px;">
+                      <table class="sui-table table-bordered">
+                          <thead>
+                          <tr>
+                              <th width="20%" class="center">
+                                  <form class="sui-form" style="margin: 0">
+                                      <label class="checkbox-pretty inline" style="margin: 0">
+                                          <input type="checkbox" ng-change="Select(allSelect)" ng-class="{'checked':allSelect}" ng-model="allSelect"><span style="color:#e1b203;font-size:15px;">选择前5个</span>
+                                      </label>
+                                  </form>
+                              </th>
+                              <th width="50%" style="color:#e1b203;font-size: 15px;">宝贝名称和图片</th>
+                          </tr>
+                          </thead>
+                      </table>
+                  </div>
+                  <div class="developTable" style="border:1px solid #e6e6e6;border-top:none;height:300px;overflow:auto;width:99.85%;">
+                      <table class="sui-table table-bordered-simple" style="color:#e1b203;font-size:15px;">
+                          <tbody>
+                          <tr ng-if="list.isIdle()" style="border-top:none;border-bottom:1px solid #ddd;"  ng-repeat="itemGoods in listGoodsItems">
+                              <td width="5.4%" class="center" style="background-color: #ffffff;text-align:right">
+                                  <form class="sui-form" style="margin-bottom: 0">
+                                      <label class="checkbox-pretty inline" ng-class="{'checked':itemGoods.itemSelect}" style="margin: 0">
+                                          <input class="numiid" type="checkbox"  ng-model="itemGoods.itemSelect"><span></span>
+                                      </label>
+                                  </form>
+                              </td>
+                              <td width="55%">
+                                  <div class="flexstart">
+                                      <span class="display" style="width:15%;text-align:right"><img width="40%" ng-src="{{itemGoods.picUrl}}"></span>
+                                      <span class="display" style="width:85%"><a href="https://item.taobao.com/item.htm?id={{itemGoods.numIid}}" target="_blank" class="block-text" style="max-width:285px;">{{itemGoods.title}}</a></span>
+                                  </div>
+                              </td>
+                          </tr>
+                          <tr ng-if="list.isLoading()">
+                              <td colspan="4">
+                                  数据正在加载中,请稍后...
+                              </td>
+                          </tr>
+                          <tr ng-if="list.isLoadFailure()">
+                              <td colspan="4">
+                                  数据加载失败，请稍后重试。
+                              </td>
+                          </tr>
+                          <tr ng-if="!list.isLoadFailure() && list.isEmpty()">
+                              <td  colspan="4">
+                                  商品列表数据列表为空。
+                              </td>
+                          </tr>
+                          </tbody>
+                      </table>
+                  </div>
+                  <div style="margin-top: 20px;text-align: center" sui-pagination-total="listGoods.total" sui-pagination-size="listGoods.pageSize" sui-pagination="{displayPage: 6, displayInfoType: 'itemsCount', onSelect: listLoadOnsale}">
+                      <div class="sui-pagination goodsPagea flexalign" style="justify-content: center;">
+                          <div class="pageTotal">
+                              <ul>
+                                  <li class="prev disabled"><a href="#">«上一页</a></li>
+                                  <li class="active"><a href="#">1</a></li>
+                                  <li class="next disabled"><a href="#">下一页»</a></li>
+                              </ul>
+                              <div><span>共1页&nbsp;</span><span>
+                                  到
+                                  <input type="text" class="page-num"><button class="page-confirm" onclick="alert(1)">确定</button>
+                                  页</span></div>
+                          </div>
+                      </div>
+                </div>
+                </div>
+            </div>  
+        <div class="modal-footer" style="text-align: center;">
+           <a href="" ng-click="deliverySure()"  data-ok="modal" class="sui-btn btn-primary btn-large" style="margin-right: 5px;">&nbsp;确认</a>
+        </div> 
+    </div>
+</div>

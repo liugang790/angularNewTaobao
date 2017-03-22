@@ -1,0 +1,51 @@
+<page-header page-title="手机详情"></page-header>
+<center>
+	<a title="一键生成全店手机详情" ng-disabled="isLoading" class="btn btn-primary btn-lg" href ng-click="onekey()">一键生成全店手机详情</a>
+	
+</center>
+<list list-service="productList">
+	<div class="well">
+	    <list-filter list-filter-init-promise="filterInitPromise">
+	        <div class="form-group">
+	        	<div ng-include="listFilterData.source.filterTemplateUrl"></div>
+	        </div>
+	        <div class="form-group">
+				<input type="text" class="form-control" ng-model="listFilterData.title" placeholder="输入商品标题查询商品">
+	        </div>
+	    </list-filter>
+	</div>
+
+	<list-notify></list-notify>
+	<div class="col-md-12 alert alert-danger" ng-show="errorStatus">
+       {{errorMessage}}
+    </div>
+	<div class="col-md-12">
+		<table class="table table-striped">
+		<thead>
+			<tr class="info">
+				<th style="width: 40%;">商品名</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody ng-repeat="product in productList.items" >
+			<tr ng-controller="ProductListMobiledescItemCtrl">
+				<td>
+					<div class="media">
+						<div class="media-left"><img class="media-object" ng-src="{{product.logo ? product.logo : '/src/img/defaultProduct.jpg'}}" style="max-height:50px;"></div>
+						<div class="media-body"><span class="media-heading">
+							<a ng-href="http://ware.shop.jd.com/ware/publish/ware_editWare.action?wid={{product.source.wareId}}" target="_blank">{{product.title}}</a>
+							<!-- <div ng-if="!product.url">{{product.title}}</div> -->
+						</span></div>
+					</div>
+				</td>
+				<td >
+					<button ng-if="product.otherInfo.mobileDesc != ''" ng-click="preview(product.otherInfo.mobileDesc)" class="btn btn-primary">预览已有手机详情</button> 
+					<button class="btn btn-success" ng-disabled="creating" ng-click="createMobileDesc(product)">生成手机详情<i ng-if="creating" class="fa fa-spinner fa-spin" ></i></button><i class="fa" ></i>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+
+	<list-pagination></list-pagination>
+</list>

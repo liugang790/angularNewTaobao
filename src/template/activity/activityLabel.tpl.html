@@ -1,0 +1,17 @@
+<div class="activityLabel">
+	<a href="javascript:;" ui-state="'member.promotion.promotionmisc.manage'" ui-state-params="{activityId: activity.id, tab: 'info'}" style="text-decoration: none;">
+		<span class="{{activity.typeCode}}">{{typeName}}</span>
+		<span class="tag priceTag">{{activity.detail.priceTag}}</span>
+	</a>
+	<a href="javascript:;" ui-state="'member.promotion.promotionmisc.manage'" ui-state-params="{activityId: activity.id, tab: 'products'}" style="text-decoration: none;">
+		<span class="tag addedTag" ng-show="activity.addedTotal">{{activity.addedTotal}}个商品参与</span>
+	</a>
+	<a href="javascript:;" ui-state="'member.promotion.promotionmisc.manage'" ui-state-params="{activityId: activity.id, tab: 'poster'}" ng-if="activity.statusName !== '已结束'">
+		<span class="tag" ng-if="activity.posterStatus">已添加海报</span>
+		<span class="tag staticTag" ng-if="!activity.posterStatus && activity.typeCode === 'taobaocommonitem'">点击添加海报</span>
+	</a>
+	<span class="shareTag" ng-repeat="tag in tags" sui-tooltip sui-tooltip-title="tag.name">
+		<i class="sui-icon" ng-class="{'icon-tb-we': tag.code==='shareToWeitao'}"></i>
+	</span>
+	<ng-transclude></ng-transclude>
+</div>

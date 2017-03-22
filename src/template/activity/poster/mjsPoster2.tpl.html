@@ -1,0 +1,40 @@
+<div style="border: 2px solid #ec4747; width: 96%; overflow: hidden; margin: 0 1% 2px 1%;">
+	<div style="line-height: 50px; background-color: #ec4747; color: #fff;">
+		<span style="margin: 0 15px; font-size: 20px; font-weight: bold;">{{activity.priceTag}}</span>
+		<span style="font-size: 16px; font-family: Arial, Helvetica, sans-serif;">活动日期：{{activity.startDate | date: 'yyyy-MM-dd HH:mm'}} - {{activity.endDate | date: 'yyyy-MM-dd HH:mm'}}</span>
+		<img src="https://img.alicdn.com/imgextra/i1/14502574/TB2RIFkahaK.eBjSZFwXXXjsFXa-14502574.png" width="200" height="50" style="float: right;">
+	</div>
+	<div style="padding: 0 15px; color: #333; font-size: 16px; line-height: 28px;">
+		<div>
+			<div style="display: inline-block;">
+				<span>单笔订单满</span>
+				<span ng-if="tab.amountMultiple.check" >
+					<span style="color: red; font-weight: bold;">{{tab.amountMultiple.totalPrice}}</span>元：
+				</span>
+				<span ng-if="tab.itemMultiple.check">
+					<span style="color: red; font-weight: bold;">{{tab.itemMultiple.itemCount}}</span>件：
+				</span>
+			</div>
+			<div style="display: inline-block;">
+				<span ng-if="tab.promotion[0].check">减
+					<span style="color: red;font-weight: bold;">{{tab.promotion[0].value}}</span>元
+				</span>
+				<span ng-if="tab.promotion[1].check">打
+					<span style="color: red;font-weight: bold;">{{tab.promotion[1].value}}</span>折
+				</span>
+			</div>
+			<div style="display: inline-block;">
+				<span ng-if="tab.multipleCheck">&nbsp;上不封顶</span>
+			</div>
+			<div style="display: inline-block;" ng-if="tab.promotion[3].check">
+				<span style="color: red;font-weight: bold;">&nbsp;包邮</span>
+				<span style="display: inline-block;color: #999;font-size: 14px;">（{{activity.postFreeAreasStr}}）</span>
+			</div>
+			<div style="display: inline-block;" ng-if="tab.promotion[2].check">
+				<span style="color: red;font-weight: bold;">&nbsp;送礼物</span>
+				<span style="display: inline-block;color: #999;font-size: 14px;"> {{tab.promotion[2].giftName}}</span>
+			</div>
+		</div>
+		<span style="white-space: pre-wrap; display: block; margin: 15px auto;" ng-bind-html="activity.posterData.desc"></span>
+	</div>
+</div>

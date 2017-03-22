@@ -1,0 +1,82 @@
+<list list-service="list">
+	<div class="well">
+	    <list-filter list-filter-init-promise="filterInitPromise">
+	    	 <div class="form-group">
+				 <label>商品数据来源</label>
+				 <select class="form-control" ng-model="listFilterData.source" ng-options="source as source.name for source in list.productSources">
+				 </select>
+	        </div>
+	        <div class="form-group">
+	        	<div ng-include="listFilterData.source.filterTemplateUrl"></div>
+	        </div>
+	        <div class="form-group">
+				<input type="text" class="form-control" ng-model="listFilterData.title" placeholder="输入商品标题查询商品">
+	        </div>
+	    </list-filter>
+	</div>
+
+	<list-notify></list-notify>
+	<div class="col-md-12 alert alert-danger" ng-show="errorStatus">
+       {{errorMessage}}
+    </div>
+	<ng-transclude></ng-transclude>
+
+	<div class="col-md-12" style="margin-bottom: 5px;">
+		<label><input type="checkbox" ng-model="list.isSelectedAll" ng-change="selecteAll(list.isSelectedAll)"> 全选</label>
+		<a style="text-decoration: none; margin-top: 15px;" ng-href="#" ng-click="showInboxProducts()"><i class="fa fa-shopping-cart"></i> 已选择{{list.inboxStorage.keyCount}}个商品</a>
+
+		<div class="pull-right" ng-if="actions.length > 0">
+			<div class="btn-group"><product-list-actions actions="actions"></product-list-actions></div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<table class="table table-striped">
+		<thead>
+			<tr class="info">
+				<th style="width: 8%;">选择</th>
+				<th style="width: 10%;">货号</th>
+				<th style="width: 30%;">商品名</th>
+				<th style="width: 17%;">在售店铺</th>
+				<th style="width: 10%;">库存</th>
+				<th style="width: 15%;">来源</th>
+				<th>商品规格详情</th>
+			</tr>
+		</thead>
+		<tbody ng-repeat="product in list.items" ng-controller="productListItemCtrl">
+			<tr>
+				<td>
+					<input type="checkbox" ng-model="product.isInbox" ng-change="list.toggleInboxProduct(product)">
+				</td>
+				<td>{{product.customId ? product.customId : '未设置'}}</td>
+				<td>
+					<div class="media">
+						<div class="media-left"><img class="media-object" ng-src="{{product.logo ? product.logo : '/src/img/defaultProduct.jpg'}}" style="max-height:50px;"></div>
+						<div class="media-body"><span class="media-heading">
+							<a href ng-click="goto(product.descUrl)" >{{product.title}}</a>
+							<!-- <div ng-if="!product.url">{{product.title}}</div> -->
+						</span></div>
+					</div>
+				</td>
+				<td>
+					<shop-icon-list shops="product.getOnsaleShops()"></shop-icon-list>
+					<span>店铺数：{{product.getOnsaleShops().length}}</span>
+				</td>
+				<td>{{product.stockTotal}}</td>
+				<td>
+					<div ng-if="product.source.shop"><shop-icon-list shops="[product.source.shop]"></shop-icon-list></div>
+					<a ng-if="product.source.url" ng-href="{{product.source.url}}">商品链接</a>
+				</td>
+				<td ng-click="getSkus(product)">点击查看<i class="fa" ng-class="{true:'fa-chevron-up', false:'fa-chevron-down'}[isSelected()]"></i></td>
+			</tr>
+			<tr>
+				<td colspan="12" ng-show="isSelected()">
+					<div ng-show="skuLoading" class="text-center"><span><i class="fa fa-spinner fa-spin"></i>正在获取sku(颜色分类和尺码等)，请稍候 ...</span></div>
+					<sku-list ng-model="skus" product="product"></sku-list>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+
+	<list-pagination></list-pagination>
+</list>

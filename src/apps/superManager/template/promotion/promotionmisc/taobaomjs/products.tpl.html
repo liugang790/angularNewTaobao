@@ -1,0 +1,13 @@
+<step-bar steps="steps"></step-bar>
+<activity-products-list list="productList" actions="listActions" setting="setting">
+	<div style="padding-left: 15px;">
+		<span ng-if="limitCounts < alllimitCounts">活动已添加{{alllimitCounts-limitCounts}}个商品，</span>
+		<span>您还可以选择{{limitCounts-productList.cacheStorage.keyCount}}个商品哦！
+			<a href="javascript:;" sui-tooltip sui-tooltip-title="'每次活动数量最多'+ alllimitCounts + '个，如需给更多商品打折请再创建活动'" data-type="info">说明</a>
+		</span>
+		<div class="sui-msg msg-error msg-large msg-block" style="text-align: center;" ng-show="errorStatus">
+			<div class="msg-con">{{errorMessage}}</div>
+			<s class="msg-icon"></s>
+		</div>
+	</div>
+</activity-products-list>

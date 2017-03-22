@@ -1,0 +1,38 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" data-dismiss="modal" aria-hidden="true" class="sui-close">×</button>
+            <h4 id="myModalLabel" class="modal-title">请选择店铺类型</h4>
+        </div>
+        <div class="modal-body">
+            <div style="margin:20px 0"><span style="font-size:16px;color:#46b8da;font-weight: 700">提醒：</span><span style="text-align: center;color:red;font-size:13px;">选择适合的店铺类型可以使你广告的投放更加精准</span></div>
+            <div>
+                <div style="font-size:16px;margin-top:10px;">类别列表：</div>
+                <div style="text-align: center">
+                    <form  class="sui-form">
+                        <span ng-repeat="item in category" style="margin-right:10px;">
+                            <label class="radio-pretty inline " style="font-size: 16px;" ng-class= "{'checked':sex == item.category}">
+                                <input ng-change="setValue(sex,item.id)" type="radio" name="radio" ng-value="item.category" ng-model="sex"><span>{{item.category}}</span>
+                            </label>
+                        </span>
+                    </form>
+                   <!--  <form  class="sui-form">
+                        <label class="radio-pretty inline " ng-class="{'checked':sex=='男性'}"  style="font-size: 16px;">
+                                <input type="radio" name="radio" value="男性" ng-model="sex"><span>男性</span>
+                        </label>
+                        <label class="radio-pretty inline "  ng-class="{'checked':sex=='女性'}" style="font-size: 16px;">
+                                <input type="radio" name="radio" value="女性" ng-model="sex"><span>女性</span>
+                        </label>
+                        <label class="radio-pretty inline " ng-class="{'checked':sex=='综合'}" style="font-size: 16px;">
+                                <input type="radio" name="radio" value="综合" ng-model="sex"><span>综合</span>
+                        </label>
+                    </form> -->
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-ok="modal" class="sui-btn btn-primary btn-large" ng-click="sure(sex,id)">确定</button>
+            <button type="button" data-dismiss="modal" class="sui-btn btn-default btn-large">取消</button>
+        </div> 
+    </div>
+  </div>

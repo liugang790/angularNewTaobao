@@ -1,0 +1,12 @@
+<step-bar steps="steps"></step-bar>
+<form class="sui-form form-horizontal" sui-validate ng-submit="submitEdit()">
+	<div ng-include="'/template/promotion/promotionmisc/taobaomjs/form.tpl.html'"></div>
+	<div ng-if="data"><mjs-detail-set activity="data" actions="tabActions"></mjs-detail-set></div>
+	<div class="sui-row-fluid" align="center">
+		<div class="sui-msg msg-error msg-large msg-block" ng-show="errorMessage">
+			<div class="msg-con">{{errorMessage}}</div>
+			<s class="msg-icon"></s>
+		</div>
+		<button type="submit" class="sui-btn btn-primary btn-large" ng-disabled="editing"><div style="vertical-align: middle;" class="sui-loading loading-xxsmall loading-inline loading-light" ng-show="editing"><i class="sui-icon icon-pc-loading" style="color: #fff; opacity: 1;"></i></div> 确认修改</button>
+	</div>
+</form>
